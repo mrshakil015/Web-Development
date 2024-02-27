@@ -1,4 +1,4 @@
-# Web-Development
+# Learning Web-Development
 
 ![HTML](images/HTML-tutorial.jpg)
 
@@ -42,6 +42,9 @@ HTML stand for "Hyper Text Markup Language". HTML is the standard markup languag
 
 <details>
 <summary><b>HTML Tags</b></summary>
+
+### HTML Tags
+---
 
 + <code>Paragraph `<p>` Tag:</code> It's used to defines a paragraph of text.
 
@@ -106,6 +109,9 @@ HTML stand for "Hyper Text Markup Language". HTML is the standard markup languag
 
 <details>
 <summary><b>HTML Attributes</b></summary>
+
+### HTML Attributes
+---
 
 1. `**id**`: Specifies a unique identifier for an element.
    
@@ -188,6 +194,82 @@ HTML stand for "Hyper Text Markup Language". HTML is the standard markup languag
     
     ```html
     <html lang="en">
+    ```
+
+
+</details>
+
+<details>
+<summary><b>Text Formatting</b></summary>
+
+1. `<b> - Bold text:`
+   This element defines bold text, without any extra importance.
+
+   ```html
+    <p>This is <b>bold</b> text.</p>
+   ```
+
+2. `<strong> - Important text:`
+   This element defines text with strong importance. The content inside is typically displayed in bold.
+
+   ```html
+    <p>This is <strong>important</strong> text.</p>
+   ```
+
+3. `<i> - Italic text:`
+   Renders text in italic.
+
+   ```html
+    <p>This is <i>italic</i> text.</p>
+   ```
+
+4. `<em> - Emphasized text:`
+   Renders text in italic, typically indicating emphasis.
+
+   ```html
+    <p>This is <em>emphasized</em> text.</p>
+   ```
+
+5. `<mark> - Marked text:`
+   Renders text with a background color, typically indicating relevance or highlighted text.
+
+   ```html
+    <p>This is <mark>highlighted</mark> text.</p>
+   ```
+
+6. `<small> - Smaller text:`
+   Renders text in a smaller font size.
+
+   ```html
+    <p>This is <small>smaller</small> text.</p>
+   ```
+
+7. `<del> - Deleted text:`
+   Renders text with a strikethrough, indicating deleted content.
+
+   ```html
+    <p>This is <del>deleted</del> text.</p>
+   ```
+
+8. `<ins> - Inserted text:`
+   Renders text with an underline, indicating inserted content.
+
+   ```html
+    <p>This is <ins>inserted</ins> text.</p>
+   ```
+
+9. `<sub> - Subscript text:`
+   Renders text as a subscript (below the baseline).
+
+   ```html
+    <p>This is H<sub>2</sub>O text.</p>
+   ```
+
+10. `<sup> - Superscript text:`
+    Renders text as a superscript (above the baseline).
+
+    ```html
+    <p>This is 10<sup>2</sup> text.</p>
     ```
 
 
