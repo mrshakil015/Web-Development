@@ -103,3 +103,92 @@ HTML stand for "Hyper Text Markup Language". HTML is the standard markup languag
   ```
 
 </details>
+
+<details>
+<summary><b>HTML Attributes</b></summary>
+
+1. `**id**`: Specifies a unique identifier for an element.
+   
+   ```html
+    <div id="header">...</div>
+   ```
+
+2. `**class**:` Specifies one or more class names for an element (used for styling with CSS).
+   
+   ```html
+    <p class="highlighted">...</p>
+   ```
+
+3. `**style**:` Specifies inline CSS styles for an element.
+   
+   ```html
+    <h1 style="color: blue; font-size: 24px;">...</h1>
+   ```
+
+4. `**href**:` Specifies the URL of a link.
+   
+   ```html
+    <a href="https://www.example.com">Link</a>
+   ```
+
+5. `**src**:` Specifies the URL of an image or other external resource.
+   
+   ```html
+    <img src="image.jpg" alt="Description">
+   ```
+
+6. `**alt**:` Specifies alternative text for an image (useful for accessibility).
+   
+   ```html
+    <img src="image.jpg" alt="Description">
+   ```
+
+7. `**title**:` Specifies additional information about an element (often displayed as a tooltip).
+   
+   ```html
+    <p title="I'm a tooltip">This is a paragraph.</p>
+   ```
+
+8. `**width** and **height**:` Specifies the width and height of an element (such as an image).
+   
+   ```html
+    <img src="image.jpg" alt="Description" width="200px" height="150px">
+   ```
+
+9.  `**target**:` Specifies where to open the linked document when clicked (e.g., `_blank` to open in a new tab).
+    
+    ```html
+    <a href="https://www.example.com" target="_blank">Link</a>
+    ```
+
+10. `**rel**:` Specifies the relationship between the current document and the linked document (e.g., `stylesheet` for a CSS file).
+    
+    ```html
+    <link rel="stylesheet" href="styles.css">
+    ```
+
+11. `**type**:` Specifies the media type of the linked document (e.g., `text/css` for a CSS file).
+    
+    ```html
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    ```
+
+12. `**disabled**:` Disables an input element or button.
+    
+    ```html
+    <input type="submit" value="Submit" disabled>
+    ```
+
+13. `**readonly**:` Specifies that an input field is read-only (cannot be edited).
+    
+    ```html
+    <input type="text" value="Read-only text" readonly>
+    ```
+14. `**lang**:` We should always include the lang attribute inside the `<html>` tag, to declare the language of the Web page.
+    
+    ```html
+    <html lang="en">
+    ```
+
+
+</details>
