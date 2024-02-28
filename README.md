@@ -1,5 +1,10 @@
 # Learning Web-Development
 
+![Web](images/web-development-image.webp)
+
+## Start With HTML
+
+
 ![HTML](images/HTML-tutorial.jpg)
 
 <details>
@@ -200,7 +205,10 @@ HTML stand for "Hyper Text Markup Language". HTML is the standard markup languag
 </details>
 
 <details>
-<summary><b>Text Formatting</b></summary>
+<summary><b>HTML Text Formatting</b></summary>
+
+### HTML Text Formatting
+---
 
 1. `<b> - Bold text:`
    This element defines bold text, without any extra importance.
@@ -272,5 +280,134 @@ HTML stand for "Hyper Text Markup Language". HTML is the standard markup languag
     <p>This is 10<sup>2</sup> text.</p>
     ```
 
+</details>
+
+<details>
+<summary><b>HTML Table</b></summary>
+
+The HTML table tag `<table>` is used to represent data in a structured way by creating a table.
+
+<b>There are multiple tags in HTML:</b>
+
++ `<table>`: This tag is used to define a table.
+  
+  ```html
+   <table>
+   ….
+   <table>
+  ```
+
++ `<caption>:` This tag defines a table caption. This tag must be inserted immediately after the `<table>` tag.
+  
+  ```html
+   <table>
+      <caption>Monthly savings</caption>
+      <tr>
+         <th>Month</th>
+         <th>Savings</th>
+      </tr>
+      <tr>
+         <td>January</td>
+         <td>$100</td>
+      </tr>
+   </table>
+  ```
+
++ `<thead>:` This tag is used to group header content in an HTML table.
+  
+  ```html
+  <thead>
+    <tr>
+      <th>Month</th>
+      <th>Savings</th>
+    </tr>
+  </thead>
+  ```
+
++ `<tbody>:` This tag is used to define the table body (containing rows of data).
+  
+  ```html
+   <table>
+   <thead>
+      <tr>
+         <th>Month</th>
+         <th>Savings</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr>
+         <td>January</td>
+         <td>$100</td>
+      </tr>
+      <tr>
+         <td>February</td>
+         <td>$80</td>
+      </tr>
+   </tbody>
+   <tfoot>
+      <tr>
+         <td>Sum</td>
+         <td>$180</td>
+      </tr>
+   </tfoot>
+   </table>
+  ```
++ `<tfoot>:` This element is used in conjunction with the `<thead>` and `<tbody>` elements to specify each part of a table (footer, header, body).
+  
+  ```html
+   <tfoot>
+      <tr>
+         <td>Sum</td>
+         <td>$180</td>
+      </tr>
+   </tfoot>
+  ```
+
++ `<tr>:` This tag is used to define a row in a table.
+  
+  ```html
+   <table>
+   <tr>
+   ...
+   </tr>
+   </table>
+  ```
+
++ `<th>:` This tag is used to define a table header. It is generally the top row of the table.
+  
+  ```html
+   <table>
+   <tr>
+      <th>Item</th>
+      <th>Count</th>
+   </tr>
+   <tr>
+      <td>Mango</td>
+      <td>125</td>
+   </tr>
+   <tr>
+      <td>Orange</td>
+      <td>75</td>
+   </tr>
+   </table>
+  ```
+
++ `<td>:` This tag is used to define table cells (data). The table cells store data to be displayed in the table.
+  
+  ```html
+   <tr>
+      <td>Apple</td>
+      <td>Mango</td>
+      <td>Orange</td>
+   </tr>
+  ```
+
 
 </details>
+
+
+</br>
+
+## Start With CSS
+
+![CSS](images/CSS.jpg)
