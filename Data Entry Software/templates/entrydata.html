@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Sobjanta Data Operator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar" style="position: fixed;z-index: 999999;min-height:100%">
+            <div class="custom-menu">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                    <i class="fa fa-bars"></i>
+                    <span class="sr-only">Toggle Menu</span>
+                </button>
+            </div>
+            <div class="p-4 pt-5">
+                <h1><a href="index.html" class="logo">Sobjanta</a></h1>
+                <ul class="list-unstyled components mb-5">
+                    <li class="active">
+                        <a href="/dashboard">Dashboard</a>
+                    </li>
+                    <li class="active">
+                        <a href="#" data-toggle="modal" data-target="#viewreportModal">Entry Data</a>
+                    </li>
+                    <li>
+                        <a href="/logout">Logout</a>
+                    </li>
+                </ul>
+
+
+            </div>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content" class="p-4 p-md-5 pt-5">
+            <div class="row dashboard-card d-flex justify-content-center">
+                <div class="col-lg-8 col-xl-8 col-sm-12">
+                    <div class="card shadow">
+                        <div class="card-header" style="background-color: #128193;">
+                            <h5 class="text-light"><strong>Entry Data</strong></h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="contact-form" role="form" action="/entrydata" method="POST">
+                                <div class="controls">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="form_operatorid">Operator ID</label>
+                                                <input id="operatorid" type="text" name="operatorid" class="form-control" value="{{ operator_data.operator_id }}" readonly>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="form_region">Store Region<span style="color: red;">*</span></label>
+                                                <input id="region" type="text" name="region" class="form-control"
+                                                    placeholder="Enter region name">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="form_district">Store District<span style="color: red;">*</span></label>
+                                                <input id="district" type="text" name="district" class="form-control"
+                                                    placeholder="Enter district name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="form_storename">Store Name<span style="color: red;">*</span></label>
+                                                <input id="storename" type="text" name="storename" class="form-control"
+                                                    placeholder="Enter store name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="form_branchname">Branch Name</label>
+                                                <input id="branchname" type="text" name="branchname"
+                                                    class="form-control" placeholder="Enter branch name">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="form_storeaddress">Store Address<span style="color: red;">*</span></label>
+                                                <input id="storeaddress" type="text" name="storeaddress"
+                                                    class="form-control" placeholder="Enter store address">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="form_storezip">Store Zip Code</label>
+                                                <input id="storezip" type="text" name="storezip" class="form-control"
+                                                    placeholder="Enter store zip code">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="form_storelatitude">Store Latitude</label>
+                                                <input id="storelatitude" type="text" name="storelatitude"
+                                                    class="form-control" placeholder="Enter store latitude">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="form_storelongitude">Store Longitude</label>
+                                                <input id="storelongitude" type="text" name="storelongitude"
+                                                    class="form-control" placeholder="Enter store longitude">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="form_storewebsite">Store Website</label>
+                                                <input id="storewebsite" type="text" name="storewebsite"
+                                                    class="form-control" placeholder="Enter store website">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="form_storemobilenumber">Store Mobile Number<span style="color: red;">*</span></label>
+                                                <input id="storemobilenumber" type="text" name="storemobilenumber"
+                                                    class="form-control" placeholder="Enter store mobile number">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="form_storeemailaddress">Store Email Address</label>
+                                                <input id="storeemailaddress" type="text" name="storeemailaddress"
+                                                    class="form-control" placeholder="Enter store email address">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="form_storeopeninghour">Store Opening Hour</label>
+                                                <input id="storeopeninghour" type="text" name="storeopeninghour"
+                                                    class="form-control" placeholder="Enter store opening hour">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="form_storeclosinghour">Store Closing Hour</label>
+                                                <input id="storeclosinghour" type="text" name="storeclosinghour"
+                                                    class="form-control" placeholder="Enter store closing hour">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <div class="col-md-12">
+                                                <input type="submit" class="btn btn-success btn-send pt-2 btn-block" value="Submit" id="submitBtn" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </form>
+                            <script>
+                                function checkMandatoryFields() {
+                                    var region = document.getElementById("region").value;
+                                    var district = document.getElementById("district").value;
+                                    var storeName = document.getElementById("storename").value;
+                                    var storeAddress = document.getElementById("storeaddress").value;
+                                    var mobileNumber = document.getElementById("storemobilenumber").value;
+                            
+                                    var submitBtn = document.getElementById("submitBtn");
+                            
+                                    if (region !== "" && district !== "" && storeName !== "" && storeAddress !== "" && mobileNumber !== "") {
+                                        submitBtn.disabled = false;
+                                    } else {
+                                        submitBtn.disabled = true;
+                                    }
+                                }
+                            
+                                // Attach the checkMandatoryFields function to input fields' change or input events
+                                document.getElementById("region").addEventListener("input", checkMandatoryFields);
+                                document.getElementById("district").addEventListener("input", checkMandatoryFields);
+                                document.getElementById("storename").addEventListener("input", checkMandatoryFields);
+                                document.getElementById("storeaddress").addEventListener("input", checkMandatoryFields);
+                                document.getElementById("storemobilenumber").addEventListener("input", checkMandatoryFields);
+                            
+                                // Check mandatory fields on page load
+                                checkMandatoryFields();
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="../static/js/jquery.min.js"></script>
+        <script src="../static/js/popper.js"></script>
+        <script src="../static/js/bootstrap.min.js"></script>
+        <script src="../static/js/main.js"></script>
+</body>
+
+</html>

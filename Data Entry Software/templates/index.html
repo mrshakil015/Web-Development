@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>Sobjanta Data Operator</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.8.0/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.8.0/dist/sweetalert2.all.min.js"></script>
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../static/css/style.css">
+	<style>
+		table {
+			font-family: arial, sans-serif;
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		td,
+		th {
+			border: 1px solid #dddddd;
+			text-align: left;
+			padding: 8px;
+		}
+
+		tr:nth-child(even) {
+			background-color: #e7e9eb;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="wrapper d-flex align-items-stretch">
+		<nav id="sidebar" style="position: fixed;z-index: 999999;min-height:100%">
+			<div class="custom-menu">
+				<button type="button" id="sidebarCollapse" class="btn btn-primary">
+					<i class="fa fa-bars"></i>
+					<span class="sr-only">Toggle Menu</span>
+				</button>
+			</div>
+			<div class="p-4 pt-5">
+				<h1><a href="#" class="logo">Sobjanta</a></h1>
+				<ul class="list-unstyled components mb-5">
+					<li class="active">
+						<a href="/dashboard">Dashboard</a>
+					</li>
+					<li class="active">
+						<a href="#" data-toggle="modal" data-target="#entrydataModal">Entry Data</a>
+					</li>
+					<li>
+						<a href="/logout">Logout</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<!-- Page Content  -->
+		<div id="content" class="p-4 p-md-5 pt-5">
+			<div class="row dashboard-card">
+				<div class="col-lg-4 col-xl-4 col-sm-12">
+					<div class="card shadow">
+						<div class="card-header bg-success">
+							<h5 class="text-light"><strong>Employee Information</strong></h5>
+						</div>
+						<div class="card-body">
+							<p><strong>Name: </strong>{{ operator_data.operatorname }}</p>
+							<p><strong>Email Address: </strong>{{ operator_data.emailaddress }}</p>
+							<p><strong>Contact Number: </strong>{{ operator_data.contactnumber }}</p>
+						</div>
+						<div class="card-footer">
+							<button class="btn btn-success text-light" id="startBtn"
+								onclick="startTimer()">Start</button>
+							<button class="btn btn-info text-light" id="pauseBtn" onclick="pauseTimer()">Pause</button>
+							<button class="btn btn-danger text-light" id="stopBtn" onclick="stopTimer()">Stop</button>
+						</div>
+					</div>
+				</div>
+
+				<script>
+					let timer;
+					let isRunning = false;
+					let seconds = 0;
+
+					// Check if there is a previous timer state in localStorage
+					const savedTimerState = localStorage.getItem('timerState');
+					if (savedTimerState) {
+						const parsedState = JSON.parse(savedTimerState);
+						seconds = parsedState.seconds;
+						isRunning = parsedState.isRunning;
+
+						if (isRunning) {
+							timer = setInterval(updateTimer, 1000);
+						}
+
+						// Restore the running hours
+						const hours = Math.floor(seconds / 3600);
+						const minutes = Math.floor((seconds % 3600) / 60);
+						const remainingSeconds = seconds % 60;
+						document.getElementById("runningHours").innerHTML = hours + ":" + (minutes < 10 ? "0" : "") + minutes + ":" +
+							(remainingSeconds < 10 ? "0" : "") + remainingSeconds;
+					}
+
+					function startTimer() {
+						if (!isRunning) {
+							if (seconds === 0) {
+								// If the timer was stopped or never started, start from 0
+								timer = setInterval(updateTimer, 1000);
+							} else {
+								// If the timer was paused, resume from the current time
+								timer = setInterval(updateTimer, 1000);
+							}
+							isRunning = true;
+							console.log(timer);
+							saveTimerState(); // Save timer state to localStorage
+						}
+					}
+					function pauseTimer() {
+						clearInterval(timer);
+						isRunning = false;
+						saveTimerState(); // Save timer state to localStorage
+					}
+
+					function stopTimer() {
+						if (isRunning) {
+							clearInterval(timer);
+							isRunning = false;
+						}
+
+
+						// Set runningHours to "00:00:00"
+						document.getElementById("runningHours").innerHTML = "00:00:00";
+						const hours = Math.floor(seconds / 3600);
+						const minutes = Math.floor((seconds % 3600) / 60);
+						const remainingSeconds = seconds % 60;
+
+						// Calculate the total time in seconds
+						const totalSeconds = hours * 3600 + minutes * 60 + remainingSeconds;
+
+						// Calculate daily time in seconds (assuming a new daily timer)
+						const dailySeconds = totalSeconds;
+
+
+						// Send the updated values in seconds to the Flask endpoint using AJAX
+						fetch('/update_hours', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json',
+							},
+							body: JSON.stringify({ totalSeconds: totalSeconds, dailySeconds: dailySeconds }),
+						})
+							.then(response => response.json())
+							.then(data => {
+								console.log(data.message);
+								if (data) {
+									document.getElementById("runningHours").innerHTML = "00:00:00";
+
+									var current_totalhoursJs = data.current_totalhours;
+									var current_dailyhoursJs = data.current_dailyhours;
+
+									// Convert the total seconds to hours, minutes, and seconds
+									var hours = Math.floor(current_totalhoursJs / 3600); // Calculate hours
+									var minutes = Math.floor((current_totalhoursJs % 3600) / 60); // Calculate minutes
+									var seconds = current_totalhoursJs % 60; // Calculate seconds
+
+									var hoursDaily = Math.floor(current_dailyhoursJs / 3600); // Calculate hours
+									var minutesDaily = Math.floor((current_dailyhoursJs % 3600) / 60); // Calculate minutes
+									var secondsDaily = current_dailyhoursJs % 60; // Calculate seconds
+
+									// Format the hours, minutes, and seconds as (0:00:00)
+									var formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+									var formattedTimeDaily = `${String(hoursDaily).padStart(2, '0')}:${String(minutesDaily).padStart(2, '0')}:${String(secondsDaily).padStart(2, '0')}`;
+
+									// Set the formatted time as the inner HTML of an element with the id "totalHours"
+									document.getElementById("totalHours").innerHTML = formattedTime;
+									document.getElementById("dailyHours").innerHTML = formattedTimeDaily;
+
+								}
+							})
+							.catch(error => {
+								console.error('Error:', error);
+							});
+
+						// Reset the seconds to 0 when the timer is stopped
+						seconds = 0;
+						saveTimerState(); // Save timer state to localStorage
+						document.getElementById("runningHours").innerHTML = "00:00:00";
+
+						// Clear the timer state from localStorage
+						localStorage.removeItem('timerState');
+					}
+
+					function updateTimer() {
+						seconds++;
+						const hours = Math.floor(seconds / 3600);
+						const minutes = Math.floor((seconds % 3600) / 60);
+						const remainingSeconds = seconds % 60;
+						document.getElementById("runningHours").innerHTML = hours + ":" + (minutes < 10 ? "0" : "") + minutes + ":" +
+							(remainingSeconds < 10 ? "0" : "") + remainingSeconds;
+
+						saveTimerState(); // Save timer state to localStorage on each update
+					}
+
+					// Function to save the timer state to localStorage
+					function saveTimerState() {
+						const timerState = {
+							seconds: seconds,
+							isRunning: isRunning,
+						};
+						localStorage.setItem('timerState', JSON.stringify(timerState));
+					}
+				</script>
+				<div class="col-lg-4 col-xl-4 col-sm-12">
+					<div class="card shadow">
+						<div class="card-header bg-info bg-gradient">
+							<h5 class="text-light"><strong>Data Status</strong></h5>
+						</div>
+						<div class="card-body">
+							<p><strong>Assign Data: </strong><a class="btn btn-info text-light">{{
+									operator_data.totaldata }}</a></p>
+							<p><strong>Daywise Data: </strong><a class="btn btn-info text-light">{{
+									operator_data.daywisecomplete }}/{{
+									operator_data.dailydata }}</a></p>
+							<p><strong>Completed Data: </strong><a class="btn btn-success text-light">{{
+									operator_data.completedata }}</a></p>
+							<p><strong>Remaining Data: </strong><a class="btn btn-danger text-light">{{
+									operator_data.remaindata }}</a></p>
+						</div>
+						<div class="card-footer">
+							<button class="btn btn-primary" data-toggle="modal" data-target="#viewreportModal"
+								id="fetchDataButton">
+								View Report
+							</button>
+							<button class="btn btn-info text-light" data-toggle="modal"
+								data-target="#viewdataModal">View Entry Data</button>
+						</div>
+					</div>
+				</div>
+				<script>
+					let lastActivityTime = Date.now();
+					let inactivityAlertTimeout = null;
+
+					// Function to reset the timer
+					function resetTimer() {
+						lastActivityTime = Date.now();
+						if (inactivityAlertTimeout !== null) {
+							clearTimeout(inactivityAlertTimeout);
+						}
+					}
+
+					// Function to automatically stop the timer after 60 seconds of inactivity
+					function stopTimerAfterInactivity() {
+						inactivityAlertTimeout = setTimeout(function () {
+							pauseTimer();
+							console.log("Pause timer called"); // Debugging statement
+							Swal.fire({
+								title: "Start work",
+								text: "You've been inactive. Start working!",
+								icon: "error"
+							});
+							console.log("Swal alert displayed"); // Debugging statement
+						}, 60000); // 60 seconds (60,000 milliseconds)
+					}
+
+					// Function to handle mousemove event
+					function handleMouseMove() {
+						resetTimer();
+						stopTimerAfterInactivity(); // Reset the timer and start the 60-second countdown
+					}
+
+					// Function to handle key press event
+					function handleKeyPress() {
+						resetTimer();
+						stopTimerAfterInactivity(); // Reset the timer and start the 60-second countdown
+					}
+
+					// Attach event listeners for mousemove and key press
+					document.addEventListener("mousemove", handleMouseMove);
+					document.addEventListener("keydown", handleKeyPress);
+
+					// Set an interval to check for inactivity
+					setInterval(function () {
+						const currentTime = Date.now();
+						const inactivityDuration = (currentTime - lastActivityTime) / 1000; // Convert to seconds
+
+						if (inactivityDuration >= 60 && inactivityAlertTimeout === null) { // 60 seconds
+							stopTimerAfterInactivity(); // Start the 60-second countdown
+						}
+					}, 1000); // Check every second
+
+				</script>
+
+				<div class="col-lg-4 col-xl-4 col-sm-12">
+					<div class="card shadow">
+						<div class="card-header bg-dark">
+							<h5 class="text-light"><strong>Work Day Status</strong></h5>
+						</div>
+						<div class="card-body">
+							<p><strong>Estimated Days: </strong><a class="btn btn-info text-light">{{
+									operator_data.assignday }} Days</a></p>
+							<p><strong>Remain Days: </strong><a class="btn btn-danger text-light">{{
+									operator_data.remainday }} Days</a></p>
+							<p><strong>Overall Working Time: </strong><a class="btn btn-info text-light"><span
+										id="totalHours">{{ current_totalhours | format_time }}</span> hours</a></p>
+							<p><strong>Today Working Time: </strong><a class="btn btn-info text-light"><span
+										id="dailyHours">{{ current_dailyhours | format_time }}</span> hours</a></p>
+
+							<p><strong>Running Working Time: </strong><a class="btn btn-info text-light"><span
+										id="runningHours">00:00:00</span> hours</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--====== View Data Modal========-->
+			<div class="modal fade" id="viewdataModal" tabindex="-1" aria-labelledby="viewdataModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog modal-xl">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="adduserModalLabel">Entry Data</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="container operator-list">
+								<div class="row">
+									<div class="col-12 mb-3 mb-lg-5">
+										<div class="overflow-hidden card table-nowrap table-card">
+											<div class="table-responsive">
+												<table class="table mb-0 table-bordered">
+													<thead class="small text-uppercase bg-body text-muted">
+														<tr>
+															<th>Entry Date</th>
+															<th>Entry Time</th>
+															<th>Region</th>
+															<th>District</th>
+															<th>Name</th>
+															<th>Branch Name</th>
+															<th>Address</th>
+															<th>Zip Code</th>
+															<th>Latitude</th>
+															<th>Longitude</th>
+															<th>Website</th>
+															<th>Mobile Number</th>
+															<th>Email Address</th>
+															<th>Opening Hour</th>
+															<th>Closing Hour</th>
+														</tr>
+													</thead>
+													<tbody>
+														{% for row in sheet_data %}
+														<tr>
+															<td>{{ row['Entry Date'] }}</td>
+															<td>{{ row['Entry Time'] }}</td>
+															<td>{{ row['Store Region'] }}</td>
+															<td>{{ row['Store District'] }}</td>
+															<td>{{ row['Store Name'] }}</td>
+															<td>{{ row['Branch Name'] }}</td>
+															<td>{{ row['Store Address'] }}</td>
+															<td>{{ row['Store Zip Code'] }}</td>
+															<td>{{ row['Store Latitude'] }}</td>
+															<td>{{ row['Store Longitude'] }}</td>
+															<td>{{ row['Store Website'] }}</td>
+															<td>{{ row['Store Mobile Number'] }}</td>
+															<td>{{ row['Store Email Address'] }}</td>
+															<td>{{ row['Store Opening Hour'] }}</td>
+															<td>{{ row['Store Closing Hour'] }}</td>
+															{% endfor %}
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--====== Entry Data Modal========-->
+			<div class="modal fade" id="entrydataModal" tabindex="-1" aria-labelledby="entrydataModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="entrydataModalLabel">Entry Data</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="card-body">
+								<form id="contact-form" role="form" action="/entrydata" method="POST">
+									<div class="controls">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="form_operatorid">Operator ID</label>
+													<input id="operatorid" type="text" name="operatorid"
+														class="form-control" value="{{ operator_data.operator_id }}"
+														readonly>
+
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="form_region">Store Region<span
+															style="color: red;">*</span></label>
+													<input id="region" type="text" name="region" class="form-control"
+														placeholder="Enter region name">
+												</div>
+											</div>
+
+										</div>
+
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="form_district">Store District<span
+															style="color: red;">*</span></label>
+													<input id="district" type="text" name="district"
+														class="form-control" placeholder="Enter district name">
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="form_storename">Store Name<span
+															style="color: red;">*</span></label>
+													<input id="storename" type="text" name="storename"
+														class="form-control" placeholder="Enter store name">
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="form_branchname">Branch Name</label>
+													<input id="branchname" type="text" name="branchname"
+														class="form-control" placeholder="Enter branch name">
+
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="form_storeaddress">Store Address<span
+															style="color: red;">*</span></label>
+													<input id="storeaddress" type="text" name="storeaddress"
+														class="form-control" placeholder="Enter store address">
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="form_storezip">Store Zip Code</label>
+													<input id="storezip" type="text" name="storezip"
+														class="form-control" placeholder="Enter store zip code">
+
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="form_storelatitude">Store Latitude</label>
+													<input id="storelatitude" type="text" name="storelatitude"
+														class="form-control" placeholder="Enter store latitude">
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="form_storelongitude">Store Longitude</label>
+													<input id="storelongitude" type="text" name="storelongitude"
+														class="form-control" placeholder="Enter store longitude">
+
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="form_storewebsite">Store Website</label>
+													<input id="storewebsite" type="text" name="storewebsite"
+														class="form-control" placeholder="Enter store website">
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="form_storemobilenumber">Store Mobile Number<span
+															style="color: red;">*</span></label>
+													<input id="storemobilenumber" type="text" name="storemobilenumber"
+														class="form-control" placeholder="Enter store mobile number">
+
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="form_storeemailaddress">Store Email Address</label>
+													<input id="storeemailaddress" type="text" name="storeemailaddress"
+														class="form-control" placeholder="Enter store email address">
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="form_storeopeninghour">Store Opening Hour</label>
+													<input id="storeopeninghour" type="text" name="storeopeninghour"
+														class="form-control" placeholder="Enter store opening hour">
+
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="form_storeclosinghour">Store Closing Hour</label>
+													<input id="storeclosinghour" type="text" name="storeclosinghour"
+														class="form-control" placeholder="Enter store closing hour">
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+
+												<div class="col-md-12">
+													<input type="submit" class="btn btn-success btn-send pt-2 btn-block"
+														value="Submit" id="submitBtn" disabled>
+												</div>
+											</div>
+										</div>
+								</form>
+								<script>
+									function checkMandatoryFields() {
+										var region = document.getElementById("region").value;
+										var district = document.getElementById("district").value;
+										var storeName = document.getElementById("storename").value;
+										var storeAddress = document.getElementById("storeaddress").value;
+										var mobileNumber = document.getElementById("storemobilenumber").value;
+
+										var submitBtn = document.getElementById("submitBtn");
+
+										if (region !== "" && district !== "" && storeName !== "" && storeAddress !== "" && mobileNumber !== "") {
+											submitBtn.disabled = false;
+										} else {
+											submitBtn.disabled = true;
+										}
+									}
+
+									// Attach the checkMandatoryFields function to input fields' change or input events
+									document.getElementById("region").addEventListener("input", checkMandatoryFields);
+									document.getElementById("district").addEventListener("input", checkMandatoryFields);
+									document.getElementById("storename").addEventListener("input", checkMandatoryFields);
+									document.getElementById("storeaddress").addEventListener("input", checkMandatoryFields);
+									document.getElementById("storemobilenumber").addEventListener("input", checkMandatoryFields);
+
+									// Check mandatory fields on page load
+									checkMandatoryFields();
+								</script>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--====== View user Report Modal========-->
+		<!-- Your existing modal content -->
+		<div class="modal fade" id="viewreportModal" tabindex="-1" aria-labelledby="viewreportModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<!-- <h4 class="modal-title" id="viewreportModalLabel">About Me</h4> -->
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<!-- Modal content goes here -->
+						<!-- Display operator information here -->
+						<div class="logo">
+							<img src="../static/images/profile.png" alt="">
+						</div>
+						<div class="body">
+							<div class="body-head">
+								<h5 class="d-flex justify-content-center"><strong>{{ operator_data.operatorname
+										}}</strong></h5>
+								<!-- Display operator data here -->
+								<div class="overallreport">
+									<h5 class="d-flex justify-content-left"><strong>Overall Report</strong></h5>
+									<table>
+										<tr style="text-align: center;">
+											<th>Total Assign Data</th>
+											<th>Total Completed Data</th>
+											<th>Remain Data</th>
+											<th>Estimated Time</th>
+											<th>Total Working Time</th>
+										</tr>
+										<tr style="text-align: center;">
+											<td>{{ operator_data.totaldata }}</td>
+											<td>{{ operator_data.completedata }}</td>
+											<td>{{ operator_data.remaindata }}</td>
+											<td>{{ operator_data.assignday }} days</td>
+											<td>{{ operator_data.totalhours // 3600 }} hr {{ (operator_data.totalhours
+												// 60) % 60 }} min {{ operator_data.totalhours % 60 }} sec</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+							<div class="daywisereport">
+								<h5 class="d-flex justify-content-left"><strong>Daywise Report</strong></h5>
+								<!-- Display daywise data here -->
+								<table>
+									<tr>
+										<th>Date</th>
+										<th>Daywise Completed Data</th>
+										<th>Daywise Working Time</th>
+										<th>Daywise Remain Data</th>
+									</tr>
+									{% for row in daywise_data %}
+									<tr>
+										<td>{{ row[0] }}</td> <!-- Entry Date -->
+										<td>{{ row[1] }}</td> <!-- Complete Data -->
+										<td>{{ row[2] // 3600 }} hr {{ (row[2] // 60) % 60 }} min {{ row[2] % 60 }} sec
+										</td> <!-- Today Working Time -->
+										<td>{{ row[3] }}</td> <!-- Remaining Data -->
+									</tr>
+									{% endfor %}
+								</table>
+							</div>
+						</div>
+						<!-- End of modal content -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<script src="../static/js/jquery.min.js"></script>
+	<script src="../static/js/popper.js"></script>
+	<script src="../static/js/bootstrap.min.js"></script>
+	<script src="../static/js/main.js"></script>
+</body>
+
+</html>
