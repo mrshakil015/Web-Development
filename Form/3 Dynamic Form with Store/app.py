@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, jsonify
 import pymysql
 
 app = Flask(__name__)
@@ -10,13 +10,19 @@ def index():
     data_dict ={}
     if request.method == 'POST':
         data_dict =entrydata()
-        studentname = data_dict['studentname']
-        message = "Form Submitted Successfully"
-        return render_template('viewform.html', data = data_dict)
+        return render_template('viewform.html')
     return render_template('entryform.html')
 
+@app.route('/viewform')
+def viewform():
+    cursor = mysql.cursor()
+    cursor.execute("SELECT * FROM data_table")
+    data = cursor.fetchall()
+    cursor.close()
+    print(data)
+    return jsonify(data=data)
+
 def entrydata():
-    
     data = {}
     studentname = request.form['studentname']
     institute = request.form['institute']
