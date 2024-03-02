@@ -1,0 +1,16 @@
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #d2d2dc;
+    border-radius: 0;
+}
+
+.card img {
+    width: 100px;
+    height: 100px;
+}
