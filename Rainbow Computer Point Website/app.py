@@ -1,9 +1,36 @@
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, jsonify
+import pymysql
 
 app = Flask(__name__)
 
 AUTHORIZED_PASSWORD = "shakil015"
 AUTHORIZED_USER= "shakil015"
+
+connection = pymysql.connect(host='localhost',
+                                user='root',
+                                password='',
+                                db='rainbow_computer')
+
+def fetch_data_from_mysql():
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM course_info")
+    data = cursor.fetchall()
+    cursor.close()
+    return data
+
+
+@app.route('/data')
+def get_data():
+    # Fetch data from MySQL database
+    data = fetch_data_from_mysql()
+    if data:
+        # Convert data to a list of dictionaries
+        keys = ['id', 'course_name', 'month_duration', 'weekly', 'duration_hour', 'duration_minute', 'amount', 'image_name']
+        data_list = [dict(zip(keys, row)) for row in data]
+        return jsonify(data_list)
+    else:
+        return jsonify([])
+
 
 @app.route('/')
 def index():
