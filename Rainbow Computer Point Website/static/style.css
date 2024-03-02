@@ -12083,6 +12083,13 @@ textarea.form-control {
     align-items: center;
 }
 
+.course-section .card-title {
+    font-size: 18px;
+}
+
+.course-section .card-info button{
+    font-size: 12px;
+}
 
 .page {
     /* background-color: #dfe6e0; */
@@ -12138,18 +12145,18 @@ margin: 2px;
     margin: 10px 0 0 0;
 }
 
-.card-footer {
+.course-footer {
     /* background-color: #cad1ee; */
-    background-color: #cad1ee;
+    /* background-color: #cad1ee; */
     color: #fff;
     font-weight: 900;
-    padding: 10px;
+    padding: 0 10px 15px 10px;
     cursor: pointer;
     width: 100%;
-    margin: 10px 0 0 0;
+    /* margin: 10px 0 0 0; */
     border: none;
 }
-.card-footer button{
+.course-footer button{
     margin-bottom: 0px;
     width: 90%;
     padding: 10px;

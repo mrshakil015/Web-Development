@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const cardsContainer = document.getElementById('cards-container');
             data.forEach(course_details => {
                 const card = document.createElement('div');
-                card.classList.add('col-md-4');
+                card.classList.add('col-lg-4');
+                card.classList.add('col-md-6');
                 card.innerHTML = `
                 <div class="card card-item">
                     <div class="view view-cascade overlay text-center">
@@ -19,8 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
                             <button class="btn btn-outline-primary">সপ্তাহে ${course_details.weekly} দিন</button>
                             <button class="btn btn-outline-primary">${course_details.duration_hour} ঘন্টা ${course_details.duration_minute} মিনিট</button>
                             <p class="price">৳  ${course_details.amount}/-</p>
-
-                            <div class="card-footer">
+                            <hr>
+                            <div class="course-footer">
                             <button class="btn btn-outline-primary">বিস্তারিত দেখুন</button>
                         </div>
                         </div>
