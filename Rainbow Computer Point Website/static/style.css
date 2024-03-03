@@ -11386,7 +11386,7 @@ blockquote::before {
     z-index: 10;
     border-radius: 1rem;
     margin-top: 1rem;
-    min-height: 200px;
+    min-height: 100px;
     background-color: #fff;
     cursor: pointer;
 }
@@ -11394,18 +11394,20 @@ blockquote::before {
 .feature-item .card-body {
     padding: 0 5px;
     height: 100%;
+    border-radius: 1rem;
 }
 
 .feature-item h3, .feature-item span{
     font-family: Anek Bangla;
+    font-size: 15px;
 }
 
 .feature-item .colored-box {
     display: inline-block;
-    height: 50px;
-    margin: 15px;
-    width: 50px;
-    line-height: 50px;
+    height: 30px;
+    margin: 5px;
+    width: 30px;
+    line-height: 30px;
     border-radius: 8px;
     color: #fff;
     background-color: #534de6;
