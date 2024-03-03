@@ -44,6 +44,10 @@ def courses():
 def aboutus():
     return render_template("aboutus.html")
 
+@app.route('/admindashboard')
+def admindashboard():
+    return render_template("admindashboard.html")
+
 @app.route('/admin', methods=['POST', 'GET'])
 def admin_login():
     if request.method == 'POST':
@@ -55,7 +59,7 @@ def admin_login():
         if (admin_username == AUTHORIZED_USER) and (admin_password == AUTHORIZED_PASSWORD):
             print("It works")
             # session['admin_logged_in'] = True
-            return redirect(url_for('index'))
+            return redirect(url_for('admindashboard'))
         else:
             error_message = "Invalid admin credentials"
             return render_template('adminlogin.html', error_message=error_message)
