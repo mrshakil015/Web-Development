@@ -12254,7 +12254,9 @@ margin: 2px;
     padding: 10px;
 }
 
-.feature-item .card-body {
+.feature-item,
+.feature-item .card-body,
+.feature-item .card-link {
     display: flex;
     flex-direction: column;
     justify-content: center;

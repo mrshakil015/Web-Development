@@ -48,6 +48,33 @@ def aboutus():
 def admindashboard():
     return render_template("admindashboard.html")
 
+@app.route('/addcourse', methods=['GET', 'POST'])
+def addcourse():
+    if request.method == 'POST':
+        course_name = request.form['coursename']
+        month_duration = request.form['monthduration']
+        weekly = request.form['weekly']
+        duration_hour = request.form['durationhour']
+        duration_minute = request.form['durationminute']
+        amount = request.form['amount']
+        image_file = request.files['imagename']
+        image_name = image_file.filename
+        print("Image: ",image_file.filename)
+        if image_file:
+            image_file.save('static/images/' + image_name)
+
+        data = {'course_name': course_name, 'month_duration': month_duration, 'weekly': weekly, 'duration_hour': duration_hour,'duration_minute':duration_minute,'amount':amount, 'image_name': image_name}
+        print(data['course_name'])
+
+        cursor = connection.cursor()
+        query = "INSERT INTO course_info (course_name, month_duration, weekly, duration_hour, duration_minute, amount, image_name) VALUES(%s,%s,%s,%s,%s,%s,%s)"
+        values = (course_name, month_duration, weekly, duration_hour, duration_minute, amount, image_name)
+        cursor.execute(query, values)
+        connection.commit()
+        message = 'Successfully Added'
+        return render_template('addcourse.html',message=message)
+    return render_template('addcourse.html')
+
 @app.route('/admin', methods=['POST', 'GET'])
 def admin_login():
     if request.method == 'POST':
