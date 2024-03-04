@@ -11,18 +11,23 @@ connection = pymysql.connect(host='localhost',
                                 password='',
                                 db='rainbow_computer')
 
-def fetch_data_from_mysql():
+def fetch_course_info():
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM course_info")
     data = cursor.fetchall()
     cursor.close()
     return data
 
+@app.route('/course_infodata')
+def course_infodata():
+    course_data = fetch_course_info()
+    if course_data:
+        return jsonify(course_data)
 
 @app.route('/data')
 def get_data():
     # Fetch data from MySQL database
-    data = fetch_data_from_mysql()
+    data = fetch_course_info()
     if data:
         # Convert data to a list of dictionaries
         keys = ['id', 'course_name', 'month_duration', 'weekly', 'duration_hour', 'duration_minute', 'amount', 'image_name']
@@ -48,6 +53,10 @@ def aboutus():
 def admindashboard():
     return render_template("admindashboard.html")
 
+@app.route('/admincourse')
+def admincourse():
+    return render_template("admincourse.html")
+
 @app.route('/addcourse', methods=['GET', 'POST'])
 def addcourse():
     if request.method == 'POST':
@@ -72,8 +81,8 @@ def addcourse():
         cursor.execute(query, values)
         connection.commit()
         message = 'Successfully Added'
-        return render_template('addcourse.html',message=message)
-    return render_template('addcourse.html')
+        return render_template('admincourse.html',message=message)
+    return render_template('admincourse.html')
 
 @app.route('/admin', methods=['POST', 'GET'])
 def admin_login():
