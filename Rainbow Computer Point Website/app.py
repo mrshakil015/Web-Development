@@ -53,12 +53,8 @@ def aboutus():
 def admindashboard():
     return render_template("admindashboard.html")
 
-@app.route('/admincourse')
+@app.route('/admincourse',  methods=['POST', 'GET'])
 def admincourse():
-    return render_template("admincourse.html")
-
-@app.route('/addcourse', methods=['GET', 'POST'])
-def addcourse():
     if request.method == 'POST':
         course_name = request.form['coursename']
         month_duration = request.form['monthduration']

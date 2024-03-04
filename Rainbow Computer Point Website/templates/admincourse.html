@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Sobjanta Data Operator</title>
+    <title>Rainbow Computer Point</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -11,6 +11,10 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.8.0/dist/sweetalert2.all.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    rel="stylesheet" />
+
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="../static/css/admincourse.css">
 
@@ -32,6 +36,9 @@
 
         tr:nth-child(even) {
             background-color: #e7e9eb;
+        }
+        tbody{
+            font-weight: normal;
         }
     </style>
 </head>
@@ -92,10 +99,78 @@
     <!-- /navigation -->
 
 
-    <!--==============Operator Status==========-->
+    <!--==============course Status==========-->
     <section class="section course-section">
         <div class="container mt-5">
             <div class="row">
+
+                <div class="col-lg-12 col-xl-12 col-sm-12">
+                    <div class="card shadow">
+                        <div class="card-header">
+                            <div class="row justify-content-between ml-3 mr-3">
+                                <h5 class="text-secondary"><strong>কোর্সসমূহ<strong></h5>
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#addcourseModal">
+                                    +কোর্স যুক্ত করুন
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="container course-list">
+                                <div class="row">
+                                    <div class="col-12 mb-3 mb-lg-5">
+                                        <div class="overflow-hidden card table-nowrap table-card">
+                                            <div class="table-responsive">
+                                                <table class="table mb-0">
+                                                    <thead class="small text-uppercase bg-body text-muted">
+                                                        <tr>
+                                                            <th>আইডি</th>
+                                                            <th>কোর্সের নাম</th>
+                                                            <th>মাস</th>
+                                                            <th>সপ্তাহ</th>
+                                                            <th>ঘন্টা</th>
+                                                            <th>মিনিট</th>
+                                                            <th>কোর্স ফি</th>
+                                                            <!-- <th>ছবির নাম</th> -->
+                                                            <th class="text-end">একশন</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="course-table-body">
+                                                    </tbody>
+                                                    <script>
+                                                        fetch('/course_infodata')
+                                                            .then(response => response.json())
+                                                            .then(data => {
+                                                                const tbody = document.getElementById('course-table-body');
+                                                                data.forEach(row => {
+                                                                    const tr = document.createElement('tr');
+                                                                    tr.innerHTML = `
+                                                                        <td>${row[0]}</td>
+                                                                        <td>${row[1]}</td>
+                                                                        <td>${row[2]}</td>
+                                                                        <td>${row[3]}</td>
+                                                                        <td>${row[4]}</td>
+                                                                        <td>${row[5]}</td>
+                                                                        <td>${row[6]}</td>
+                                                                        
+                                                                    `;
+                                                                    tbody.appendChild(tr);
+                                                                });
+                                                            })
+                                                            .catch(error => console.error('Error fetching data:', error));
+                                                    </script>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
                 <!--==========Add user Model==================-->
                 <div class="modal fade" id="addcourseModal" tabindex="-1" aria-labelledby="addcourseModalLabel"
                     aria-hidden="true">
@@ -108,7 +183,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form id="contact-form" role="form" action="/addcourse" method="post"
+                                <form id="contact-form" role="form" action="/admincourse" method="post"
                                     enctype="multipart/form-data">
                                     <div class="controls">
                                         <div class="row">
@@ -191,7 +266,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-success"
-                                            id="add-operator-button">Add</button>
+                                            id="add-course-button">Add</button>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
                                     </div>
@@ -203,387 +278,8 @@
                         </div>
                     </div>
                 </div>
-
-
-                <!--==========View User Info Model==================-->
-                <div class="modal fade" id="viewUserModal" tabindex="-1" aria-labelledby="viewreportModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="logo">
-                                    <img src="../static/images/profile.png" alt="">
-                                </div>
-                                <div class="body">
-                                    <div class="body-head">
-                                        <h5 class="d-flex justify-content-center"></h5>
-                                        <!-- Display operator data here -->
-                                        <p>Operator Name: <span id="overall-operator-name"></span></p>
-                                        <p>Operator ID: <span id="overall-operator-id"></span></p>
-                                        <div class="overallreport">
-                                            <h5 class="d-flex justify-content-left"><strong>Overall Report</strong></h5>
-                                            <table>
-                                                <tr>
-                                                    <th>Total Data</th>
-                                                    <th>Complete Data</th>
-                                                    <th>Remain Data</th>
-                                                    <th>Assigned Day</th>
-                                                    <th>Remain Day</th>
-                                                    <th>Total Hours</th>
-                                                </tr>
-                                                <tr>
-                                                    <td id="overall-total-data"></td>
-                                                    <td id="overall-complete-data"></td>
-                                                    <td id="overall-remain-data"></td>
-                                                    <td id="overall-assigned-day"></td>
-                                                    <td id="overall-remain-day"></td>
-                                                    <td id="overall-total-hours"></td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                        <div class="daywisereport">
-                                            <h5 class="d-flex justify-content-left"><strong>Daywise Report</strong></h5>
-                                            <!-- Display daywise data here -->
-                                            <table>
-                                                <tr>
-                                                    <th>Date</th>
-                                                    <th>Daywise Completed Data</th>
-                                                    <th>Daywise Working Time</th>
-                                                    <th>Daywise Remain Data</th>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End of modal content -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
     </section>
-    <section>
-        <div class="container mt-5">
-            <div class="row operator-status">
-                <div class="col-lg-12 col-xl-12 col-sm-12">
-                    <div class="card shadow">
-                        <div class="card-header">
-                            <div class="row justify-content-between ml-3 mr-3">
-                                <h5 class="text-secondary"><strong>কোর্সসমূহ<strong></h5>
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#addcourseModal">
-                                    +কোর্স যুক্ত করুন
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-
-                            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-                                rel="stylesheet" />
-
-                            <div class="container operator-list">
-                                <div class="row">
-                                    <div class="col-12 mb-3 mb-lg-5">
-                                        <div class="overflow-hidden card table-nowrap table-card">
-                                            <div class="table-responsive">
-                                                <table class="table mb-0">
-                                                    <thead class="small text-uppercase bg-body text-muted">
-                                                        <tr>
-                                                            <!-- <th>আইডি</th> -->
-                                                            <th>কোর্সের নাম</th>
-                                                            <th>মাস</th>
-                                                            <th>সপ্তাহ</th>
-                                                            <th>ঘন্টা</th>
-                                                            <th>মিনিট</th>
-                                                            <th>কোর্স ফি</th>
-                                                            <th>ছবির নাম</th>
-                                                            <th class="text-end">একশন</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="course-table-body">
-                                                        <!-- Table body will be populated by JavaScript -->
-                                                    </tbody>
-                                                    <script>
-                                                        fetch('/course_infodata')
-                                                            .then(response => response.json())
-                                                            .then(data => {
-                                                                const tbody = document.getElementById('course-table-body');
-                                                                data.forEach(row => {
-                                                                    const tr = document.createElement('tr');
-                                                                    tr.innerHTML = `
-                                                                        <td>${row[1]}</td>
-                                                                        <td>${row[2]}</td>
-                                                                        <td>${row[3]}</td>
-                                                                        <td>${row[4]}</td>
-                                                                        <td>${row[5]}</td>
-                                                                        <td>${row[6]}</td>
-                                                                        <td>${row[7]}</td>
-                                                                        <td class="text-end">
-                                                                            <div class="dropdown">
-                                                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                    <i class="fa fa-bars"></i>
-                                                                                </button>
-                                                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                                    <a class="dropdown-item view-user" href="#" data-operator-id="${row[1]}"
-                                                                                        data-operator-name="${row[2]}" data-toggle="modal" data-target="#viewUserModal">
-                                                                                        <i class="fa fa-eye"></i> View
-                                                                                    </a>
-                                                                                    <a class="dropdown-item assign-job-link" href="#" data-operator-id="${row[1]}"
-                                                                                        data-toggle="modal" data-target="#assignjobmodal">
-                                                                                        <i class="fa fa-tasks"></i> Assign Job
-                                                                                    </a>
-                                                                                    <a class="dropdown-item" href="#" data-toggle="modal"
-                                                                                        data-target="#deleteModal${row[1]}">
-                                                                                        <i class="fa fa-trash"></i> Delete
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                    `;
-                                                                    tbody.appendChild(tr);
-                                                                });
-                                                            })
-                                                            .catch(error => console.error('Error fetching data:', error));
-                                                    </script>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-
-
-
-
-
-    <!--==========Assign Job Model==================-->
-    <div class="modal fade" id="assignjobmodal" tabindex="-1" aria-labelledby="assignjobmodalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="assignjobmodalLabel">Assign Job</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="assign-job-form" role="form" action="/assign_job" method="POST">
-                        <input type="hidden" id="operator-id" name="operator_id" value="">
-
-                        <div class="controls">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="form_assignday">Assign Days</label>
-                                        <input id="assignday" type="number" name="assignday"
-                                            class="form-control numeric-input" placeholder="Enter Assign Days"
-                                            value="0">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="form_totaldata">Total Assign Data</label>
-                                        <input id="totaldata" type="number" name="totaldata"
-                                            class="form-control numeric-input" placeholder="Enter Total Assign Data"
-                                            value="0">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="form_dailydata">Daily Data Limit</label>
-                                        <input id="dailydata" type="number" name="dailydata"
-                                            class="form-control numeric-input" placeholder="Enter Daily Limit"
-                                            value="0">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="form_sheetname">Sheet Name</label>
-                                        <input id="sheetname" type="text" name="sheetname" class="form-control"
-                                            placeholder="Enter Sheet Name">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="form_sheetid">Sheet ID</label>
-                                        <input id="sheetid" type="text" name="sheetid" class="form-control"
-                                            placeholder="Enter Sheet ID">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-success" id="add-assignjob-button">Assign
-                                Job</button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        </div>
-                        <script>
-                            // Add an event listener to the "Assign Job" button
-                            document.querySelectorAll('.assign-job-link').forEach(function (element) {
-                                element.addEventListener('click', function () {
-                                    var operatorId = this.getAttribute('data-operator-id');
-                                    document.getElementById('operator-id').value = operatorId;
-                                });
-                            });
-
-                            //----------------View User info Report--------------------------------
-                            document.querySelectorAll('.view-user').forEach(function (element) {
-                                element.addEventListener('click', function () {
-                                    var operatorId = this.getAttribute('data-operator-id');
-                                    var operatorName = this.getAttribute('data-operator-name');
-                                    document.getElementById('operator-id').value = operatorId;
-                                    document.getElementById('overall-operator-id').textContent = operatorId;
-                                    document.getElementById('overall-operator-name').textContent = operatorName;
-                                    // Assuming operatorInfo includes operator_name and operator_id
-                                    console.log(operatorId);
-
-                                    // Make an AJAX request to fetch user information based on operator_id
-                                    fetch(`/get_user_info/${operatorId}`, {
-                                        method: 'GET',
-                                    })
-                                        .then(response => response.json())
-                                        .then(data => {
-                                            // Display the user information in the modal
-                                            var daywiseReportTable = document.querySelector('.daywisereport table');
-                                            daywiseReportTable.innerHTML = ''; // Clear the previous content
-
-                                            // Create and add the table header for daywise report
-                                            var daywiseReportHeader = daywiseReportTable.createTHead();
-                                            var daywiseReportRow = daywiseReportHeader.insertRow();
-                                            var daywiseDateHeader = daywiseReportRow.insertCell(0);
-                                            var daywiseCompletedDataHeader = daywiseReportRow.insertCell(1);
-                                            var daywiseWorkingTimeHeader = daywiseReportRow.insertCell(2);
-                                            var daywiseRemainDataHeader = daywiseReportRow.insertCell(3);
-
-                                            daywiseDateHeader.textContent = 'Date';
-                                            daywiseCompletedDataHeader.textContent = 'Daywise Completed Data';
-                                            daywiseWorkingTimeHeader.textContent = 'Daywise Working Time';
-                                            daywiseRemainDataHeader.textContent = 'Daywise Remain Data';
-
-                                            data.user_info.forEach(record => {
-                                                var row = daywiseReportTable.insertRow();
-                                                var entryDateCell = row.insertCell(0);
-                                                var completeDataCell = row.insertCell(1);
-                                                var totalHoursCell = row.insertCell(2);
-                                                var remainDataCell = row.insertCell(3);
-
-                                                entryDateCell.textContent = record.entry_date;
-                                                completeDataCell.textContent = record.complete_data;
-
-                                                // Convert total working time in seconds to hours, minutes, and seconds
-                                                var totalWorkingTime = record.total_hours; // Assuming it's in seconds
-                                                var hours = Math.floor(totalWorkingTime / 3600);
-                                                var minutes = Math.floor((totalWorkingTime % 3600) / 60);
-                                                var seconds = totalWorkingTime % 60;
-
-                                                // Format the working time as "00 hr 00 min 00 sec"
-                                                totalHoursCell.textContent = `${hours.toString().padStart(2, '0')} hr ${minutes.toString().padStart(2, '0')} min ${seconds.toString().padStart(2, '0')} sec`;
-
-                                                remainDataCell.textContent = record.remain_data;
-                                            });
-
-                                            // Display the operator information in the modal
-                                            var overallReportTable = document.querySelector('.overallreport table');
-                                            overallReportTable.innerHTML = ''; // Clear the previous content
-
-                                            // Create and add the table header for overall report
-                                            var overallReportHeader = overallReportTable.createTHead();
-                                            var overallReportRow = overallReportHeader.insertRow();
-                                            var overallTotalDataHeader = overallReportRow.insertCell(0);
-                                            var overallCompleteDataHeader = overallReportRow.insertCell(1);
-                                            var overallRemainDataHeader = overallReportRow.insertCell(2);
-                                            var overallAssignedDayHeader = overallReportRow.insertCell(3);
-                                            var overallRemainDayHeader = overallReportRow.insertCell(4);
-                                            var overallTotalHoursHeader = overallReportRow.insertCell(5);
-
-                                            overallTotalDataHeader.textContent = 'Total Data';
-                                            overallCompleteDataHeader.textContent = 'Complete Data';
-                                            overallRemainDataHeader.textContent = 'Remain Data';
-                                            overallAssignedDayHeader.textContent = 'Assigned Day';
-                                            overallRemainDayHeader.textContent = 'Remain Day';
-                                            overallTotalHoursHeader.textContent = 'Total Hours';
-
-                                            var operatorInfo = data.operator_info;
-
-                                            var overallReportRow = overallReportTable.insertRow();
-                                            var overallTotalDataCell = overallReportRow.insertCell(0);
-                                            var overallCompleteDataCell = overallReportRow.insertCell(1);
-                                            var overallRemainDataCell = overallReportRow.insertCell(2);
-                                            var overallAssignedDayCell = overallReportRow.insertCell(3);
-                                            var overallRemainDayCell = overallReportRow.insertCell(4);
-                                            var overallTotalHoursCell = overallReportRow.insertCell(5);
-
-                                            overallTotalDataCell.textContent = operatorInfo.total_data;
-                                            overallCompleteDataCell.textContent = operatorInfo.complete_data;
-                                            overallRemainDataCell.textContent = operatorInfo.remain_data;
-                                            overallAssignedDayCell.textContent = operatorInfo.assigned_day;
-                                            overallRemainDayCell.textContent = operatorInfo.remain_day;
-                                            // Format the total hours as "00 hr 00 min 00 sec"
-                                            var totalHours = Math.floor(operatorInfo.total_hours / 3600);
-                                            var totalMinutes = Math.floor((operatorInfo.total_hours % 3600) / 60);
-                                            var totalSeconds = operatorInfo.total_hours % 60;
-                                            overallTotalHoursCell.textContent = `${totalHours.toString().padStart(2, '0')} hr ${totalMinutes.toString().padStart(2, '0')} min ${totalSeconds.toString().padStart(2, '0')} sec`;
-
-                                        })
-                                        .catch(error => {
-                                            console.error('Error fetching user information:', error);
-                                        });
-                                });
-                            });
-                            //----------------End View User info Report--------------------------------
-                            document.getElementById("add-assignjob-button").addEventListener("click", function () {
-                                Swal.fire(
-                                    'Good job!',
-                                    'You clicked the button!',
-                                    'success'
-                                )
-                            });
-                            //========Input field 0============
-
-                            const numericInputs = document.querySelectorAll('.numeric-input');
-
-                            numericInputs.forEach((input) => {
-                                let initialValue = input.value;
-
-                                input.addEventListener('input', function () {
-                                    let value = input.value;
-
-                                    if (value === "") {
-                                        // If the input is empty, display the initial value "0"
-                                        input.value = initialValue;
-                                    } else if (value.startsWith("0") && value.length > 1) {
-                                        // Remove the leading "0" when any number is typed
-                                        value = value.slice(1);
-                                        input.value = value;
-                                    }
-                                });
-                            });
-                        </script>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
 
 
     <script src="../static/js/jquery.min.js"></script>
