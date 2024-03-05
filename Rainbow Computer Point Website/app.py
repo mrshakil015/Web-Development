@@ -81,49 +81,26 @@ def admincourse():
         return render_template('admincourse.html',message=message)
     return render_template('admincourse.html')
 
-@app.route('/update_course', methods=['POST'])
-def update_course():
-    try:
-        # Get updated course information from the form
-        course_id = request.form['courseid']
-        course_name = request.form['coursename']
-        month_duration = request.form['monthduration']
-        weekly = request.form['weekly']
-        duration_hour = request.form['durationhour']
-        duration_minute = request.form['durationminute']
-        amount = request.form['amount']
-        # Update the course information in the database
-        cursor = connection.cursor()
-        query = "UPDATE course_info SET course_name = %s, month_duration = %s, weekly = %s, duration_hour = %s, duration_minute = %s, amount = %s WHERE id = %s"
-        values = (course_name, month_duration, weekly, duration_hour, duration_minute, amount, course_id)
-        cursor.execute(query, values)
-        connection.commit()
-        cursor.close()
-        return jsonify({'message': 'Course updated successfully'}), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
 @app.route('/get_course/<int:course_id>')
 def get_course(course_id):
     cursor = connection.cursor()
     query = "SELECT * FROM course_info WHERE courseid = %s"
     cursor.execute(query, (course_id,))
     course_data = cursor.fetchone()
-    cursor.close()
     if course_data:
         course_dict = {
             'courseid': course_data[1],
             'coursename': course_data[2],
             'monthduration': course_data[3],
             'weekly': course_data[4],
-            'duration_hour': course_data[5],
-            'duration_minute': course_data[6],
-            'amount': course_data[7],
-            'image_name': course_data[8]
+            'durationhour': course_data[5],
+            'durationminute': course_data[6],
+            'amount': course_data[7]
         }
         return jsonify(course_dict)
     else:
         return jsonify({'error': 'Course not found'}), 404
+
 
 @app.route('/delete_course/<int:course_id>', methods=['DELETE'])
 def delete_course(course_id):
