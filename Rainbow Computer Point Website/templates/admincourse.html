@@ -12,11 +12,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="../static/css/admincourse.css">
+
+    <!-- # Sweet Alert CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.8.0/dist/sweetalert2.min.css">
 
     <!-- # Main Style Sheet -->
     <!-- <link rel="stylesheet" href="../static/style.css"> -->
@@ -37,7 +39,8 @@
         tr:nth-child(even) {
             background-color: #e7e9eb;
         }
-        tbody{
+
+        tbody {
             font-weight: normal;
         }
     </style>
@@ -124,14 +127,13 @@
                                                 <table class="table mb-0">
                                                     <thead class="small text-uppercase bg-body text-muted">
                                                         <tr>
-                                                            <th>আইডি</th>
+                                                            <th>কোর্স আইডি</th>
                                                             <th>কোর্সের নাম</th>
                                                             <th>মাস</th>
                                                             <th>সপ্তাহ</th>
                                                             <th>ঘন্টা</th>
                                                             <th>মিনিট</th>
                                                             <th>কোর্স ফি</th>
-                                                            <!-- <th>ছবির নাম</th> -->
                                                             <th class="text-end">একশন</th>
                                                         </tr>
                                                     </thead>
@@ -145,20 +147,91 @@
                                                                 data.forEach(row => {
                                                                     const tr = document.createElement('tr');
                                                                     tr.innerHTML = `
-                                                                        <td>${row[0]}</td>
                                                                         <td>${row[1]}</td>
                                                                         <td>${row[2]}</td>
                                                                         <td>${row[3]}</td>
                                                                         <td>${row[4]}</td>
                                                                         <td>${row[5]}</td>
                                                                         <td>${row[6]}</td>
-                                                                        
+                                                                        <td>${row[7]}</td>
+                                                                        <td class="text-end">
+                                                                            <div class="dropdown">
+                                                                                <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                    Action
+                                                                                </button>
+                                                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                                    <a class="dropdown-item update-course" data-course-id="${row[1]}" data-toggle="modal" data-target="#updateCourseModal">Update Course</a>
+                                                                                    <a class="dropdown-item delete-course" data-course-id="${row[1]}" data-toggle="modal" data-target="#deleteConfirmationModal">Delete Course</a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
                                                                     `;
                                                                     tbody.appendChild(tr);
                                                                 });
+                                                    
+                                                                // Event listener for update course action
+                                                                document.querySelectorAll('.update-course').forEach(item => {
+        item.addEventListener('click', event => {
+            const courseId = event.target.getAttribute('data-course-id');
+            fetch(`/get_course/${courseId}`)
+                .then(response => response.json())
+                .then(course => {
+                    // Populate the modal input fields with course data
+                    document.getElementById('courseid').value = course.courseid;
+                    document.getElementById('coursename').value = course.coursename;
+                    document.getElementById('monthduration').value = course.monthduration;
+                    document.getElementById('weekly').value = course.weekly;
+                    document.getElementById('durationhour').value = course.duration_hour;
+                    document.getElementById('durationminute').value = course.duration_minute;
+                    document.getElementById('amount').value = course.amount;
+                    // Show the update modal
+                    $('#updateCourseModal').modal('show');
+                })
+                .catch(error => console.error('Error fetching course data:', error));
+        });
+    });
+                                                    
+                                                                // Event listener for delete course confirmation
+                                                                document.querySelectorAll('.delete-course').forEach(item => {
+                                                                    item.addEventListener('click', event => {
+                                                                        const courseId = event.target.getAttribute('data-course-id');
+                                                                        const confirmDeleteButton = document.getElementById('confirmDeleteButton');
+                                                    
+                                                                        confirmDeleteButton.addEventListener('click', () => {
+                                                                            // Perform the deletion process, either by making an AJAX request or redirecting to a delete route
+                                                                            deleteCourse(courseId);
+                                                                        });
+                                                                    });
+                                                                });
                                                             })
                                                             .catch(error => console.error('Error fetching data:', error));
+                                                    
+                                                        function deleteCourse(courseId) {
+                                                            fetch(`/delete_course/${courseId}`, {
+                                                                method: 'DELETE'
+                                                            })
+                                                            .then(response => {
+                                                                if (response.ok) {
+                                                                    Swal.fire({
+                                                                        title: "Good job!",
+                                                                        text: "Course deleted successfully",
+                                                                        icon: "success"
+                                                                    });
+                                                                    location.reload(); 
+                                                                } else {
+                                                                    Swal.fire({
+                                                                        title: "Opps...!",
+                                                                        text: "Failed to delete course!",
+                                                                        icon: "error"
+                                                                    });
+                                                                }
+                                                            })
+                                                            .catch(error => console.error('Error deleting course:', error));
+                                                        }
                                                     </script>
+                                                    
+
+
                                                 </table>
                                             </div>
                                         </div>
@@ -171,121 +244,208 @@
                     </div>
                 </div>
 
-                <!--==========Add user Model==================-->
-                <div class="modal fade" id="addcourseModal" tabindex="-1" aria-labelledby="addcourseModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title" id="addcourseModalLabel">Add Courses</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="contact-form" role="form" action="/admincourse" method="post"
-                                    enctype="multipart/form-data">
-                                    <div class="controls">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="coursename">কোর্স সিলেক্ট করুন *</label>
-                                                    <select id="coursename" name="coursename" class="form-control"
-                                                        required="required" data-error="Select the Course.">
-                                                        <option value="" selected disabled>--Select Course--</option>
-                                                        <option>Office Application Program</option>
-                                                        <option>Graphic Designing</option>
-                                                        <option>Degital Marketing</option>
-                                                        <option>Other</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="monthduration">মাস *</label>
-                                                    <input id="monthduration" type="text" name="monthduration"
-                                                        class="form-control" placeholder="Course Duration *"
-                                                        required="required"
-                                                        data-error="অবশ্যই কোর্সের সময়সীমা লিখতে হবে।.">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="weekly">সপ্তাহে কতদিন *</label>
-                                                    <input id="weekly" type="text" name="weekly" class="form-control"
-                                                        placeholder="Weekly Class*" required="required"
-                                                        data-error="weekly is required.">
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                        <div class="row">
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="durationhour">ঘন্টা *</label>
-                                                    <input id="durationhour" type="text" name="durationhour"
-                                                        class="form-control" placeholder="Hours*" required="required"
-                                                        data-error="weekly is required.">
-                                                </div>
-
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="durationminute">মিনিট*</label>
-                                                    <input id="durationminute" type="text" name="durationminute"
-                                                        class="form-control" placeholder="Minutes*" required="required"
-                                                        data-error="Minute is required.">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="amount">কোর্স ফি *</label>
-                                                    <input id="amount" type="text" name="amount" class="form-control"
-                                                        placeholder="Course Fee*" required="required"
-                                                        data-error="Course Fee is required.">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="imagename">ফটোগ্রাফ/ছবি *</label>
-                                                    <input id="imagename" type="file" accept="image/*" name="imagename"
-                                                        class="form-control-file" required="required"
-                                                        data-error="Image is required.">
-                                                    <small id="imageHelp" class="form-text text-muted">Please upload an
-                                                        image file.</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-success"
-                                            id="add-course-button">Add</button>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-
-                                    </div>
-                                    {% if message %}
-                                    <p class="text-success text-center">{{ message }}</p>
-                                    {% endif %}
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
     </section>
+
+    <!--==========Add Course Model==================-->
+    <div class="modal fade" id="addcourseModal" tabindex="-1" aria-labelledby="addcourseModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="addcourseModalLabel">Add Courses</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="contact-form" role="form" action="/admincourse" method="post"
+                        enctype="multipart/form-data">
+                        <div class="controls">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="courseid">কোর্স আইডি *</label>
+                                        <input id="courseid" type="text" name="courseid" class="form-control"
+                                            placeholder="Course ID *" required="required">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="coursename">কোর্স সিলেক্ট করুন *</label>
+                                        <select id="coursename" name="coursename" class="form-control"
+                                            required="required" data-error="Select the Course.">
+                                            <option value="" selected disabled>--Select Course--</option>
+                                            <option>Office Application Program</option>
+                                            <option>Graphic Designing</option>
+                                            <option>Degital Marketing</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="monthduration">মাস *</label>
+                                        <input id="monthduration" type="text" name="monthduration" class="form-control"
+                                            placeholder="Course Duration *" required="required"
+                                            data-error="অবশ্যই কোর্সের সময়সীমা লিখতে হবে।.">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="weekly">সপ্তাহে কতদিন *</label>
+                                        <input id="weekly" type="text" name="weekly" class="form-control"
+                                            placeholder="Weekly Class*" required="required"
+                                            data-error="weekly is required.">
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="durationhour">ঘন্টা *</label>
+                                        <input id="durationhour" type="text" name="durationhour" class="form-control"
+                                            placeholder="Hours*" required="required" data-error="weekly is required.">
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="durationminute">মিনিট*</label>
+                                        <input id="durationminute" type="text" name="durationminute"
+                                            class="form-control" placeholder="Minutes*" required="required"
+                                            data-error="Minute is required.">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="amount">কোর্স ফি *</label>
+                                        <input id="amount" type="text" name="amount" class="form-control"
+                                            placeholder="Course Fee*" required="required"
+                                            data-error="Course Fee is required.">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="imagename">ফটোগ্রাফ/ছবি *</label>
+                                        <input id="imagename" type="file" accept="image/*" name="imagename"
+                                            class="form-control-file" required="required"
+                                            data-error="Image is required.">
+                                        <small id="imageHelp" class="form-text text-muted">Please upload an
+                                            image file.</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success" id="add-course-button">Add</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+                        </div>
+                        {% if message %}
+                        <p class="text-success text-center">{{ message }}</p>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Course -->
+    <div class="modal fade" id="updateCourseModal" tabindex="-1" aria-labelledby="updateCourseModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateCourseModalLabel">Update Course</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="update-course-form" role="form" action="/update_course" method="post" enctype="multipart/form-data">
+                        <div class="controls">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="courseid">কোর্স আইডি *</label>
+                                        <input id="courseid" type="text" name="courseid" class="form-control" placeholder="Course ID *" required="required" readonly value="{{ course_id_from_database }}">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="coursename">কোর্স সিলেক্ট করুন *</label>
+                                        <select id="coursename" name="coursename" class="form-control" required="required" data-error="Select the Course.">
+                                            <option value="" selected disabled>--Select Course--</option>
+                                            <!-- Add options dynamically using JavaScript -->
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Other form fields -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="monthduration">মাস *</label>
+                                        <input id="monthduration" type="text" name="monthduration" class="form-control" placeholder="Course Duration *" required="required">
+                                    </div>
+                                </div>
+                                <!-- Add other input fields here -->
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success" id="update-course-button">Update</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                        <!-- Optional: Show success/error message -->
+                        {% if message %}
+                        <p class="text-success text-center">{{ message }}</p>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog"
+        aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirm Deletion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this course?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteButton">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <script src="../static/js/jquery.min.js"></script>
     <script src="../static/js/popper.js"></script>
     <script src="../static/js/bootstrap.min.js"></script>
     <script src="../static/js/main.js"></script>
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.8.0/dist/sweetalert2.all.min.js"></script>
 </body>
 
 </html>
