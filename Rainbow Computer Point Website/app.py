@@ -206,20 +206,42 @@ def adminservice():
 def get_service(service_id):
     cursor = connection.cursor()
     query = "SELECT * FROM service_info WHERE serviceid = %s"
-    cursor.execute(query, (course_id,))
-    course_data = cursor.fetchone()
-    if course_data:
-        course_dict = {
-            'serviceid': course_data[1],
-            'servicename': course_data[2],
-            'aboutservice': course_data[3],
+    cursor.execute(query, (service_id,))
+    print("IT work")
+    service_data = cursor.fetchone()
+    print(service_data)
+    if service_data:
+        service_dict = {
+            'serviceid': service_data[1],
+            'servicename': service_data[2],
+            'aboutservice': service_data[3],
         }
-        print(course_data[8])
-        return jsonify(course_dict)
+        print(service_data[1])
+        return jsonify(service_dict)
     else:
-        return jsonify({'error': 'Course not found'}), 404
+        return jsonify({'error': 'Service not found'}), 404
 
-
+@app.route('/update_service', methods=['POST'])
+def update_service():
+    if request.method == 'POST':
+        serviceid = request.form['update_serviceid']
+        print("Service id: ",serviceid)
+        servicename = request.form['update_servicename']
+        aboutservice = request.form['update_aboutservice']
+        
+        cursor = connection.cursor()
+        query = "UPDATE service_info SET servicename = %s, aboutservice = %s WHERE serviceid = %s"
+        values = (servicename, aboutservice, serviceid)
+        cursor.execute(query, values)
+        connection.commit()
+        
+        # Optionally, you can check if any rows were affected to determine if the update was successful
+        if cursor.rowcount > 0:
+            message = 'Service updated successfully'
+        else:
+            message = 'No changes made to the Service'
+            
+        return redirect('/adminservice')
 
 @app.route('/delete_service/<int:service_id>', methods=['DELETE'])
 def delete_service(service_id):
