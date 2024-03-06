@@ -24,8 +24,8 @@ def course_infodata():
     if course_data:
         return jsonify(course_data)
 
-@app.route('/data')
-def get_data():
+@app.route('/course_data')
+def get_coursedata():
     # Fetch data from MySQL database
     data = fetch_course_info()
     if data:
@@ -49,17 +49,17 @@ def service_infodata():
     if service_data:
         return jsonify(service_data)
 
-# @app.route('/data')
-# def get_data():
-#     # Fetch data from MySQL database
-#     data = fetch_course_info()
-#     if data:
-#         # Convert data to a list of dictionaries
-#         keys = ['id','couseid', 'course_name', 'month_duration', 'weekly', 'duration_hour', 'duration_minute', 'amount', 'image_name', 'aboutcourse', 'coursetopic']
-#         data_list = [dict(zip(keys, row)) for row in data]
-#         return jsonify(data_list)
-#     else:
-#         return jsonify([])
+@app.route('/service_data')
+def get_servicedata():
+    # Fetch data from MySQL database
+    data = fetch_service_info()
+    if data:
+        # Convert data to a list of dictionaries
+        keys = ['id','serviceid', 'servicename', 'aboutservice']
+        data_list = [dict(zip(keys, row)) for row in data]
+        return jsonify(data_list)
+    else:
+        return jsonify([])
 
 
 
