@@ -36,6 +36,32 @@ def get_data():
     else:
         return jsonify([])
 
+def fetch_service_info():
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM service_info")
+    data = cursor.fetchall()
+    cursor.close()
+    return data
+
+@app.route('/service_infodata')
+def service_infodata():
+    service_data = fetch_service_info()
+    if service_data:
+        return jsonify(service_data)
+
+# @app.route('/data')
+# def get_data():
+#     # Fetch data from MySQL database
+#     data = fetch_course_info()
+#     if data:
+#         # Convert data to a list of dictionaries
+#         keys = ['id','couseid', 'course_name', 'month_duration', 'weekly', 'duration_hour', 'duration_minute', 'amount', 'image_name', 'aboutcourse', 'coursetopic']
+#         data_list = [dict(zip(keys, row)) for row in data]
+#         return jsonify(data_list)
+#     else:
+#         return jsonify([])
+
+
 
 @app.route('/')
 def index():
@@ -172,6 +198,23 @@ def adminservice():
         message = 'Successfully Added'
         return render_template('adminservice.html',message=message)
     return render_template('adminservice.html')
+
+@app.route('/get_service/<int:service_id>')
+def get_service(service_id):
+    cursor = connection.cursor()
+    query = "SELECT * FROM service_info WHERE serviceid = %s"
+    cursor.execute(query, (course_id,))
+    course_data = cursor.fetchone()
+    if course_data:
+        course_dict = {
+            'serviceid': course_data[1],
+            'servicename': course_data[2],
+            'aboutservice': course_data[3],
+        }
+        print(course_data[8])
+        return jsonify(course_dict)
+    else:
+        return jsonify({'error': 'Course not found'}), 404
 
 
 
