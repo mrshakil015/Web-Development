@@ -132,7 +132,7 @@ def update_course():
         else:
             message = 'No changes made to the course'
             
-        return render_template('admincourse.html', message=message)
+        return redirect('/admincourse')
 
 @app.route('/delete_course/<int:course_id>', methods=['DELETE'])
 def delete_course(course_id):
