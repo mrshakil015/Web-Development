@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    fetch('/course_data')
+    fetch('/coursedata')
         .then(response => response.json())
         .then(data => {
             const cardsContainer = document.getElementById('cards-container');

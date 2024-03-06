@@ -13,10 +13,11 @@ connection = pymysql.connect(host='localhost',
 
 def fetch_course_info():
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM course_info")
-    data = cursor.fetchall()
+    query = "SELECT * FROM course_info"
+    cursor.execute(query)
+    coursedata = cursor.fetchall()
     cursor.close()
-    return data
+    return coursedata
 
 @app.route('/course_infodata')
 def course_infodata():
@@ -24,24 +25,26 @@ def course_infodata():
     if course_data:
         return jsonify(course_data)
 
-@app.route('/course_data')
+@app.route('/coursedata')
 def get_coursedata():
     # Fetch data from MySQL database
-    data = fetch_course_info()
-    if data:
+    coursedata = fetch_course_info()
+    if coursedata:
         # Convert data to a list of dictionaries
         keys = ['id','couseid', 'course_name', 'month_duration', 'weekly', 'duration_hour', 'duration_minute', 'amount', 'image_name', 'aboutcourse', 'coursetopic']
-        data_list = [dict(zip(keys, row)) for row in data]
-        return jsonify(data_list)
+        coursedata_list = [dict(zip(keys, row)) for row in coursedata]
+        return jsonify(coursedata_list)
     else:
         return jsonify([])
 
+
 def fetch_service_info():
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM service_info")
-    data = cursor.fetchall()
+    query = "SELECT * FROM service_info"
+    cursor.execute(query)
+    servicedata = cursor.fetchall()
     cursor.close()
-    return data
+    return servicedata
 
 @app.route('/service_infodata')
 def service_infodata():
@@ -49,15 +52,15 @@ def service_infodata():
     if service_data:
         return jsonify(service_data)
 
-@app.route('/service_data')
+@app.route('/servicedata')
 def get_servicedata():
     # Fetch data from MySQL database
-    data = fetch_service_info()
-    if data:
+    servicedata = fetch_service_info()
+    if servicedata:
         # Convert data to a list of dictionaries
         keys = ['id','serviceid', 'servicename', 'aboutservice']
-        data_list = [dict(zip(keys, row)) for row in data]
-        return jsonify(data_list)
+        servicedata_list = [dict(zip(keys, row)) for row in servicedata]
+        return jsonify(servicedata_list)
     else:
         return jsonify([])
 
@@ -217,6 +220,20 @@ def get_service(service_id):
         return jsonify({'error': 'Course not found'}), 404
 
 
+
+@app.route('/delete_service/<int:service_id>', methods=['DELETE'])
+def delete_service(service_id):
+    try:
+        cursor = connection.cursor()
+        # Execute SQL query to delete the course with the given ID
+        print("Service id is: ", service_id)
+        query = "DELETE FROM service_info WHERE serviceid = %s"
+        cursor.execute(query, (service_id,))
+        connection.commit()
+        cursor.close()
+        return jsonify({'message': 'Service deleted successfully'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/admin', methods=['POST', 'GET'])
 def admin_login():
