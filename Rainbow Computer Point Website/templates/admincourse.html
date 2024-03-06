@@ -177,20 +177,22 @@
                                                                             .then(response => response.json())
                                                                             .then(course => {
                                                                                 // Populate the modal input fields with course data
-                                                                                document.getElementById('courseid').value = course.courseid;
+                                                                                document.getElementById('update_courseid').value = course.courseid;
                                                                                 console.log(course.courseid);
-                                                                                document.getElementById('coursename').value = course.coursename;
+                                                                                document.getElementById('update_coursename').value = course.coursename;
                                                                                 console.log(course.coursename);
-                                                                                document.getElementById('monthduration').value = course.monthduration;
+                                                                                document.getElementById('update_monthduration').value = course.monthduration;
                                                                                 console.log(course.monthduration);
-                                                                                document.getElementById('weekly').value = course.weekly;
+                                                                                document.getElementById('update_weekly').value = course.weekly;
                                                                                 console.log(course.weekly);
-                                                                                document.getElementById('durationhour').value = course.durationhour;
+                                                                                document.getElementById('update_durationhour').value = course.durationhour;
                                                                                 console.log(course.durationhour);
-                                                                                document.getElementById('durationminute').value = course.durationminute;
+                                                                                document.getElementById('update_durationminute').value = course.durationminute;
                                                                                 console.log(course.durationminute);
-                                                                                document.getElementById('amount').value = course.amount;
+                                                                                document.getElementById('update_amount').value = course.amount;
                                                                                 console.log(course.amount);
+                                                                                document.getElementById('update_imagename').value = course.imagename;
+                                                                                console.log(course.imagename);
                                                                                 // Show the update modal
                                                                                 $('#updateCourseModal').modal('show');
                                                                             })
@@ -237,10 +239,6 @@
                                                                 .catch(error => console.error('Error deleting course:', error));
                                                         }
                                                     </script>
-
-
-
-
                                                 </table>
                                             </div>
                                         </div>
@@ -379,21 +377,20 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="update-course-form" role="form" action="/update_course" method="post"
-                        enctype="multipart/form-data">
+                    <form id="update-course-form" role="form" action="/update_course" method="post" enctype="multipart/form-data">
                         <div class="controls">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="courseid">কোর্স আইডি *</label>
-                                        <input id="courseid" type="text" name="courseid" class="form-control"
+                                        <label for="update_courseid">কোর্স আইডি *</label>
+                                        <input id="update_courseid" type="text" name="update_courseid" class="form-control"
                                             placeholder="Course ID *" required="required">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="coursename">কোর্স সিলেক্ট করুন *</label>
-                                        <select id="coursename" name="coursename" class="form-control"
+                                        <label for="update_coursename">কোর্স সিলেক্ট করুন *</label>
+                                        <select id="update_coursename" name="update_coursename" class="form-control"
                                             required="required" data-error="Select the Course.">
                                             <option value="" selected disabled>--Select Course--</option>
                                             <option>Office Application Program</option>
@@ -408,16 +405,16 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="monthduration">মাস *</label>
-                                        <input id="monthduration" type="text" name="monthduration" class="form-control"
+                                        <label for="update_monthduration">মাস *</label>
+                                        <input id="update_monthduration" type="text" name="update_monthduration" class="form-control"
                                             placeholder="Course Duration *" required="required"
                                             data-error="অবশ্যই কোর্সের সময়সীমা লিখতে হবে।.">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="weekly">সপ্তাহে কতদিন *</label>
-                                        <input id="weekly" type="text" name="weekly" class="form-control"
+                                        <label for="update_weekly">সপ্তাহে কতদিন *</label>
+                                        <input id="update_weekly" type="text" name="update_weekly" class="form-control"
                                             placeholder="Weekly Class*" required="required"
                                             data-error="weekly is required.">
                                     </div>
@@ -429,16 +426,15 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="durationhour">ঘন্টা *</label>
-                                        <input id="durationhour" type="text" name="durationhour" class="form-control"
+                                        <label for="update_durationhour">ঘন্টা *</label>
+                                        <input id="update_durationhour" type="text" name="update_durationhour" class="form-control"
                                             placeholder="Hours*" required="required" data-error="weekly is required.">
                                     </div>
-
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="durationminute">মিনিট*</label>
-                                        <input id="durationminute" type="text" name="durationminute"
+                                        <label for="update_durationminute">মিনিট*</label>
+                                        <input id="update_durationminute" type="text" name="update_durationminute"
                                             class="form-control" placeholder="Minutes*" required="required"
                                             data-error="Minute is required.">
                                     </div>
@@ -447,16 +443,16 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="amount">কোর্স ফি *</label>
-                                        <input id="amount" type="text" name="amount" class="form-control"
+                                        <label for="update_amount">কোর্স ফি *</label>
+                                        <input id="update_amount" type="text" name="update_amount" class="form-control"
                                             placeholder="Course Fee*" required="required"
                                             data-error="Course Fee is required.">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="imagename">ফটোগ্রাফ/ছবি *</label>
-                                        <input id="imagename" type="file" accept="image/*" name="imagename"
+                                        <label for="update_imagename">ফটোগ্রাফ/ছবি *</label>
+                                        <input id="update_imagename" type="file" accept="image/*" name="update_imagename"
                                             class="form-control-file" required="required"
                                             data-error="Image is required.">
                                         <small id="imageHelp" class="form-text text-muted">Please upload an

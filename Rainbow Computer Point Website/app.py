@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request, url_for, jsonify
+from flask import Flask, render_template, redirect, request, url_for, jsonify, request
 import pymysql
 
 app = Flask(__name__)
@@ -95,12 +95,44 @@ def get_course(course_id):
             'weekly': course_data[4],
             'durationhour': course_data[5],
             'durationminute': course_data[6],
-            'amount': course_data[7]
+            'amount': course_data[7],
+            'imagename': course_data[8]
         }
+        print(course_data[8])
         return jsonify(course_dict)
     else:
         return jsonify({'error': 'Course not found'}), 404
 
+@app.route('/update_course', methods=['POST'])
+def update_course():
+    if request.method == 'POST':
+        courseid = request.form['update_courseid']
+        print("Course id: ",courseid)
+        course_name = request.form['update_coursename']
+        month_duration = request.form['update_monthduration']
+        weekly = request.form['update_weekly']
+        duration_hour = request.form['update_durationhour']
+        duration_minute = request.form['update_durationminute']
+        amount = request.form['update_amount']
+        image_file = request.files['update_imagename']
+        image_name = image_file.filename
+        print("Image: ",image_file.filename)
+        if image_file:
+            image_file.save('static/images/' + image_name)
+
+        cursor = connection.cursor()
+        query = "UPDATE course_info SET course_name = %s, month_duration = %s, weekly = %s, duration_hour = %s, duration_minute = %s, amount = %s, image_name = %s WHERE courseid = %s"
+        values = (course_name, month_duration, weekly, duration_hour, duration_minute, amount,image_name, courseid)
+        cursor.execute(query, values)
+        connection.commit()
+        
+        # Optionally, you can check if any rows were affected to determine if the update was successful
+        if cursor.rowcount > 0:
+            message = 'Course updated successfully'
+        else:
+            message = 'No changes made to the course'
+            
+        return render_template('admincourse.html', message=message)
 
 @app.route('/delete_course/<int:course_id>', methods=['DELETE'])
 def delete_course(course_id):
