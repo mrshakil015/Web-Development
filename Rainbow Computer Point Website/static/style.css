@@ -11386,7 +11386,7 @@ blockquote::before {
     z-index: 10;
     border-radius: 1rem;
     margin-top: 1rem;
-    min-height: 100px;
+    min-height: 150px;
     background-color: #fff;
     cursor: pointer;
 }
@@ -11399,15 +11399,15 @@ blockquote::before {
 
 .feature-item h3, .feature-item span{
     font-family: Anek Bangla;
-    font-size: 15px;
+    font-size: 20px;
 }
 
 .feature-item .colored-box {
     display: inline-block;
-    height: 30px;
+    height: 40px;
     margin: 5px;
-    width: 30px;
-    line-height: 30px;
+    width: 40px;
+    line-height: 40px;
     border-radius: 8px;
     color: #fff;
     background-color: #534de6;
