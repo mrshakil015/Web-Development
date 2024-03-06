@@ -191,8 +191,12 @@
                                                                                 console.log(course.durationminute);
                                                                                 document.getElementById('update_amount').value = course.amount;
                                                                                 console.log(course.amount);
-                                                                                document.getElementById('update_imagename').value = course.imagename;
-                                                                                console.log(course.imagename);
+                                                                                document.getElementById('update_imagename').value = '';
+                                                                                console.log(course.imagename); 
+                                                                                document.getElementById('update_aboutcourse').value = course.aboutcourse;
+                                                                                console.log(course.aboutcourse);
+                                                                                document.getElementById('update_coursetopic').value = course.coursetopic;
+                                                                                console.log(course.coursetopic);
                                                                                 // Show the update modal
                                                                                 $('#updateCourseModal').modal('show');
                                                                             })
@@ -350,15 +354,30 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="aboutcourse">কোর্স সম্পর্কে *</label>
+                                        <textarea id="aboutcourse" type="text" name="aboutcourse" class="form-control"
+                                            placeholder="About Course*" required="required"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="coursetopic">কোর্সে যা থাকবে *</label>
+                                        <textarea id="coursetopic" type="text" name="coursetopic" class="form-control"
+                                            placeholder="Course Topics*" required="required"></textarea>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-success" id="add-course-button">Add</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
                         </div>
-                        {% if message %}
-                        <p class="text-success text-center">{{ message }}</p>
-                        {% endif %}
                     </form>
                 </div>
             </div>
@@ -460,15 +479,29 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="update_aboutcourse">কোর্স সম্পর্কে *</label>
+                                        <textarea id="update_aboutcourse" type="text" name="update_aboutcourse" class="form-control"
+                                            placeholder="About Course*" required="required"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="update_coursetopic">কোর্সে যা থাকবে *</label>
+                                        <textarea id="update_coursetopic" type="text" name="update_coursetopic" class="form-control"
+                                            placeholder="Course Topics*" required="required"></textarea>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-success" id="update-course-button">Update</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                         </div>
-                        <!-- Optional: Show success/error message -->
-                        {% if message %}
-                        <p class="text-success text-center">{{ message }}</p>
-                        {% endif %}
                     </form>
                 </div>
             </div>

@@ -30,7 +30,7 @@ def get_data():
     data = fetch_course_info()
     if data:
         # Convert data to a list of dictionaries
-        keys = ['id','couseid', 'course_name', 'month_duration', 'weekly', 'duration_hour', 'duration_minute', 'amount', 'image_name']
+        keys = ['id','couseid', 'course_name', 'month_duration', 'weekly', 'duration_hour', 'duration_minute', 'amount', 'image_name', 'aboutcourse', 'coursetopic']
         data_list = [dict(zip(keys, row)) for row in data]
         return jsonify(data_list)
     else:
@@ -65,16 +65,18 @@ def admincourse():
         amount = request.form['amount']
         image_file = request.files['imagename']
         image_name = image_file.filename
+        aboutcourse = request.form['aboutcourse']
+        coursetopic = request.form['coursetopic']
         print("Image: ",image_file.filename)
         if image_file:
             image_file.save('static/images/' + image_name)
 
-        data = {'courseid':courseid, 'course_name': course_name, 'month_duration': month_duration, 'weekly': weekly, 'duration_hour': duration_hour,'duration_minute':duration_minute,'amount':amount, 'image_name': image_name}
+        data = {'courseid':courseid, 'course_name': course_name, 'month_duration': month_duration, 'weekly': weekly, 'duration_hour': duration_hour,'duration_minute':duration_minute,'amount':amount, 'image_name': image_name, 'aboutcourse': aboutcourse, 'coursetopic': coursetopic}
         print(data['course_name'])
 
         cursor = connection.cursor()
-        query = "INSERT INTO course_info (courseid, course_name, month_duration, weekly, duration_hour, duration_minute, amount, image_name) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
-        values = (courseid, course_name, month_duration, weekly, duration_hour, duration_minute, amount, image_name)
+        query = "INSERT INTO course_info (courseid, course_name, month_duration, weekly, duration_hour, duration_minute, amount, image_name, aboutcourse, coursetopic) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        values = (courseid, course_name, month_duration, weekly, duration_hour, duration_minute, amount, image_name, aboutcourse, coursetopic)
         cursor.execute(query, values)
         connection.commit()
         message = 'Successfully Added'
@@ -96,7 +98,9 @@ def get_course(course_id):
             'durationhour': course_data[5],
             'durationminute': course_data[6],
             'amount': course_data[7],
-            'imagename': course_data[8]
+            'imagename': course_data[8],
+            'aboutcourse': course_data[9],
+            'coursetopic': course_data[10]
         }
         print(course_data[8])
         return jsonify(course_dict)
@@ -114,6 +118,8 @@ def update_course():
         duration_hour = request.form['update_durationhour']
         duration_minute = request.form['update_durationminute']
         amount = request.form['update_amount']
+        aboutcourse = request.form['update_aboutcourse']
+        coursetopic = request.form['update_coursetopic']
         image_file = request.files['update_imagename']
         image_name = image_file.filename
         print("Image: ",image_file.filename)
@@ -121,8 +127,8 @@ def update_course():
             image_file.save('static/images/' + image_name)
 
         cursor = connection.cursor()
-        query = "UPDATE course_info SET course_name = %s, month_duration = %s, weekly = %s, duration_hour = %s, duration_minute = %s, amount = %s, image_name = %s WHERE courseid = %s"
-        values = (course_name, month_duration, weekly, duration_hour, duration_minute, amount,image_name, courseid)
+        query = "UPDATE course_info SET course_name = %s, month_duration = %s, weekly = %s, duration_hour = %s, duration_minute = %s, amount = %s, image_name = %s, aboutcourse = %s, coursetopic=%s WHERE courseid = %s"
+        values = (course_name, month_duration, weekly, duration_hour, duration_minute, amount,image_name, aboutcourse, coursetopic, courseid)
         cursor.execute(query, values)
         connection.commit()
         
