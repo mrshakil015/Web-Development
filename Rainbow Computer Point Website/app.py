@@ -153,6 +153,28 @@ def delete_course(course_id):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/adminservice',  methods=['POST', 'GET'])
+def adminservice():
+    if request.method == 'POST':
+        serviceid = request.form['serviceid']
+        servicename = request.form['servicename']
+        aboutservice = request.form['aboutservice']
+        
+
+        data = {'serviceid':serviceid, 'servicename': servicename, 'aboutservice': aboutservice}
+        print(data['servicename'])
+
+        cursor = connection.cursor()
+        query = "INSERT INTO service_info (serviceid, servicename, aboutservice) VALUES(%s,%s,%s)"
+        values = (serviceid, servicename, aboutservice)
+        cursor.execute(query, values)
+        connection.commit()
+        message = 'Successfully Added'
+        return render_template('adminservice.html',message=message)
+    return render_template('adminservice.html')
+
+
+
 @app.route('/admin', methods=['POST', 'GET'])
 def admin_login():
     if request.method == 'POST':
