@@ -44,7 +44,7 @@ CREATE TABLE `course_info` (
 --
 
 INSERT INTO `course_info` (`id`, `courseid`, `course_name`, `month_duration`, `weekly`, `duration_hour`, `duration_minute`, `amount`, `image_name`) VALUES
-(3, '102', 'Degital Marketing', '৩', '৩', '১', '৩০', '8888', 'digitalmarketing.jpg'),
+(3, '102', 'Digital Marketing', '৩', '৩', '১', '৩০', '8888', 'digitalmarketing.jpg'),
 (5, '103', 'Office Application Program', '4', '6', '2', '0', '6000', 'banner.png');
 
 --
