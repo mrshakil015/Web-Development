@@ -12270,7 +12270,7 @@ margin: 2px;
 
 .application-section {
     padding-bottom: 0;
-    padding-top: 20px;
+    /* padding-top: 20px; */
 }
 .application-section h1{
     font-size: 40px;
@@ -12334,4 +12334,8 @@ margin: 2px;
 
 .form-section .form-footer button:hover{
     background-color: #534de6;
+}
+
+.form-section .form-control::placeholder{
+    color: black;
 }
