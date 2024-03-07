@@ -11356,7 +11356,7 @@ blockquote::before {
     line-height: 50px;
     border-radius: 8px;
     color: #fff;
-    background-color: #534de6;
+    /* background-color: #534de6; */
 }
 
 .card-item h4 {

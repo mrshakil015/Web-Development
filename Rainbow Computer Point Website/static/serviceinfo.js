@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="card card-item">
                     <div class="card-body">
                         <div class="rounded">
-                            <span class="colored-box text-center h3">${service_details.serviceid}</span>
+                        <img class="colored-box text-center h3" src="../static/images/icons/serviceicon.png" alt="Service Icon" width="30" height="30">
                             <h3 class="mb-3">${service_details.servicename}</h3>
                             <p>${service_details.aboutservice}</p>
                         </div>                        
