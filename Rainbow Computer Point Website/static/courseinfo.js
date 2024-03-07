@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 card.classList.add('col-md-6');
                 card.innerHTML = `
                 <div class="card card-item">
-                    <div class="view view-cascade overlay text-center">
+                    <div class="card-header view view-cascade overlay text-center">
                         <img src="../static/images/${course_details.image_name}" class="card-img-top" alt="profile image">
                             <hr>
                     </div>
