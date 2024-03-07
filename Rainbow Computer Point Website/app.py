@@ -82,6 +82,10 @@ def aboutus():
 def admindashboard():
     return render_template("admindashboard.html")
 
+@app.route('/applicationform')
+def applicationform():
+    return render_template("applicationform.html")
+
 @app.route('/admincourse',  methods=['POST', 'GET'])
 def admincourse():
     if request.method == 'POST':

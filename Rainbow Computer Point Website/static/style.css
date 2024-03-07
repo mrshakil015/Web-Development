@@ -10491,7 +10491,7 @@ h6,
     content: "";
     height: 15px;
     width: 15px;
-    background-color: #3c8d53;
+    background-color: red;
     top: 100%;
     left: 60%;
     z-index: -1;
@@ -12265,3 +12265,55 @@ margin: 2px;
     align-items: center;
     height: 100%; 
 }
+
+/* ---Application Form------ */
+
+.application-section {
+    padding-bottom: 0;
+    padding-top: 20px;
+}
+.application-section h1{
+    font-size: 40px;
+}
+
+.application-section .section-title{
+    margin-bottom: 0;
+}
+
+.form-section{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.form-section .card-body {
+    padding: 15px;
+    font-family: Anek Bangla;
+}
+
+.form-section .card-title{
+    align-items: center;
+    text-align: center;
+    padding-top: 10px;
+}
+.form-section .card-title h3 {
+    font-size: 20px;  
+    font-family: Anek Bangla;
+}
+
+.form-section .card-title p{
+    font-weight: bold;
+    color: red;
+    padding-bottom: 10px;
+    text-decoration: underline;
+}
+
+.form-section form .row{
+    padding: 10px;
+}
+
+.form-section form label{
+    color: #534de6;
+    color: #000;
+    font-weight: 500;
+}
+
