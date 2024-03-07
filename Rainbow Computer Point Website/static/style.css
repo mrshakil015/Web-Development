@@ -10491,7 +10491,7 @@ h6,
     content: "";
     height: 15px;
     width: 15px;
-    background-color: red;
+    background-color: #7570eb;
     top: 100%;
     left: 60%;
     z-index: -1;
@@ -12308,13 +12308,30 @@ margin: 2px;
     /* color: #534de6; */
 }
 
-.form-section form .row{
+.form-section form .input-section{
     padding: 10px;
 }
 
 .form-section form label{
-    color: #534de6;
-    /* color: #000; */
+    /* color: #534de6; */
+    color: #000;
     font-weight: 500;
 }
 
+.form-section .form-footer{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.form-section .form-footer button{
+    /* width: 100%; */
+    background-color: #534de6;
+    color: #fff;
+    font-family: Anek Bangla;
+    border: none;
+}
+
+.form-section .form-footer button:hover{
+    background-color: #534de6;
+}

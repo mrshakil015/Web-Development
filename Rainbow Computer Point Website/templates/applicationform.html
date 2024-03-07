@@ -38,7 +38,7 @@
     <header class="navigation bg-tertiary">
         <nav class="navbar navbar-expand-xl navbar-light text-center py-3">
             <div class="container">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="/">
                     <img loading="prelaod" decoding="async" class="img-fluid" width="160"
                         src="../static/images/logo.png" alt="রেইনবো">
                 </a>
@@ -94,7 +94,6 @@
                 <div class="section-title">
                     <h1>শিক্ষার্থী আবেদন ফরম</h1>
                     <p>ভর্তির আবেদন করতে নিচের ফরমটি পূরণ করুন</p>
-                
                 </div>
             </div>
     </section>
@@ -112,7 +111,7 @@
                             <div class="controls">
                                 <div class="row">
 
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="coursename">কোর্স সিলেক্ট করুন *</label>
                                             <select id="coursename" name="coursename" class="form-control"
@@ -124,7 +123,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="serviceid">শিক্ষার্থীর নাম *</label>
                                             <input id="serviceid" type="text" name="serviceid" class="form-control"
@@ -134,14 +133,14 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="serviceid">পিতার নাম *</label>
                                             <input id="serviceid" type="text" name="serviceid" class="form-control"
                                                 placeholder="Service Serial No *" required="required">
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="servicename">মাতার নাম *</label>
                                             <input id="servicename" type="text" name="servicename" class="form-control"
@@ -151,7 +150,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="serviceid">জন্ম তারিখ *</label>
                                             <input id="serviceid" type="text" name="serviceid" class="form-control"
@@ -159,7 +158,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="coursename">লিঙ্গ *</label>
                                             <select id="coursename" name="coursename" class="form-control"
@@ -173,14 +172,14 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="serviceid">ইমেল *</label>
                                             <input id="serviceid" type="text" name="serviceid" class="form-control"
                                                 placeholder="Service Serial No *" required="required">
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="servicename">মোবইল *</label>
                                             <input id="servicename" type="text" name="servicename" class="form-control"
@@ -188,10 +187,25 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="input-section col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="serviceid">ঠিকানা *</label>
+                                            <input id="serviceid" type="text" name="serviceid" class="form-control"
+                                                placeholder="Service Serial No *" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="input-section col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="formFile" class="form-label">ফটোগ্রাফ/ছবি (সর্বোচ্চ ২ MB) *</label>
+                                            <input class="form-control" type="file" accept="image/*"  id="formFile" required="required">
+                                        </div>
+                                    </div>
+                                </div>
 
                             </div>
                             <div class="form-footer">
-                                <button type="submit" class="btn btn-success" id="add-service-button">Add</button>
+                                <button type="submit" class="btn col-lg-3" id="add-service-button">সাবমিট করুন</button>
                             </div>
                         </form>
                     </div>
