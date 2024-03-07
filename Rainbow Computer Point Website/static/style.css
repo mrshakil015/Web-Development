@@ -12305,6 +12305,7 @@ margin: 2px;
     color: red;
     padding-bottom: 10px;
     text-decoration: underline;
+    /* color: #534de6; */
 }
 
 .form-section form .row{
@@ -12313,7 +12314,7 @@ margin: 2px;
 
 .form-section form label{
     color: #534de6;
-    color: #000;
+    /* color: #000; */
     font-weight: 500;
 }
 
