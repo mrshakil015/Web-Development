@@ -22,6 +22,7 @@ def course_infodata():
     query = "SELECT * FROM course_info"
     cursor.execute(query)
     course_data = cursor.fetchall()
+    print("type of: ", type(course_data))
 
     cursor.close()
     db.close()

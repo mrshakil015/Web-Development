@@ -144,24 +144,26 @@
                                                             .then(response => response.json())
                                                             .then(data => {
                                                                 const tbody = document.getElementById('course-table-body');
+                                                                console.log("Table body: ", data);
                                                                 data.forEach(row => {
                                                                     const tr = document.createElement('tr');
+                                                                    console.log("TR value: ",tr);
                                                                     tr.innerHTML = `
-                                                                        <td>${row[1]}</td>
-                                                                        <td>${row[2]}</td>
-                                                                        <td>${row[3]}</td>
-                                                                        <td>${row[4]}</td>
-                                                                        <td>${row[5]}</td>
-                                                                        <td>${row[6]}</td>
-                                                                        <td>${row[7]}</td>
+                                                                        <td>${row.courseid}</td>
+                                                                        <td>${row.course_name}</td>
+                                                                        <td>${row.month_duration}</td>
+                                                                        <td>${row.weekly}</td>
+                                                                        <td>${row.duration_hour}</td>
+                                                                        <td>${row.duration_minute}</td>
+                                                                        <td>${row.amount}</td>
                                                                         <td class="text-end">
                                                                             <div class="dropdown">
                                                                                 <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                                     Action
                                                                                 </button>
                                                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                                    <a class="dropdown-item update-course" data-course-id="${row[1]}" data-toggle="modal" data-target="#updateCourseModal">Update Course</a>
-                                                                                    <a class="dropdown-item delete-course" data-course-id="${row[1]}" data-toggle="modal" data-target="#deleteConfirmationModal">Delete Course</a>
+                                                                                    <a class="dropdown-item update-course" data-course-id="${row.courseid}" data-toggle="modal" data-target="#updateCourseModal">Update Course</a>
+                                                                                    <a class="dropdown-item delete-course" data-course-id="${row.courseid}" data-toggle="modal" data-target="#deleteConfirmationModal">Delete Course</a>
                                                                                 </div>
                                                                             </div>
                                                                         </td>

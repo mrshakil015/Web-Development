@@ -153,14 +153,14 @@
                                                                                     Action
                                                                                 </button>
                                                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                                    <a class="dropdown-item update-service" data-service-id="${row[1]}" data-toggle="modal" data-target="#updateserviceModal">Update service</a>
-                                                                                    <a class="dropdown-item delete-service" data-service-id="${row[1]}" data-toggle="modal" data-target="#deleteConfirmationModal">Delete service</a>
+                                                                                    <a class="dropdown-item update-service" data-service-id="${row.serviceid}" data-toggle="modal" data-target="#updateserviceModal">Update service</a>
+                                                                                    <a class="dropdown-item delete-service" data-service-id="${row.serviceid}" data-toggle="modal" data-target="#deleteConfirmationModal">Delete service</a>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
-                                                                        <td>${row[1]}</td>
-                                                                        <td>${row[2]}</td>
-                                                                        <td>${row[3]}</td>
+                                                                        <td>${row.serviceid}</td>
+                                                                        <td>${row.servicename}</td>
+                                                                        <td>${row.aboutservice}</td>
                                                                         
                                                                     `;
                                                                     tbody.appendChild(tr);
