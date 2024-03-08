@@ -12,12 +12,12 @@ connection = pymysql.connect(host='localhost',
                                 db='rainbow_computer')
 
 def fetch_course_info():
-    cursor = connection.cursor()
-    query = "SELECT * FROM course_info"
-    cursor.execute(query)
-    coursedata = cursor.fetchall()
-    #cursor.close()
-    return coursedata
+    with connection.cursor() as cursor:
+        query = "SELECT * FROM course_info"
+        cursor.execute(query)
+        coursedata = cursor.fetchall()
+        #cursor.close()
+        return coursedata
 
 @app.route('/course_infodata')
 def course_infodata():
@@ -39,12 +39,12 @@ def get_coursedata():
 
 
 def fetch_service_info():
-    cursor = connection.cursor()
-    query = "SELECT * FROM service_info"
-    cursor.execute(query)
-    servicedata = cursor.fetchall()
-    #cursor.close()
-    return servicedata
+    with connection.cursor() as cursor:
+        query = "SELECT * FROM service_info"
+        cursor.execute(query)
+        servicedata = cursor.fetchall()
+        #cursor.close()
+        return servicedata
 
 @app.route('/service_infodata')
 def service_infodata():
@@ -118,27 +118,27 @@ def admincourse():
 
 @app.route('/get_course/<int:course_id>')
 def get_course(course_id):
-    cursor = connection.cursor()
-    query = "SELECT * FROM course_info WHERE courseid = %s"
-    cursor.execute(query, (course_id,))
-    course_data = cursor.fetchone()
-    if course_data:
-        course_dict = {
-            'courseid': course_data[1],
-            'coursename': course_data[2],
-            'monthduration': course_data[3],
-            'weekly': course_data[4],
-            'durationhour': course_data[5],
-            'durationminute': course_data[6],
-            'amount': course_data[7],
-            'imagename': course_data[8],
-            'aboutcourse': course_data[9],
-            'coursetopic': course_data[10]
-        }
-        print(course_data[8])
-        return jsonify(course_dict)
-    else:
-        return jsonify({'error': 'Course not found'}), 404
+    with connection.cursor() as cursor:
+        query = "SELECT * FROM course_info WHERE courseid = %s"
+        cursor.execute(query, (course_id,))
+        course_data = cursor.fetchone()
+        if course_data:
+            course_dict = {
+                'courseid': course_data[1],
+                'coursename': course_data[2],
+                'monthduration': course_data[3],
+                'weekly': course_data[4],
+                'durationhour': course_data[5],
+                'durationminute': course_data[6],
+                'amount': course_data[7],
+                'imagename': course_data[8],
+                'aboutcourse': course_data[9],
+                'coursetopic': course_data[10]
+            }
+            print(course_data[8])
+            return jsonify(course_dict)
+        else:
+            return jsonify({'error': 'Course not found'}), 404
 
 @app.route('/update_course', methods=['POST'])
 def update_course():
@@ -159,11 +159,11 @@ def update_course():
         if image_file:
             image_file.save('static/images/' + image_name)
 
-        cursor = connection.cursor()
-        query = "UPDATE course_info SET course_name = %s, month_duration = %s, weekly = %s, duration_hour = %s, duration_minute = %s, amount = %s, image_name = %s, aboutcourse = %s, coursetopic=%s WHERE courseid = %s"
-        values = (course_name, month_duration, weekly, duration_hour, duration_minute, amount,image_name, aboutcourse, coursetopic, courseid)
-        cursor.execute(query, values)
-        connection.commit()
+        with connection.cursor() as cursor:
+            query = "UPDATE course_info SET course_name = %s, month_duration = %s, weekly = %s, duration_hour = %s, duration_minute = %s, amount = %s, image_name = %s, aboutcourse = %s, coursetopic=%s WHERE courseid = %s"
+            values = (course_name, month_duration, weekly, duration_hour, duration_minute, amount,image_name, aboutcourse, coursetopic, courseid)
+            cursor.execute(query, values)
+            connection.commit()
         
         # Optionally, you can check if any rows were affected to determine if the update was successful
         if cursor.rowcount > 0:
@@ -176,12 +176,12 @@ def update_course():
 @app.route('/delete_course/<int:course_id>', methods=['DELETE'])
 def delete_course(course_id):
     try:
-        cursor = connection.cursor()
-        # Execute SQL query to delete the course with the given ID
-        query = "DELETE FROM course_info WHERE courseid = %s"
-        cursor.execute(query, (course_id,))
-        connection.commit()
-        #cursor.close()
+        with connection.cursor() as cursor:
+            # Execute SQL query to delete the course with the given ID
+            query = "DELETE FROM course_info WHERE courseid = %s"
+            cursor.execute(query, (course_id,))
+            connection.commit()
+            #cursor.close()
         return jsonify({'message': 'Course deleted successfully'}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -197,23 +197,21 @@ def adminservice():
         data = {'serviceid':serviceid, 'servicename': servicename, 'aboutservice': aboutservice}
         print(data['servicename'])
 
-        cursor = connection.cursor()
-        query = "INSERT INTO service_info (serviceid, servicename, aboutservice) VALUES(%s,%s,%s)"
-        values = (serviceid, servicename, aboutservice)
-        cursor.execute(query, values)
-        connection.commit()
+        with connection.cursor() as cursor:
+            query = "INSERT INTO service_info (serviceid, servicename, aboutservice) VALUES(%s,%s,%s)"
+            values = (serviceid, servicename, aboutservice)
+            cursor.execute(query, values)
+            connection.commit()
         message = 'Successfully Added'
         return render_template('adminservice.html',message=message)
     return render_template('adminservice.html')
 
 @app.route('/get_service/<int:service_id>')
 def get_service(service_id):
-    cursor = connection.cursor()
-    query = "SELECT * FROM service_info WHERE serviceid = %s"
-    cursor.execute(query, (service_id,))
-    print("IT work")
-    service_data = cursor.fetchone()
-    print(service_data)
+    with connection.cursor() as cursor:
+        query = "SELECT * FROM service_info WHERE serviceid = %s"
+        cursor.execute(query, (service_id,))
+        service_data = cursor.fetchone()
     if service_data:
         service_dict = {
             'serviceid': service_data[1],
@@ -229,15 +227,14 @@ def get_service(service_id):
 def update_service():
     if request.method == 'POST':
         serviceid = request.form['update_serviceid']
-        print("Service id: ",serviceid)
         servicename = request.form['update_servicename']
         aboutservice = request.form['update_aboutservice']
         
-        cursor = connection.cursor()
-        query = "UPDATE service_info SET servicename = %s, aboutservice = %s WHERE serviceid = %s"
-        values = (servicename, aboutservice, serviceid)
-        cursor.execute(query, values)
-        connection.commit()
+        with connection.cursor() as cursor:
+            query = "UPDATE service_info SET servicename = %s, aboutservice = %s WHERE serviceid = %s"
+            values = (servicename, aboutservice, serviceid)
+            cursor.execute(query, values)
+            connection.commit()
         
         # Optionally, you can check if any rows were affected to determine if the update was successful
         if cursor.rowcount > 0:
@@ -250,13 +247,11 @@ def update_service():
 @app.route('/delete_service/<int:service_id>', methods=['DELETE'])
 def delete_service(service_id):
     try:
-        cursor = connection.cursor()
-        # Execute SQL query to delete the course with the given ID
-        print("Service id is: ", service_id)
-        query = "DELETE FROM service_info WHERE serviceid = %s"
-        cursor.execute(query, (service_id,))
-        connection.commit()
-        #cursor.close()
+        with connection.cursor() as cursor:
+            query = "DELETE FROM service_info WHERE serviceid = %s"
+            cursor.execute(query, (service_id,))
+            connection.commit()
+            #cursor.close()
         return jsonify({'message': 'Service deleted successfully'}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
