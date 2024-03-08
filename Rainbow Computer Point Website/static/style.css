@@ -12342,3 +12342,31 @@ margin: 2px;
 .form-section .form-control::placeholder{
     color: black;
 }
+
+
+.aboutus-section {
+    padding-bottom: 0px;
+    padding-top: 40px;
+}
+
+.aboutus-section h3{
+    /* background-color: #534de6; */
+    color: #534de6;
+    font-family: Anek Bangla;
+    margin-bottom: 0;
+}
+
+.aboutus-section .about-management img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+
+.aboutus-section .about .text-justify{
+    text-align: justify;
+} 
+
+.aboutus-course{
+    padding-top: 40px;
+}
