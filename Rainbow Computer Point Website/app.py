@@ -11,24 +11,22 @@ connection = pymysql.connect(host='localhost',
                                 password='',
                                 db='rainbow_computer')
 
-def fetch_course_info():
+@app.route('/course_infodata')
+def course_infodata():
     with connection.cursor() as cursor:
         query = "SELECT * FROM course_info"
         cursor.execute(query)
-        coursedata = cursor.fetchall()
-        #cursor.close()
-        return coursedata
-
-@app.route('/course_infodata')
-def course_infodata():
-    course_data = fetch_course_info()
+        course_data = cursor.fetchall()
     if course_data:
         return jsonify(course_data)
 
 @app.route('/coursedata')
 def get_coursedata():
     # Fetch data from MySQL database
-    coursedata = fetch_course_info()
+    with connection.cursor() as cursor:
+        query = "SELECT * FROM course_info"
+        cursor.execute(query)
+        coursedata = cursor.fetchall()
     if coursedata:
         # Convert data to a list of dictionaries
         keys = ['id','couseid', 'course_name', 'month_duration', 'weekly', 'duration_hour', 'duration_minute', 'amount', 'image_name', 'aboutcourse', 'coursetopic']
@@ -38,24 +36,22 @@ def get_coursedata():
         return jsonify([])
 
 
-def fetch_service_info():
+@app.route('/service_infodata')
+def service_infodata():
     with connection.cursor() as cursor:
         query = "SELECT * FROM service_info"
         cursor.execute(query)
-        servicedata = cursor.fetchall()
-        #cursor.close()
-        return servicedata
-
-@app.route('/service_infodata')
-def service_infodata():
-    service_data = fetch_service_info()
+        service_data = cursor.fetchall()
     if service_data:
         return jsonify(service_data)
 
 @app.route('/servicedata')
 def get_servicedata():
     # Fetch data from MySQL database
-    servicedata = fetch_service_info()
+    with connection.cursor() as cursor:
+        query = "SELECT * FROM service_info"
+        cursor.execute(query)
+        servicedata = cursor.fetchall()
     if servicedata:
         # Convert data to a list of dictionaries
         keys = ['id','serviceid', 'servicename', 'aboutservice']
