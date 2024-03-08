@@ -12215,8 +12215,11 @@ textarea.form-control {
 }
 .card-body{
     border: none;
-    /* padding-top: 0; */
     padding: 0;
+}
+
+.course-section .card .card-body{
+    padding-top: 10px;
 }
 
 .course-card{

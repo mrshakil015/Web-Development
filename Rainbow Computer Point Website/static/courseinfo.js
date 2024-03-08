@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="card card-item">
                     <div class="card-header view view-cascade overlay text-center">
                         <img src="../static/images/${course_details.image_name}" class="card-img-top" alt="profile image">
-                            <hr>
                     </div>
                     <div class="card-body">
                         <h4 class="card-title"><strong>${course_details.course_name}</strong></h4>

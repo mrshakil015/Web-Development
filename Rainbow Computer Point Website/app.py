@@ -16,7 +16,7 @@ def fetch_course_info():
     query = "SELECT * FROM course_info"
     cursor.execute(query)
     coursedata = cursor.fetchall()
-    cursor.close()
+    #cursor.close()
     return coursedata
 
 @app.route('/course_infodata')
@@ -43,7 +43,7 @@ def fetch_service_info():
     query = "SELECT * FROM service_info"
     cursor.execute(query)
     servicedata = cursor.fetchall()
-    cursor.close()
+    #cursor.close()
     return servicedata
 
 @app.route('/service_infodata')
@@ -181,7 +181,7 @@ def delete_course(course_id):
         query = "DELETE FROM course_info WHERE courseid = %s"
         cursor.execute(query, (course_id,))
         connection.commit()
-        cursor.close()
+        #cursor.close()
         return jsonify({'message': 'Course deleted successfully'}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -256,7 +256,7 @@ def delete_service(service_id):
         query = "DELETE FROM service_info WHERE serviceid = %s"
         cursor.execute(query, (service_id,))
         connection.commit()
-        cursor.close()
+        #cursor.close()
         return jsonify({'message': 'Service deleted successfully'}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
