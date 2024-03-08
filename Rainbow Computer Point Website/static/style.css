@@ -12344,7 +12344,7 @@ margin: 2px;
 }
 
 
-.aboutus-section {
+.aboutus-section, .location-section {
     padding-bottom: 0px;
     padding-top: 40px;
 }
@@ -12369,4 +12369,9 @@ margin: 2px;
 
 .aboutus-course{
     padding-top: 40px;
+}
+
+.location-section iframe{
+    border-radius: 20px;
+    margin-bottom: 40px;
 }
