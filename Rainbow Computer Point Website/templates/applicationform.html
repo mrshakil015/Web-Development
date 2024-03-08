@@ -94,7 +94,7 @@
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="section-title">
-                    <h1>শিক্ষার্থী আবেদন ফরম</h1>
+                    <h1>শিক্ষার্থী ভর্তি আবেদন ফরম</h1>
                     <p>ভর্তির আবেদন করতে নিচের ফরমটি পূরণ করুন</p>
                 </div>
             </div>
@@ -106,7 +106,7 @@
                     <div class="card-body">
                         <div class="card-title">
                             <!-- <h3>শিক্ষার্থী আবেদন ফরম</h3> -->
-                            <p>বিঃদ্রঃ ফরমটি অবশ্যই ইংরেজিতে পূরণ করতে হবে।</p>
+                            <p>বিঃদ্রঃ ফরমটি অবশ্যই ইংরেজিতে পূরণ করতে হবে।<br> সকল তথ্য অবশ্যই সার্টিফিকেট অনুযায়ী দিতে হবে।</p>
                         </div>
                         <form id="contact-form" role="form" action="/adminservice" method="post"
                             enctype="multipart/form-data">
@@ -127,9 +127,9 @@
                                     </div>
                                     <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label for="serviceid">শিক্ষার্থীর নাম *</label>
-                                            <input id="serviceid" type="text" name="serviceid" class="form-control"
-                                                placeholder="Service Serial No *" required="required">
+                                            <label for="applicant-name">শিক্ষার্থীর নাম *</label>
+                                            <input id="applicant-studentname" type="text" name="applicant-studentname" class="form-control"
+                                                placeholder="Full Name *" required="required">
                                         </div>
                                     </div>
                                 </div>
@@ -137,16 +137,16 @@
                                 <div class="row">
                                     <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label for="serviceid">পিতার নাম *</label>
-                                            <input id="serviceid" type="text" name="serviceid" class="form-control"
-                                                placeholder="Service Serial No *" required="required">
+                                            <label for="applicant-fathername">পিতার নাম *</label>
+                                            <input id="applicant-fathername" type="text" name="applicant-fathername" class="form-control"
+                                                placeholder="Father Name *" required="required">
                                         </div>
                                     </div>
                                     <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label for="servicename">মাতার নাম *</label>
-                                            <input id="servicename" type="text" name="servicename" class="form-control"
-                                                placeholder="Service Name *" required="required">
+                                            <label for="applicant-mothername">মাতার নাম *</label>
+                                            <input id="applicant-mothername" type="text" name="applicant-mothername" class="form-control"
+                                                placeholder="Mother Name *" required="required">
                                         </div>
                                     </div>
                                 </div>
@@ -154,16 +154,16 @@
                                 <div class="row">
                                     <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label for="serviceid">জন্ম তারিখ *</label>
-                                            <input id="serviceid" type="text" name="serviceid" class="form-control"
-                                                placeholder="Service Serial No *" required="required">
+                                            <label for="applicant-dob">জন্ম তারিখ *</label>
+                                            <input id="applicant-dob" type="text" name="applicant-dob" class="form-control"
+                                                placeholder="Date of Birth *" required="required">
                                         </div>
                                     </div>
 
                                     <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label for="coursename">লিঙ্গ *</label>
-                                            <select id="coursename" name="coursename" class="form-control"
+                                            <label for="applicant-gender">লিঙ্গ *</label>
+                                            <select id="applicant-gender" name="applicant-gender" class="form-control"
                                                 required="required" data-error="Select the Course.">
                                                 <option value="" selected disabled>--Select Gender--</option>
                                                 <option>পুরুষ</option>
@@ -176,31 +176,31 @@
                                 <div class="row">
                                     <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label for="serviceid">ইমেল *</label>
-                                            <input id="serviceid" type="text" name="serviceid" class="form-control"
-                                                placeholder="Service Serial No *" required="required">
+                                            <label for="applicant-email">ইমেল *</label>
+                                            <input id="applicant-email" type="text" name="applicant-email" class="form-control"
+                                                placeholder="Email Address *" required="required">
                                         </div>
                                     </div>
                                     <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label for="servicename">মোবইল *</label>
-                                            <input id="servicename" type="text" name="servicename" class="form-control"
-                                                placeholder="Service Name *" required="required">
+                                            <label for="applicant-mobile">মোবইল *</label>
+                                            <input id="applicant-mobile" type="number" name="applicant-mobile" class="form-control"
+                                                placeholder="Mobile No *" required="required">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label for="serviceid">ঠিকানা *</label>
-                                            <input id="serviceid" type="text" name="serviceid" class="form-control"
-                                                placeholder="Service Serial No *" required="required">
+                                            <label for="applicant-address">ঠিকানা *</label>
+                                            <input id="applicant-address" type="text" name="applicant-address" class="form-control"
+                                                placeholder="Address *" required="required">
                                         </div>
                                     </div>
                                     <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label for="formFile" class="form-label">ফটোগ্রাফ/ছবি (সর্বোচ্চ ২ MB) *</label>
-                                            <input class="form-control" type="file" accept="image/*"  id="formFile" required="required">
+                                            <label for="applicant-photo" class="form-label">ফটোগ্রাফ/ছবি (সর্বোচ্চ ২ MB) *</label>
+                                            <input class="form-control" type="file" accept="image/*"  id="applicant-photo" required="required">
                                         </div>
                                     </div>
                                 </div>
