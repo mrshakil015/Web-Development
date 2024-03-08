@@ -11,6 +11,7 @@
 
 </head>
 <body>
+    
     <div class="wrapper">
         <div class="logo">
             <a href="{{url_for('index')}}">
@@ -22,15 +23,15 @@
             
         </div>
     
-        <form class="p-3 mt-3" method="POST" action="{{ url_for('admin_login') }}">
+        <form class="p-3 mt-3" method="POST" action="{{ url_for('studentlogin') }}">
 
             <div class="form-field">
                 <span class="fas fa-user icon"></span>
-                <input type="text" name="admin_username" id="admin_username" placeholder="User Name">
+                <input type="text" name="studentroll" id="studentuser" placeholder="Enter Roll No">
             </div>
             <div class="form-field">
                 <span class="fas fa-key icon"></span>
-                <input type="password" name="admin_password" id="admin_password" placeholder="Authorization Password">
+                <input type="password" name="studentpassword" id="studentpassword" placeholder="Enter Passowrd">
                 <span class="toggle-password fas fa-eye" onclick="togglePasswordVisibility()"></span>
             </div>
             
@@ -50,11 +51,8 @@
                     }
                 }
                 </script>
-                
-            
             <div>
-                <button class="btn mt-3">Admin Login</button>
-                
+                <button class="btn mt-3">Student Login</button>
             </div>
             {% if error_message %}
             <p class="text-danger">{{ error_message }}</p>

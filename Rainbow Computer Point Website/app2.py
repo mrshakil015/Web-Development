@@ -95,6 +95,10 @@ def admindashboard():
 def applicationform():
     return render_template("applicationform.html")
 
+@app.route('/studentlogin')
+def studentlogin():
+    return render_template("studentlogin.html")
+
 @app.route('/admincourse', methods=['POST', 'GET'])
 def admincourse():
     if request.method == 'POST':
