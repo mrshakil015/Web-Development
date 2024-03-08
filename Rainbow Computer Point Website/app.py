@@ -74,6 +74,10 @@ def index():
 def courses():
     return render_template("courses.html")
 
+@app.route('/services')
+def services():
+    return render_template("services.html")
+
 @app.route('/aboutus')
 def aboutus():
     return render_template("aboutus.html")
