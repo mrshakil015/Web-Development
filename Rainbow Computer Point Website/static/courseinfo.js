@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         <img src="../static/images/${course_details.image_name}" class="card-img-top" alt="profile image">
                     </div>
                     <div class="card-body">
+                    <hr>
                         <h4 class="card-title"><strong>${course_details.course_name}</strong></h4>
                         <div class="card-info">
                             <button class="btn btn-outline-primary">${course_details.month_duration} মাস</button>
