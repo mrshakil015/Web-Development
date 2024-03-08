@@ -13,6 +13,8 @@
     <!-- theme meta -->
     <meta name="theme-name" content="Rainbow Computer Point" />
 
+
+
     <!-- # Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,13 +27,13 @@
     <link rel="stylesheet" href="plugins/font-awesome/solid.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
-    integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+        integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- # Main Style Sheet -->
     <link rel="stylesheet" href="../static/style.css">
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-   
+
 </head>
 
 <body>
@@ -81,7 +83,7 @@
                         </li> -->
                     </ul>
                     <!-- account btn --> <a href="{{ url_for('admin_login') }}" class="btn btn-outline-primary">লগ
-                    ইন</a>
+                        ইন</a>
                     <!-- account btn -->
                     <!-- <a href="#!" class="btn btn-primary ms-2 ms-lg-3">সাইনআপ</a> -->
                 </div>
@@ -106,9 +108,10 @@
                     <div class="card-body">
                         <div class="card-title">
                             <!-- <h3>শিক্ষার্থী আবেদন ফরম</h3> -->
-                            <p>বিঃদ্রঃ ফরমটি অবশ্যই ইংরেজিতে পূরণ করতে হবে।<br> সকল তথ্য অবশ্যই সার্টিফিকেট অনুযায়ী দিতে হবে।</p>
+                            <p>বিঃদ্রঃ ফরমটি অবশ্যই ইংরেজিতে পূরণ করতে হবে।<br> সকল তথ্য অবশ্যই সার্টিফিকেট অনুযায়ী দিতে
+                                হবে।</p>
                         </div>
-                        <form id="contact-form" role="form" action="/adminservice" method="post"
+                        <form id="contact-form" role="form" action="/applicationform" method="post"
                             enctype="multipart/form-data">
                             <div class="controls">
                                 <div class="row">
@@ -128,8 +131,8 @@
                                     <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="applicant-name">শিক্ষার্থীর নাম *</label>
-                                            <input id="applicant-studentname" type="text" name="applicant-studentname" class="form-control"
-                                                placeholder="Full Name *" required="required">
+                                            <input id="applicant-studentname" type="text" name="applicant-studentname"
+                                                class="form-control" placeholder="Full Name *" required="required">
                                         </div>
                                     </div>
                                 </div>
@@ -138,15 +141,15 @@
                                     <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="applicant-fathername">পিতার নাম *</label>
-                                            <input id="applicant-fathername" type="text" name="applicant-fathername" class="form-control"
-                                                placeholder="Father Name *" required="required">
+                                            <input id="applicant-fathername" type="text" name="applicant-fathername"
+                                                class="form-control" placeholder="Father Name *" required="required">
                                         </div>
                                     </div>
                                     <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="applicant-mothername">মাতার নাম *</label>
-                                            <input id="applicant-mothername" type="text" name="applicant-mothername" class="form-control"
-                                                placeholder="Mother Name *" required="required">
+                                            <input id="applicant-mothername" type="text" name="applicant-mothername"
+                                                class="form-control" placeholder="Mother Name *" required="required">
                                         </div>
                                     </div>
                                 </div>
@@ -155,8 +158,8 @@
                                     <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="applicant-dob">জন্ম তারিখ *</label>
-                                            <input id="applicant-dob" type="text" name="applicant-dob" class="form-control"
-                                                placeholder="Date of Birth *" required="required">
+                                            <input id="applicant-dob" type="text" name="applicant-dob"
+                                                class="form-control" placeholder="Date of Birth *" required="required">
                                         </div>
                                     </div>
 
@@ -166,8 +169,8 @@
                                             <select id="applicant-gender" name="applicant-gender" class="form-control"
                                                 required="required" data-error="Select the Course.">
                                                 <option value="" selected disabled>--Select Gender--</option>
-                                                <option>পুরুষ</option>
-                                                <option>মহিলা</option>
+                                                <option>Male</option>
+                                                <option>Female</option>
                                             </select>
                                         </div>
                                     </div>
@@ -177,15 +180,15 @@
                                     <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="applicant-email">ইমেল *</label>
-                                            <input id="applicant-email" type="text" name="applicant-email" class="form-control"
-                                                placeholder="Email Address *" required="required">
+                                            <input id="applicant-email" type="text" name="applicant-email"
+                                                class="form-control" placeholder="Email Address *" required="required">
                                         </div>
                                     </div>
                                     <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="applicant-mobile">মোবইল *</label>
-                                            <input id="applicant-mobile" type="number" name="applicant-mobile" class="form-control"
-                                                placeholder="Mobile No *" required="required">
+                                            <input id="applicant-mobile" type="number" name="applicant-mobile"
+                                                class="form-control" placeholder="Mobile No *" required="required">
                                         </div>
                                     </div>
                                 </div>
@@ -193,14 +196,17 @@
                                     <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="applicant-address">ঠিকানা *</label>
-                                            <input id="applicant-address" type="text" name="applicant-address" class="form-control"
-                                                placeholder="Address *" required="required">
+                                            <input id="applicant-address" type="text" name="applicant-address"
+                                                class="form-control" placeholder="Address *" required="required">
                                         </div>
                                     </div>
                                     <div class="input-section col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label for="applicant-photo" class="form-label">ফটোগ্রাফ/ছবি (সর্বোচ্চ ২ MB) *</label>
-                                            <input class="form-control" type="file" accept="image/*"  id="applicant-photo" required="required">
+                                            <label for="photo" class="form-label">ফটোগ্রাফ/ছবি (সর্বোচ্চ ২ MB, ৫০০ x ৫০০
+                                                Pixels)
+                                                *</label>
+                                            <input class="form-control" type="file" accept="image/*" id="photo"
+                                                name="photo" required="required">
                                         </div>
                                     </div>
                                 </div>
@@ -209,6 +215,19 @@
                             <div class="form-footer">
                                 <button type="submit" class="btn col-lg-3" id="add-service-button">সাবমিট করুন</button>
                             </div>
+                            {% if message %}
+                            <script>
+                                // Display SweetAlert when message exists
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    Swal.fire({
+                                        title: "Good job!",
+                                        text: "{{ message }}",
+                                        icon: "success"
+                                    });
+                                });
+                            </script>
+                            {% endif %}
+
                         </form>
                     </div>
                 </div>
@@ -227,6 +246,9 @@
     <!-- Main Script -->
     <script src="js/script.js"></script>
     <script src="{{ url_for('static', filename='courseinfo.js') }}"></script>
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 </body>
 
