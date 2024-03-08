@@ -120,7 +120,7 @@ def applicationform():
         mobile = request.form['applicant-mobile']
         address = request.form['applicant-address']
         image_file = request.files['photo']
-        studentphoto = image_file.filename
+        studentphoto = f"{studentid}_{(image_file.filename)}"
         print("Photo: ",studentphoto)
         if image_file:
             image_file.save('static/images/pending_student/' + studentphoto)
@@ -133,7 +133,7 @@ def applicationform():
         db.commit()
         cursor.close()
         db.close()
-        message = "Your Application Successfully Done!"
+        message = "Your Application Received Successfully!"
         return render_template("applicationform.html", message = message)
     
     return render_template("applicationform.html")
