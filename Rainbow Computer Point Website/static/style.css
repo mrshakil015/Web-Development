@@ -10660,8 +10660,8 @@ a:hover {
 }
 
 .section {
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding-top: 40px;
+    padding-bottom: 40px;
     text-align: center;
 }
 
@@ -12273,7 +12273,7 @@ margin: 2px;
 
 .application-section {
     padding-bottom: 0;
-    /* padding-top: 20px; */
+    padding-top: 0px;
 }
 .application-section h1{
     font-size: 40px;
@@ -12286,6 +12286,10 @@ margin: 2px;
 .form-section{
     padding-top: 20px;
     padding-bottom: 20px;
+}
+
+.form-section .card{
+    background-image: url(../static/images/rcblogo.png);
 }
 
 .form-section .card-body {
@@ -12568,3 +12572,44 @@ margin: 2px;
     }
   }
   
+
+
+/*--------------------------------------------------------------
+# Back to top button
+--------------------------------------------------------------*/
+/* .back-to-top {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    display: none;
+    background: #1a868c;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+} */
+
+.back-to-top {
+    position: fixed;
+    /* visibility: hidden; */
+    right: 15px;
+    bottom: 15px;
+    z-index: 996;
+    background: #1a868c;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-to-top i {
+    font-size: 24px;
+    color: #fff;
+}
+
+.back-to-top:hover {
+    background: #1a868c;
+    color: #fff;
+}
+

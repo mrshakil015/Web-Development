@@ -322,12 +322,39 @@
       </div>
   </footer><!-- End Footer -->
 
+  <a href="#" id="back-to-top" class="back-to-top d-flex align-items-center justify-content-center">
+    <i class="bi bi-arrow-up-short"></i>
+</a>
 
+
+    <script>
+      $(document).ready(function(){
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 50) {
+            $('#back-to-top').css('visibility', 'visible');
+        } else {
+            $('#back-to-top').css('visibility', 'hidden');
+        }
+    });
+    
+    // scroll body to 0px on click
+    $('#back-to-top').click(function () {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 400);
+        return false;
+    });
+});
+
+
+
+    </script>
     <!-- # JS Plugins -->
     <script src="plugins/jquery/jquery.min.js"></script>
     <script src="plugins/bootstrap/bootstrap.min.js"></script>
     <script src="plugins/slick/slick.min.js"></script>
     <script src="plugins/scrollmenu/scrollmenu.min.js"></script>
+    
 
     <!-- Main Script -->
     <script src="js/script.js"></script>
