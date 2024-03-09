@@ -42,7 +42,7 @@
 
 body {
     margin: 0;
-    font-family: var(--bs-font-sans-serif);
+    font-family: Anek Bangla;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -10393,7 +10393,7 @@ fieldset:disabled .btn {
 /*  typography */
 body {
     line-height: 1.7;
-    font-family: "Rubik", sans-serif;
+    font-family: Anek Bangla;
     -webkit-font-smoothing: antialiased;
     font-size: 15px;
     font-weight: 400;
@@ -10422,7 +10422,7 @@ h6,
 .h5,
 .h6 {
     color: #040404;
-    font-family: "Rubik", sans-serif;
+    font-family: Anek Bangla;
     font-weight: 700;
 }
 
@@ -11132,7 +11132,7 @@ blockquote::before {
 }
 
 .navbar-brand {
-    font-family: "Rubik", sans-serif;
+    font-family: Anek Bangla;
     font-size: 30px;
 }
 
@@ -12377,3 +12377,50 @@ margin: 2px;
     border: 10px solid #fff;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
+
+#contact{
+    margin-top: 0px;
+}
+.contact .info-box {
+    /* color: #000; */
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+  }
+
+  .contact .info-box i.bx {
+    font-size: 24px;
+    color: #fff;
+    border-radius: 50%;
+    padding: 14px;
+    float: left;
+    background: #534de6;
+    margin: 10px;
+  }
+  
+  .contact .info-box h3 {
+    font-size: 25px;
+    font-weight: 700;
+    margin: 0;
+
+  }
+  
+  .contact .info-box p {
+    padding: 0;
+    font-size: 20px;
+    margin: 0;
+  }
+
+  .contact .info-box .social-links {
+    display: flex;
+  }
+  
+  .contact .info-box .social-links a {
+    font-size: 22px;
+    display: inline-block;
+    margin-right: 12px;
+    transition: 0.3s;
+  }
+  

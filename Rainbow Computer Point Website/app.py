@@ -92,6 +92,10 @@ def aboutus():
 def admindashboard():
     return render_template("admindashboard.html")
 
+@app.route('/contactus')
+def contactus():
+    return render_template("contactus.html")
+
 @app.route('/applicationform', methods=['POST','GET'])
 def applicationform():
     while True:
