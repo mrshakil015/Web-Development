@@ -12357,8 +12357,8 @@ margin: 2px;
 }
 
 .aboutus-section .about-management img{
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
 }
 
@@ -12374,4 +12374,6 @@ margin: 2px;
 .location-section iframe{
     border-radius: 20px;
     margin-bottom: 40px;
+    border: 10px solid #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
