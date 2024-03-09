@@ -96,7 +96,7 @@
                         <p class="rainbow-text0">গণপ্রজাতন্ত্রী বাংলাদেশ সরকার কর্তৃক অনুমোদিত</p>
                         <h1 class="rainbow-text1"><strong>রেইনবো</strong></h1>
                         <h2 class="rainbow-text2 mb-4">কম্পিউটার পয়েন্ট</h2>
-                        <p class="mb-4">আমাদের প্রতিষ্ঠানের পক্ষ থেকে আপনাদের সকলকে জানাই আন্তরিক শুভেচ্ছা। আমরা দীর্ঘ
+                        <p class="text-justify mb-4">আমাদের প্রতিষ্ঠানের পক্ষ থেকে আপনাদের সকলকে জানাই আন্তরিক শুভেচ্ছা। আমরা দীর্ঘ
                             একযুগেরও বেশি সময় ধরে তথ্য ও প্রযুক্তির উন্নয়নে কাজ করে আসছি। আমাদের মূল লক্ষ্য বেকার
                             জনগোষ্ঠিকে প্রযুক্তিভিত্তিক আত্মনির্ভরশীল করে গড়ে তোলা এবং বাংলাদেশ সরকারের ডিজিটাল
                             বাংলাদেশকে স্মার্ট বাংলাদেশে রুপান্তর করা।</p>
@@ -104,7 +104,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="ps-lg-5 text-center">
+                    <div class="text-center">
                         <img loading="lazy" decoding="async" src="../static/images/banner3.png" alt="banner image"
                             class="banner-img w-100">
                     </div>
@@ -254,43 +254,37 @@
 
           <div class="col-lg-3 col-md-6 footer-contact">
             <!-- <h3>Sobjanta</h3> -->
-            <img src="../static/images/rcblogo.png" class="img-fluid animated" alt="sobjantalogo">
+            <img src="../static/images/logo.png" class="img-fluid animated" alt="sobjantalogo">
 
           </div>
 
           <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Useful Links</h4>
+            <h4>গুরুত্বপূর্ণ লিংক</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Update Log</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">FAQ</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('index')}}">হোম</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('aboutus')}}">আমাদের সম্পর্কে</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('contactus')}}">যোগাযোগ</a></li>
             </ul>
           </div>
 
           <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Our Services</h4>
+            <h4>আমাদের সেবাসমূহ</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('courses')}}">কোর্সসমূহ/a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('services')}}">সেবাসমূহ</a></li>
             </ul>
           </div>
 
           <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Our Social Networks</h4>
-            <p>Join our social media community for the latest updates, news, and exclusive content! 📱💬 Follow us on Facebook, Twitter, Youtube, Instagram, and LinkedIn. Stay connected with us!</p>
+            <!-- <h4>Our Social Networks</h4> -->
+            <p>সর্বশেষ আপডেট, খবরের জন্য আমাদের সামাজিক মিডিয়া যোগ দিন। 📱💬 ফেসবুকে এবং ইউটিউবে আমাদের অনুসরণ করুন। আমাদের সাথে সংযুক্ত থাকুন!</p>
             <div class="social-links mt-3">
-              <a href="https://twitter.com/sobjantaai" target="_blank" class="twitter" aria-label="Twitter">
-                <i class="bx bxl-twitter"></i>
-              </a>
-              <a href="https://www.facebook.com/sobjantaai"  target="_blank" class="facebook" aria-label="Facebook">
+
+              <a href="https://www.facebook.com"  target="_blank" class="facebook" aria-label="Facebook">
                 <i class="bx bxl-facebook"></i>
               </a>
-              
-              <a href="https://www.linkedin.com/company/sobjantaai" target="_blank" class="linkedin" aria-label="LinkedIn">
-                <i class="bx bxl-linkedin"></i>
-              </a>
-              <a href="https://www.youtube.com/@SobjantaAI" target="_blank" class="youtube" aria-label="Youtube">
+            
+              <a href="https://www.youtube.com" target="_blank" class="youtube" aria-label="Youtube">
                 <i class='bx bxl-youtube'></i>
               </a>
               
@@ -302,10 +296,13 @@
     </div>
 
     <div class="container footer-bottom clearfix">
-      <div class="copyright">
-        &copy; Copyright <strong><span>Sobjanta</span></strong>. All Rights Reserved
+        <div class="copyright">
+          &copy; Copyright <strong><span>Rainbow Computer Point</span></strong>. All Rights Reserved
+        </div>
+        <!-- <div class="developer">
+            Developed by <strong><a href="https://mrshakil015.github.io/" target="_blank">CodeMod</a></strong>
+          </div> -->
       </div>
-    </div>
   </footer><!-- End Footer -->
 
 
