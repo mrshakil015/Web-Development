@@ -32,7 +32,11 @@
 
     <!-- # Main Style Sheet -->
     <link rel="stylesheet" href="../static/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- #ICONS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css" integrity="sha512-pVCM5+SN2+qwj36KonHToF2p1oIvoU3bsqxphdOIWMYmgr4ZqD3t5DjKvvetKhXGc/ZG5REYTT6ltKfExEei/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="../static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
     <style>
         .error-border {
             border-color: red !important;
@@ -298,6 +302,66 @@
         </div>
     </section>
 
+    <footer id="footer">
+
+        <div class="footer-top">
+          <div class="container">
+            <div class="row">
+    
+              <div class="col-lg-3 col-md-6 footer-contact">
+                <!-- <h3>Sobjanta</h3> -->
+                <img src="../static/images/logo.png" class="img-fluid animated" alt="sobjantalogo">
+    
+              </div>
+    
+              <div class="col-lg-3 col-md-6 footer-links">
+                <h4>গুরুত্বপূর্ণ লিংক</h4>
+                <ul>
+                  <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('index')}}">হোম</a></li>
+                  <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('aboutus')}}">আমাদের সম্পর্কে</a></li>
+                  <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('contactus')}}">যোগাযোগ</a></li>
+                </ul>
+              </div>
+    
+              <div class="col-lg-3 col-md-6 footer-links">
+                <h4>আমাদের সেবাসমূহ</h4>
+                <ul>
+                  <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('courses')}}">কোর্সসমূহ</a></li>
+                  <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('services')}}">সেবাসমূহ</a></li>
+                </ul>
+              </div>
+    
+              <div class="col-lg-3 col-md-6 footer-links">
+                <!-- <h4>Our Social Networks</h4> -->
+                <p>সর্বশেষ আপডেট, খবরের জন্য আমাদের সামাজিক মিডিয়া যোগ দিন। 📱💬 ফেসবুকে এবং ইউটিউবে আমাদের অনুসরণ করুন। আমাদের সাথে সংযুক্ত থাকুন!</p>
+                <div class="social-links mt-3">
+    
+                  <a href="https://www.facebook.com"  target="_blank" class="facebook" aria-label="Facebook">
+                    <i class="bx bxl-facebook"></i>
+                  </a>
+                
+                  <a href="https://www.youtube.com" target="_blank" class="youtube" aria-label="Youtube">
+                    <i class='bx bxl-youtube'></i>
+                  </a>
+                  
+                </div>
+              </div>
+    
+            </div>
+          </div>
+        </div>
+    
+        <div class="container footer-bottom clearfix">
+            <div class="copyright">
+              &copy; Copyright <strong><span>Rainbow Computer Point</span></strong>. All Rights Reserved
+            </div>
+            <!-- <div class="developer">
+                Developed by <strong><a href="https://mrshakil015.github.io/" target="_blank">CodeMod</a></strong>
+              </div> -->
+          </div>
+      </footer><!-- End Footer -->
+    
+
 
 
     <!-- # JS Plugins -->
@@ -311,6 +375,7 @@
     <script src="{{ url_for('static', filename='courseinfo.js') }}"></script>
     <!-- Sweet Alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 </body>
