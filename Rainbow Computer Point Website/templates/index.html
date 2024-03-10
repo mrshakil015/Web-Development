@@ -43,6 +43,15 @@
 
   <!-- # Main Style Sheet -->
   <link rel="stylesheet" href="../static/style.css">
+
+  <style>
+    .gallery .card{
+      width: 400px;
+      height: 250px;
+      border-radius: 20px;
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+  </style>
 </head>
 
 <body>
@@ -295,10 +304,32 @@
 
         <div class="row">
           <div class="col-lg-4">
-            <img src="../static/images/aboutus/director.JPG" alt="">
+            <div class="card" id="director-card">
+            </div>
           </div>
-
         </div>
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+        // Select the card element
+        var card = document.getElementById("director-card");
+      
+        // Create an image element
+        var img = document.createElement("img");
+      
+        // Set the image source
+        img.src = "../static/images/aboutus/director.JPG";
+      
+        // Set image style to fit the card without changing its dimensions
+        img.style.width = "100%";
+        img.style.height = "100%";
+        img.style.objectFit = "cover";
+        img.style.borderRadius = "20px";
+      
+        // Append the image to the card
+        card.appendChild(img);
+      });
+      
+        </script>
 
       </div>
     </div>
