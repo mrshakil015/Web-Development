@@ -12649,3 +12649,49 @@ margin: 2px;
 .carousel-inner{
     padding: 0 10px 10px 0;
 }
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    /* background-color: red; */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1; /* Ensure the buttons are displayed above the cards */
+}
+.carousel-control-next i,
+.carousel-control-prev i{
+    font-size: 50px;
+    color: #4a45cf;
+}
+.carousel-control-prev {
+    left: 10px; /* Adjust this value to position the previous button */
+}
+
+.carousel-control-next {
+    right: 10px; /* Adjust this value to position the next button */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+}
+
+.carousel-control-prev-icon:before,
+.carousel-control-next-icon:before {
+    content: '';
+    border-width: 0 2px 2px 0;
+    border-color: transparent;
+    border-style: solid;
+}
+
+.card-item {
+    position: relative; /* Ensure cards are positioned relatively */
+    z-index: 0; /* Ensure cards are behind the buttons */
+}
+
+
