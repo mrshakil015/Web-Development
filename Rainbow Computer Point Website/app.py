@@ -110,6 +110,10 @@ def admindashboard():
 def contactus():
     return render_template("contactus.html")
 
+@app.route('/gallery')
+def gallery():
+    return render_template("gallery.html")
+
 @app.route('/applicationform', methods=['POST','GET'])
 def applicationform():
     while True:

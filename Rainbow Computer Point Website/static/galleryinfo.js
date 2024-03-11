@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const imagesPerPage = 2;
+    const imagesPerPage = 4;
     let currentPage = 1;
 
     fetch('/galleryimagedata')
@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     galleryimagecard.classList.add('col-lg-6');
                     galleryimagecard.classList.add('col-md-6');
                     galleryimagecard.innerHTML = `
-                        <div class="img-card" style="height: 300px;">
-                            <img src="../static/images/gallery/${galleryimage_details.imagename}" class="card-img-top" alt="profile image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+                        <div class="img-card" style="height: 300px; padding-top:20px;">
+                            <img src="../static/images/${galleryimage_details.imagename}" class="card-img-top" alt="profile image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
                         </div>
                     `;
                     galleryimagecardsContainer.appendChild(galleryimagecard);

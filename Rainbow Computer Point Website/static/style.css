@@ -12715,3 +12715,7 @@ input[type="file"]::file-selector-button {
     transition: 1s;
     margin-top:5px;
   }
+
+  .pagination-control{
+    margin-top: 20px;
+  }
