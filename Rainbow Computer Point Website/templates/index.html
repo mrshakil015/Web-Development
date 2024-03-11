@@ -43,15 +43,6 @@
 
   <!-- # Main Style Sheet -->
   <link rel="stylesheet" href="../static/style.css">
-
-  <style>
-    .gallery .card{
-      width: 400px;
-      height: 250px;
-      border-radius: 20px;
-      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-    }
-  </style>
 </head>
 
 <body>
@@ -301,35 +292,9 @@
           <!-- <p>আমাদের প্রতিষ্ঠান থেকে প্রশিক্ষণ শেষে সরকারের বিভিন্ন মন্ত্রণালয়/বিভাগ/জেলা/উপজেলায় চাকরি প্রাপ্তদের বর্তমান কর্মস্থল (আংশিক)</p> -->
           <hr>
         </div>
+        <div class="row" id="galleryimage-cards-container">
 
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="card" id="director-card">
-            </div>
-          </div>
         </div>
-        <script>
-          document.addEventListener("DOMContentLoaded", function() {
-        // Select the card element
-        var card = document.getElementById("director-card");
-      
-        // Create an image element
-        var img = document.createElement("img");
-      
-        // Set the image source
-        img.src = "../static/images/aboutus/director.JPG";
-      
-        // Set image style to fit the card without changing its dimensions
-        img.style.width = "100%";
-        img.style.height = "100%";
-        img.style.objectFit = "cover";
-        img.style.borderRadius = "20px";
-      
-        // Append the image to the card
-        card.appendChild(img);
-      });
-      
-        </script>
 
       </div>
     </div>
@@ -488,6 +453,7 @@
   <script src="js/script.js"></script>
   <script src="{{ url_for('static', filename='courseinfo.js') }}"></script>
   <script src="{{ url_for('static', filename='serviceinfo.js') }}"></script>
+  <script src="{{ url_for('static', filename='galleryinfo.js') }}"></script>
 
 </body>
 

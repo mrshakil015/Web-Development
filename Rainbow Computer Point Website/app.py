@@ -72,6 +72,20 @@ def get_servicedata():
 
     return jsonify(servicedata)
 
+@app.route('/galleryimagedata')
+def get_galleryimagedata():
+    db = mysql.connector.connect(**db_config)
+    cursor = db.cursor(dictionary=True)
+
+    query = "SELECT * FROM galleryimage_info"
+    cursor.execute(query)
+    galleryimagedata = cursor.fetchall()
+
+    cursor.close()
+    db.close()
+
+    return jsonify(galleryimagedata)
+
 @app.route('/')
 def index():
     return render_template("index.html")
