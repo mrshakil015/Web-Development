@@ -30,14 +30,16 @@
         integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- # Main Style Sheet -->
-    <link rel="stylesheet" href="../static/style.css">
+   
 
     <!-- #ICONS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css"
         integrity="sha512-pVCM5+SN2+qwj36KonHToF2p1oIvoU3bsqxphdOIWMYmgr4ZqD3t5DjKvvetKhXGc/ZG5REYTT6ltKfExEei/Q=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="../static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+     <!-- # Main Style Sheet -->
+     <link rel="stylesheet" href="../static/style.css">
 
     <style>
         .error-border {
@@ -73,25 +75,6 @@
                         </li>
                         <li class="nav-item "> <a class="nav-link" href="/contactus">যোগাযোগ করুন</a>
                         </li>
-                        <!-- <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item " href="blog.html">Blog</a>
-                                </li>
-                                <li><a class="dropdown-item " href="blog-details.html">Blog Details</a>
-                                </li>
-                                <li><a class="dropdown-item " href="service-details.html">Service Details</a>
-                                </li>
-                                <li><a class="dropdown-item " href="faq.html">FAQ&#39;s</a>
-                                </li>
-                                <li><a class="dropdown-item " href="legal.html">Legal</a>
-                                </li>
-                                <li><a class="dropdown-item " href="terms.html">Terms &amp; Condition</a>
-                                </li>
-                                <li><a class="dropdown-item " href="privacy-policy.html">Privacy &amp; Policy</a>
-                                </li>
-                            </ul>
-                        </li> -->
                     </ul>
                     <a href="{{ url_for('applicationform') }}" class="btn btn-primary ">ভর্তির আবেদন</a>
                     <a href="{{ url_for('studentlogin') }}" class="btn btn-outline-primary ms-2 ms-lg-3">লগইন</a>
@@ -136,7 +119,7 @@
                             <div class="controls">
                                 <div class="row">
 
-                                    <div class="input-section col-lg-6 col-md-6 col-sm-12">
+                                    <div class="input-section col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="coursename">কোর্স সিলেক্ট করুন *</label>
                                             <select id="coursename" name="coursename" class="form-control"
@@ -310,7 +293,6 @@
                 <div class="row">
 
                     <div class="col-lg-3 col-md-6 footer-contact">
-                        <!-- <h3>Sobjanta</h3> -->
                         <img src="../static/images/logo.png" class="img-fluid animated" alt="sobjantalogo">
 
                     </div>

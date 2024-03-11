@@ -2278,6 +2278,7 @@ progress {
 .form-control[type=file]:not(:disabled):not([readonly]) {
     cursor: pointer;
 }
+  
 
 .form-control:focus {
     color: #fff;
@@ -12705,3 +12706,12 @@ margin: 2px;
 }
 
 
+input[type="file"]::file-selector-button {
+    border: 2px solid #4a45cf;
+    padding: 0.2em 0.4em;
+    border-radius: 0.2em;
+    background-color: #4a45cf;
+    color: #fff;
+    transition: 1s;
+    margin-top:5px;
+  }
