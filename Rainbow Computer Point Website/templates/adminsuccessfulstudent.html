@@ -23,16 +23,19 @@
     <!-- # Main Style Sheet -->
     <!-- <link rel="stylesheet" href="../static/style.css"> -->
     <style>
+        body{
+            font-family: Anek Bangla;
+        }
 
         table {
-            font-family: arial, sans-serif;
+            font-family: Anek Bangla;
             border-collapse: collapse;
             width: 100%;
         }
     
         td,
         th {
-            border: 1px solid #dddddd;
+        border: 1px solid #dddddd;
         text-align: left;
         padding: 8px;
         word-wrap: break-word; 
@@ -150,19 +153,19 @@
                                                                     const tr = document.createElement('tr');
                                                                     console.log("TR value: ",tr);
                                                                     tr.innerHTML = `
-                                                                        // <td>${row.successfulstudentid}</td>
-                                                                        <td>${row.successfulstudent_name}</td>
-                                                                        <td>${row.successfulstudent_designation}</td>
-                                                                        <td>${row.successfulstudent_institute}</td>
-                                                                        <td>${row.successfulstudent_image}</td>
+                                                                       
+                                                                        <td>${row.studentname}</td>
+                                                                        <td>${row.studentdesignation}</td>
+                                                                        <td>${row.studentinstitute}</td>
+                                                                        <td>${row.image_name}</td>
                                                                         <td class="text-end">
                                                                             <div class="dropdown">
                                                                                 <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                                     Action
                                                                                 </button>
                                                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                                    <a class="dropdown-item update-successfulstudent" data-successfulstudent-id="${row.successfulstudentid}" data-toggle="modal" data-target="#updatesuccessfulstudentModal">Update successfulstudent</a>
-                                                                                    <a class="dropdown-item delete-successfulstudent" data-successfulstudent-id="${row.successfulstudentid}" data-toggle="modal" data-target="#deleteConfirmationModal">Delete successfulstudent</a>
+                                                                                    <a class="dropdown-item update-successfulstudent" data-successfulstudent-id="${row.studentid}" data-toggle="modal" data-target="#updatesuccessfulstudentModal">Update successfulstudent</a>
+                                                                                    <a class="dropdown-item delete-successfulstudent" data-successfulstudent-id="${row.studentid}" data-toggle="modal" data-target="#deleteConfirmationModal">Delete successfulstudent</a>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -174,6 +177,7 @@
                                                                 document.querySelectorAll('.update-successfulstudent').forEach(item => {
                                                                     item.addEventListener('click', event => {
                                                                         const successfulstudentId = event.target.getAttribute('data-successfulstudent-id');
+                                                                        console.log("ID: ", successfulstudentId);
                                                                         fetch(`/get_successfulstudent/${successfulstudentId}`)
                                                                             .then(response => response.json())
                                                                             .then(successfulstudent => {

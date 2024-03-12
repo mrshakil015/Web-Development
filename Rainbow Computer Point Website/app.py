@@ -72,6 +72,20 @@ def get_servicedata():
 
     return jsonify(servicedata)
 
+@app.route('/successfulstudent_infodata')
+def successfulstudent_infodata():
+    db = mysql.connector.connect(**db_config)
+    cursor = db.cursor(dictionary=True)
+
+    query = "SELECT * FROM successfulstudent_info"
+    cursor.execute(query)
+    successfulstudent_data = cursor.fetchall()
+
+    cursor.close()
+    db.close()
+
+    return jsonify(successfulstudent_data)
+
 @app.route('/galleryimagedata')
 def get_galleryimagedata():
     db = mysql.connector.connect(**db_config)
