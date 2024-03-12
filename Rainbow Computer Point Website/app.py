@@ -362,6 +362,10 @@ def delete_service(service_id):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/adminsuccessfulstudent')
+def adminsuccessfulstudent():
+    return render_template('adminsuccessfulstudent.html')
+
 @app.route('/admin', methods=['POST', 'GET'])
 def admin_login():
     if request.method == 'POST':
