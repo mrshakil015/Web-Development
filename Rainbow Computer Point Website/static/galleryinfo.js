@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const galleryimagesPerPage = 4;
+    const galleryimagesPerPage = 2;
     let gallerycurrentPage = 1;
+    let galleryAutoScrollInterval;
 
     fetch('/galleryimagedata')
         .then(response => response.json())
@@ -83,6 +84,31 @@ document.addEventListener('DOMContentLoaded', function () {
                 gallerycurrentPage = page;
                 gallerydisplayImages();
             };
+
+            // Auto scroll pagination function
+            const galleryautoScrollPagination = () => {
+                galleryAutoScrollInterval = setInterval(() => {
+                    if (gallerycurrentPage < gallerytotalPages) {
+                        gallerycurrentPage++;
+                    } else {
+                        gallerycurrentPage = 1;
+                    }
+                    gallerydisplayImages();
+                }, 5000); // Change 5000 to desired milliseconds for auto scroll interval
+            };
+
+            // Start auto scrolling
+            galleryautoScrollPagination();
+
+            // Stop auto scrolling on hover
+            document.getElementById('gallerypagination').addEventListener('mouseenter', () => {
+                clearInterval(galleryAutoScrollInterval);
+            });
+
+            // Resume auto scrolling on mouse leave
+            document.getElementById('gallerypagination').addEventListener('mouseleave', () => {
+                galleryautoScrollPagination();
+            });
         })
         .catch(error => console.error('Error fetching data:', error));
 });

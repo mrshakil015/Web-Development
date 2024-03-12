@@ -12619,6 +12619,10 @@ margin: 2px;
 /*----------------------------------------------
             Successful Student Section Style
 ----------------------------------------------*/
+.success-student .row {
+    margin: 0;
+    padding: 0;
+}
 .success-student .card{
     display: flex;
     flex-direction: column;

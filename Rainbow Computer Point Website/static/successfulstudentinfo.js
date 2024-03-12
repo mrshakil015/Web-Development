@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const imagesPerPage = 1;
+    const imagesPerPage = 4;
     let currentPage = 1;
+    let autoScrollInterval;
 
     fetch('/successfulstudentdata')
         .then(response => response.json())
@@ -41,18 +42,18 @@ document.addEventListener('DOMContentLoaded', function () {
                     successfulstudentcardsContainer.appendChild(successfulstudentcard);
                 }
 
-                // Update successfulpagination links
-                updatesuccessfulpagination();
+                // Update pagination links
+                updatePagination();
             };
 
-            // Function to update successfulpagination links
-            const updatesuccessfulpagination = () => {
-                const successfulpaginationContainer = document.getElementById('successfulpagination');
-                successfulpaginationContainer.innerHTML = '';
+            // Function to update pagination links
+            const updatePagination = () => {
+                const paginationContainer = document.getElementById('successfulpagination');
+                paginationContainer.innerHTML = '';
 
                 // Add Previous button
                 if (currentPage > 1) {
-                    successfulpaginationContainer.innerHTML += `
+                    paginationContainer.innerHTML += `
                         <li class="page-item">
                             <button class="page-link" onclick="changePage(${currentPage - 1})" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
@@ -64,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Add numbered pages
                 for (let i = 1; i <= totalPages; i++) {
-                    successfulpaginationContainer.innerHTML += `
+                    paginationContainer.innerHTML += `
                         <li class="page-item${currentPage === i ? ' active' : ''}">
                             <button class="page-link" onclick="changePage(${i})">${i}</button>
                         </li>
@@ -73,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Add Next button
                 if (currentPage < totalPages) {
-                    successfulpaginationContainer.innerHTML += `
+                    paginationContainer.innerHTML += `
                         <li class="page-item">
                             <button class="page-link" onclick="changePage(${currentPage + 1})" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
@@ -87,11 +88,36 @@ document.addEventListener('DOMContentLoaded', function () {
             // Initial display
             displayImages();
 
-            // Function to handle successfulpagination
+            // Function to handle pagination
             window.changePage = (page) => {
                 currentPage = page;
                 displayImages();
             };
+
+            // Auto scroll pagination function
+            const autoScrollPagination = () => {
+                autoScrollInterval = setInterval(() => {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                    } else {
+                        currentPage = 1;
+                    }
+                    displayImages();
+                }, 5000); // Change 5000 to desired milliseconds for auto scroll interval
+            };
+
+            // Start auto scrolling
+            autoScrollPagination();
+
+            // Stop auto scrolling on hover
+            document.getElementById('successfulpagination').addEventListener('mouseenter', () => {
+                clearInterval(autoScrollInterval);
+            });
+
+            // Resume auto scrolling on mouse leave
+            document.getElementById('successfulpagination').addEventListener('mouseleave', () => {
+                autoScrollPagination();
+            });
         })
         .catch(error => console.error('Error fetching data:', error));
 });
