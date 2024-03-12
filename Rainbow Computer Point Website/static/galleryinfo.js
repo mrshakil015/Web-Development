@@ -1,25 +1,25 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const imagesPerPage = 4;
-    let currentPage = 1;
+    const galleryimagesPerPage = 4;
+    let gallerycurrentPage = 1;
 
     fetch('/galleryimagedata')
         .then(response => response.json())
         .then(data => {
             const galleryimagecardsContainer = document.getElementById('galleryimage-cards-container');
-            const totalImages = data.length;
-            const totalPages = Math.ceil(totalImages / imagesPerPage);
+            const gallerytotalImages = data.length;
+            const gallerytotalPages = Math.ceil(gallerytotalImages / galleryimagesPerPage);
 
             // Function to display images for the current page
-            const displayImages = () => {
+            const gallerydisplayImages = () => {
                 // Clear existing content
                 galleryimagecardsContainer.innerHTML = '';
 
                 // Calculate start and end index of images for the current page
-                const startIndex = (currentPage - 1) * imagesPerPage;
-                const endIndex = Math.min(startIndex + imagesPerPage, totalImages);
+                const gallerystartIndex = (gallerycurrentPage - 1) * galleryimagesPerPage;
+                const galleryendIndex = Math.min(gallerystartIndex + galleryimagesPerPage, gallerytotalImages);
 
                 // Loop through images for the current page and create image elements
-                for (let i = startIndex; i < endIndex; i++) {
+                for (let i = gallerystartIndex; i < galleryendIndex; i++) {
                     const galleryimage_details = data[i];
                     const galleryimagecard = document.createElement('div');
                     galleryimagecard.classList.add('col-lg-6');
@@ -32,20 +32,20 @@ document.addEventListener('DOMContentLoaded', function () {
                     galleryimagecardsContainer.appendChild(galleryimagecard);
                 }
 
-                // Update pagination links
-                updatePagination();
+                // Update gallerypagination links
+                updategallerypagination();
             };
 
-            // Function to update pagination links
-            const updatePagination = () => {
-                const paginationContainer = document.getElementById('pagination');
-                paginationContainer.innerHTML = '';
+            // Function to update gallerypagination links
+            const updategallerypagination = () => {
+                const gallerypaginationContainer = document.getElementById('gallerypagination');
+                gallerypaginationContainer.innerHTML = '';
 
                 // Add Previous button
-                if (currentPage > 1) {
-                    paginationContainer.innerHTML += `
+                if (gallerycurrentPage > 1) {
+                    gallerypaginationContainer.innerHTML += `
                         <li class="page-item">
-                            <button class="page-link" onclick="changePage(${currentPage - 1})" aria-label="Previous">
+                            <button class="page-link" onclick="gallerychangePage(${gallerycurrentPage - 1})" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                                 <span class="visually-hidden">Previous</span>
                             </button>
@@ -54,19 +54,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
                 // Add numbered pages
-                for (let i = 1; i <= totalPages; i++) {
-                    paginationContainer.innerHTML += `
-                        <li class="page-item${currentPage === i ? ' active' : ''}">
-                            <button class="page-link" onclick="changePage(${i})">${i}</button>
+                for (let i = 1; i <= gallerytotalPages; i++) {
+                    gallerypaginationContainer.innerHTML += `
+                        <li class="page-item${gallerycurrentPage === i ? ' active' : ''}">
+                            <button class="page-link" onclick="gallerychangePage(${i})">${i}</button>
                         </li>
                     `;
                 }
 
                 // Add Next button
-                if (currentPage < totalPages) {
-                    paginationContainer.innerHTML += `
+                if (gallerycurrentPage < gallerytotalPages) {
+                    gallerypaginationContainer.innerHTML += `
                         <li class="page-item">
-                            <button class="page-link" onclick="changePage(${currentPage + 1})" aria-label="Next">
+                            <button class="page-link" onclick="gallerychangePage(${gallerycurrentPage + 1})" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                                 <span class="visually-hidden">Next</span>
                             </button>
@@ -76,12 +76,12 @@ document.addEventListener('DOMContentLoaded', function () {
             };
 
             // Initial display
-            displayImages();
+            gallerydisplayImages();
 
-            // Function to handle pagination
-            window.changePage = (page) => {
-                currentPage = page;
-                displayImages();
+            // Function to handle gallerypagination
+            window.gallerychangePage = (page) => {
+                gallerycurrentPage = page;
+                gallerydisplayImages();
             };
         })
         .catch(error => console.error('Error fetching data:', error));
