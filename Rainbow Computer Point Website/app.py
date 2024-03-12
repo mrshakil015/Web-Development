@@ -86,6 +86,20 @@ def get_galleryimagedata():
 
     return jsonify(galleryimagedata)
 
+@app.route('/successfulstudentdata')
+def get_successfulstudentdata():
+    db = mysql.connector.connect(**db_config)
+    cursor = db.cursor(dictionary=True)
+
+    query = "SELECT * FROM successfulstudent_info"
+    cursor.execute(query)
+    successfulstudentdata = cursor.fetchall()
+
+    cursor.close()
+    db.close()
+
+    return jsonify(successfulstudentdata)
+
 @app.route('/')
 def index():
     return render_template("index.html")
