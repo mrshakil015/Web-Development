@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const imagesPerPage = 4;
+    const imagesPerPage = 1;
     let currentPage = 1;
 
     fetch('/successfulstudentdata')
@@ -24,10 +24,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     const successfulstudentcard = document.createElement('div');
                     successfulstudentcard.classList.add('col-lg-3');
                     successfulstudentcard.classList.add('col-md-6');
+                    console.log(successfulstudent_details.imagename);
                     successfulstudentcard.innerHTML = `
                     <div class="card card-item">
                     <div class="view view-cascade overlay text-center">
-                    <img src="../static/images/${successfulstudent_details.imagename}" class="card-img-top" alt="profile image">
+                    <img src="../static/images/successfulstudent/${successfulstudent_details.image_name}" class="card-img-top" alt="profile image">
                     </div>
                     <div class="card-body">
                       <h4 class="card-title"><strong>${successfulstudent_details.studentname}</strong>
@@ -40,18 +41,18 @@ document.addEventListener('DOMContentLoaded', function () {
                     successfulstudentcardsContainer.appendChild(successfulstudentcard);
                 }
 
-                // Update pagination links
-                updatePagination();
+                // Update successfulpagination links
+                updatesuccessfulpagination();
             };
 
-            // Function to update pagination links
-            const updatePagination = () => {
-                const paginationContainer = document.getElementById('pagination');
-                paginationContainer.innerHTML = '';
+            // Function to update successfulpagination links
+            const updatesuccessfulpagination = () => {
+                const successfulpaginationContainer = document.getElementById('successfulpagination');
+                successfulpaginationContainer.innerHTML = '';
 
                 // Add Previous button
                 if (currentPage > 1) {
-                    paginationContainer.innerHTML += `
+                    successfulpaginationContainer.innerHTML += `
                         <li class="page-item">
                             <button class="page-link" onclick="changePage(${currentPage - 1})" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
@@ -63,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Add numbered pages
                 for (let i = 1; i <= totalPages; i++) {
-                    paginationContainer.innerHTML += `
+                    successfulpaginationContainer.innerHTML += `
                         <li class="page-item${currentPage === i ? ' active' : ''}">
                             <button class="page-link" onclick="changePage(${i})">${i}</button>
                         </li>
@@ -72,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Add Next button
                 if (currentPage < totalPages) {
-                    paginationContainer.innerHTML += `
+                    successfulpaginationContainer.innerHTML += `
                         <li class="page-item">
                             <button class="page-link" onclick="changePage(${currentPage + 1})" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
@@ -86,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Initial display
             displayImages();
 
-            // Function to handle pagination
+            // Function to handle successfulpagination
             window.changePage = (page) => {
                 currentPage = page;
                 displayImages();

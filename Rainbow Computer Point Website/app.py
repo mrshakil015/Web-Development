@@ -362,8 +362,48 @@ def delete_service(service_id):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/adminsuccessfulstudent')
+@app.route('/adminsuccessfulstudent', methods=['POST', 'GET'])
 def adminsuccessfulstudent():
+    while True:
+        successfulstudentid = generateid()
+        
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor(dictionary=True)
+
+        query = "SELECT * FROM successfulstudent_info WHERE studentid = %s"
+        cursor.execute(query, (successfulstudentid,))
+        dataid = cursor.fetchone()
+        cursor.close()
+        db.close()
+
+        if not dataid:
+            break 
+    if request.method == 'POST':
+        successfulstudent_name = request.form['successfulstudentname']
+        print("Successful Student name: ", successfulstudent_name)
+        successfulstudent_designation = request.form['successfulstudentdesignation']
+        successfulstudent_institute = request.form['successfulstudentinstitute']
+        image_file = request.files['imagename']
+        image_name = image_file.filename
+
+        if image_file:
+            image_file.save('static/images/successfulstudent/' + image_name)
+
+        # data = {'successfulstudentid': successfulstudentid, 'successfulstudent_name': successfulstudent_name, 'month_duration': month_duration,
+        #         'weekly': weekly, 'duration_hour': duration_hour, 'duration_minute': duration_minute,
+        #         'amount': amount, 'image_name': image_name, 'aboutsuccessfulstudent': aboutsuccessfulstudent, 'successfulstudenttopic': successfulstudenttopic}
+        # print(data['successfulstudent_name'])
+
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        query = "INSERT INTO successfulstudent_info (studentid, studentname, studentdesignation,studentinstitute, image_name) VALUES(%s,%s,%s,%s,%s)"
+        values = (successfulstudentid, successfulstudent_name,successfulstudent_designation, successfulstudent_institute, image_name)
+        cursor.execute(query, values)
+        db.commit()
+        cursor.close()
+        db.close()
+        message = 'Successfully Added'
+        return render_template('adminsuccessfulstudent.html', message=message)
     return render_template('adminsuccessfulstudent.html')
 
 @app.route('/admin', methods=['POST', 'GET'])
