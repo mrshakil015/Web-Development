@@ -23,8 +23,12 @@
     <!-- # Main Style Sheet -->
     <!-- <link rel="stylesheet" href="../static/style.css"> -->
     <style>
+        body {
+            font-family: Anek Bangla;
+        }
+
         table {
-            font-family: arial, sans-serif;
+            font-family: Anek Bangla;
             border-collapse: collapse;
             width: 100%;
         }
@@ -147,7 +151,7 @@
                                                                 console.log("Table body: ", data);
                                                                 data.forEach(row => {
                                                                     const tr = document.createElement('tr');
-                                                                    console.log("TR value: ",tr);
+                                                                    console.log("TR value: ", tr);
                                                                     tr.innerHTML = `
                                                                         <td>${row.courseid}</td>
                                                                         <td>${row.course_name}</td>
@@ -545,8 +549,8 @@
     <!-- Sweet Alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.8.0/dist/sweetalert2.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"
-    integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
 </html>

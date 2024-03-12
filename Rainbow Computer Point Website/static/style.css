@@ -348,7 +348,7 @@ select,
 optgroup,
 textarea {
     margin: 0;
-    font-family: inherit;
+    font-family: Anek Bangla;
     font-size: inherit;
     line-height: inherit;
 }
@@ -5373,6 +5373,7 @@ fieldset:disabled .btn {
 .modal-title {
     margin-bottom: 0;
     line-height: 1.5;
+    font-family: Anek Bangla;
 }
 
 .modal-body {
@@ -10664,6 +10665,7 @@ a:hover {
     padding-top: 40px;
     padding-bottom: 40px;
     text-align: center;
+    font-family: Anek Bangla;
 }
 
 .section-sm {
@@ -10742,7 +10744,7 @@ a.text-black:hover {
 }
 
 .font-secondary {
-    font-family: sans-serif !important;
+    font-family: Anek Bangla !important;
 }
 
 .shadow {

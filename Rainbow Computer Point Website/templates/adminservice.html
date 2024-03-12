@@ -23,30 +23,33 @@
     <!-- # Main Style Sheet -->
     <!-- <link rel="stylesheet" href="../static/style.css"> -->
     <style>
+        body {
+            font-family: Anek Bangla;
+        }
 
         table {
-            font-family: arial, sans-serif;
+            font-family: Anek Bangla;
             border-collapse: collapse;
             width: 100%;
         }
-    
+
         td,
         th {
             border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-        word-wrap: break-word; 
+            text-align: left;
+            padding: 8px;
+            word-wrap: break-word;
         }
-    
+
         tr:nth-child(even) {
             background-color: #e7e9eb;
         }
-    
+
         tbody {
             font-weight: normal;
         }
     </style>
-    
+
 </head>
 
 <body>
@@ -134,7 +137,7 @@
                                                             <th>সিরিয়াল</th>
                                                             <th>সেবার নাম</th>
                                                             <th>বিস্তারিত</th>
-                                                            
+
                                                         </tr>
                                                     </thead>
                                                     <tbody id="service-table-body">
@@ -243,7 +246,8 @@
     </section>
 
     <!--==========Add service Model==================-->
-    <div class="modal fade" id="addserviceModal" tabindex="-1" aria-labelledby="addserviceModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addserviceModal" tabindex="-1" aria-labelledby="addserviceModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -274,7 +278,7 @@
 
 
                             </div>
-  
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -315,27 +319,29 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="update_serviceid">সিরিয়ল *</label>
-                                        <input id="update_serviceid" type="text" name="update_serviceid" class="form-control"
-                                            placeholder="Service Serial No *" required="required" readonly>
+                                        <input id="update_serviceid" type="text" name="update_serviceid"
+                                            class="form-control" placeholder="Service Serial No *" required="required"
+                                            readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="update_servicename">সেবার নাম *</label>
-                                        <input id="update_servicename" type="text" name="update_servicename" class="form-control"
-                                            placeholder="Service Name *" required="required">
+                                        <input id="update_servicename" type="text" name="update_servicename"
+                                            class="form-control" placeholder="Service Name *" required="required">
                                     </div>
                                 </div>
 
 
                             </div>
-  
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="update_aboutservice">সেবা সম্পর্কে *</label>
-                                        <textarea id="update_aboutservice" type="text" name="update_aboutservice" class="form-control"
-                                            placeholder="About service*" required="required"></textarea>
+                                        <textarea id="update_aboutservice" type="text" name="update_aboutservice"
+                                            class="form-control" placeholder="About service*"
+                                            required="required"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -381,8 +387,8 @@
     <!-- Sweet Alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.8.0/dist/sweetalert2.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"
-    integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
 </html>
