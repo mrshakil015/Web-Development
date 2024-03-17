@@ -44,6 +44,28 @@ def get_coursedata():
 
     return jsonify(coursedata)
 
+def get_course_info_from_database(courseid):
+    db = mysql.connector.connect(**db_config)
+    cursor = db.cursor(dictionary=True)
+
+    query = "SELECT * FROM course_info WHERE courseid = %s"
+    cursor.execute(query, (courseid,))
+    course_info = cursor.fetchone()
+
+    cursor.close()
+    db.close()
+
+    return course_info
+
+@app.route('/courseinfo/<int:courseid>')
+def show_courseinfo(courseid):
+    # Assuming you have a function to fetch course info based on courseid from the database
+    course_info = get_course_info_from_database(courseid)
+    print("Course info type: ", type(course_info))
+    # Render a template to display course info
+    return render_template('coursedetails.html', course_info=course_info)
+
+
 @app.route('/service_infodata')
 def service_infodata():
     db = mysql.connector.connect(**db_config)

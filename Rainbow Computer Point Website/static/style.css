@@ -12189,13 +12189,15 @@ textarea.form-control {
 .course-section .card-info button{
     font-size: 12px;
 }
-.course-section .card-header{
+.course-section .card-header,
+.course-info .card-header{
     margin: 0;
     padding: 0;
 }
 
-.course-section .card-header img{
-    border-radius: 18px;
+.course-section .card-header img,
+.course-info .card-header img{
+    border-radius: 18px  0;
 }
 
 .page {

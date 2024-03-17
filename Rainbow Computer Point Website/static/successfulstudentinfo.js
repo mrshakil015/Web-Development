@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const successfulstudentcard = document.createElement('div');
                     successfulstudentcard.classList.add('col-lg-3');
                     successfulstudentcard.classList.add('col-md-6');
-                    console.log(successfulstudent_details.imagename);
+                    console.log(successfulstudent_details.image_name);
                     successfulstudentcard.innerHTML = `
                     <div class="card card-item">
                     <div class="view view-cascade overlay text-center">
