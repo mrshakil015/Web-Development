@@ -209,7 +209,20 @@ def applicationform():
         return render_template("applicationform.html", message = message)
     
     return render_template("applicationform.html")
-    
+
+@app.route('/pendingstudent')
+def pendingstudent():
+    db = mysql.connector.connect(**db_config)
+    cursor = db.cursor(dictionary=True)
+
+    query = "SELECT * FROM pending_studentinfo"
+    cursor.execute(query)
+    data = cursor.fetchall()
+
+    cursor.close()
+    db.close()
+
+    return render_template("pendingstudent.html", data=data)
 
 def generateid():
     randomid = random.randint(100,10000)
