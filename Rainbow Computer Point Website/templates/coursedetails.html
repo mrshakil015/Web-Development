@@ -113,10 +113,10 @@
                         <hr>
                     </div>
                     <div class="text-center text-lg-start pe-0 pe-xl-5">
-                        <p class="text-justify mb-4">{{course_info.aboutcourse}}</p>
+                        <p class="text-justify about-course mb-4">{{course_info.aboutcourse}}</p>
                         <h3><strong>কোর্সটি করে যা শিখবেন</strong></h3>
                         <hr>
-                        <p class="text-justify mb-4" id="courseInfo">{{ course_info.coursetopic }}</p>
+                        <p class="text-justify course-topics mb-4" id="courseInfo">{{ course_info.coursetopic }}</p>
 
                         <script>
                             const paragraph = document.getElementById('courseInfo');
@@ -151,8 +151,13 @@
                                 <button class="btn btn-outline-primary">দৈনিক {{course_info.duration_hour}} ঘন্টা
                                     {{course_info.duration_minute}} মিনিট</button>
                                 <p class="price">৳ {{course_info.amount}}/-</p>
+                                <div class="course-footer">
+                                    <a href="{{ url_for('applicationform') }}"><button class="btn btn-outline-primary">নিবন্ধন করুন</button></a>
+                                </div>
                             </div>
+                            
                         </div>
+                       
                     </div>
                 </div>
             </div>

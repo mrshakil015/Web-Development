@@ -12199,6 +12199,11 @@ textarea.form-control {
 .course-info .card-header img{
     border-radius: 18px  0;
 }
+.course-info .course-topics, .course-info .about-course {
+    padding: 10px;
+    border: 1px solid #dddddd;
+    border-radius: 20px;
+}
 
 .page {
     /* background-color: #dfe6e0; */
