@@ -557,8 +557,33 @@
 }
 
 
+.text-primary {
+    color: #4a45cf !important;
+}
 
+.btn-outline-primary {
+    color: #4a45cf;
+    border: 1px solid#4a45cf;
+}
+.btn-outline-primary:hover {
+    background-color: #4a45cf;
+    color: #fff;
+    border: 1px solid#4a45cf;
+}
+.btn-primary{
+    background-color: #4a45cf;
+    color: #fff;
+    border: 1px solid#4a45cf;
+}
+.page-item.active .page-link {
+    background-color: #4a45cf;
+    color: #fff;
+    border: 1px solid#4a45cf;
+}
 
+.page-link{
+    color: #4a45cf;
+}
 .admindashboard-card .card {
     position: relative;
     display: -webkit-box;

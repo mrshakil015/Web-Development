@@ -40,6 +40,9 @@
             padding: 8px;
             word-wrap: break-word;
         }
+        th {
+            color: #4a45cf;
+        }
 
         tr:nth-child(even) {
             background-color: #e7e9eb;
@@ -117,7 +120,7 @@
                     <div class="card shadow">
                         <div class="card-header">
                             <div class="row justify-content-between ml-3 mr-3">
-                                <h5 class="text-secondary"><strong>সেবাসমূহ<strong></h5>
+                                <h5 class="text-primary"><strong>সেবাসমূহ<strong></h5>
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
                                     data-target="#addserviceModal">
                                     +সেবা যুক্ত করুন
@@ -152,7 +155,7 @@
                                                                     tr.innerHTML = `
                                                                     <td class="text-end">
                                                                             <div class="dropdown">
-                                                                                <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                                     Action
                                                                                 </button>
                                                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
