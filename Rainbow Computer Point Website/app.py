@@ -1,6 +1,8 @@
 from flask import Flask, render_template, redirect, request, url_for, jsonify
 import mysql.connector
 import random
+import os
+import shutil
 
 app = Flask(__name__)
 
@@ -258,25 +260,49 @@ def get_pendingstudent(student_id):
 @app.route('/update_pendingstudent', methods=['POST'])
 def update_pendingstudent():
     if request.method == 'POST':
-        pendingstudentid = request.form['update_pendingstudentid']
-        pendingstudentname = request.form['update_pendingstudentname']
-        aboutpendingstudent = request.form['update_aboutpendingstudent']
+        idno = request.form['update_pendingstudentid']
+        photoname = request.form['update_pendingstudentphoto']
+    
+        rollno = request.form['update_pendingstudentrollno']
+        coursename = request.form['update_pendingstudentcoursename']
+        batch = request.form['update_pendingstudentbatch']
+        section = request.form['update_pendingstudentsection']
+        studentname=request.form['update_pendingstudentname']
+        fathername = request.form['update_pendingstudentfathername']
+        mothername = request.form['update_pendingstudentmothername']
+        gender = request.form['update_pendingstudentgender']
+        dob = request.form['update_pendingstudentdob']
+        address = request.form['update_pendingstudentaddress']
+        email = request.form['update_pendingstudentemail']
+        mobile = request.form['update_pendingstudentmobile']
+        password = mobile
+
+        studentphoto = f"{rollno}_{photoname}"
+        source_path = 'static/images/pending_student/' + photoname
+        destination_path = 'static/images/students/' + studentphoto
+
+        if os.path.exists(source_path):
+            shutil.copyfile(source_path, destination_path)
 
         db = mysql.connector.connect(**db_config)
         cursor = db.cursor()
-        query = "UPDATE pendingstudent_info SET pendingstudentname = %s, aboutpendingstudent = %s WHERE pendingstudentid = %s"
-        values = (pendingstudentname, aboutpendingstudent, pendingstudentid)
-        cursor.execute(query, values)
+        insert_query = "INSERT INTO studentinfo (RollNo, CourseName, Batch, Section, StudentName, FatherName, MotherName, Gender, Dob, Address, Email, Mobile, StudentPhoto, Password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        cursor.execute(insert_query, (rollno, coursename, batch, section, studentname, fathername, mothername, gender, dob, address, email, mobile, photoname, password))
         db.commit()
+
+        delete_query = "DELETE FROM pending_studentinfo WHERE studentid = %s"
+        cursor.execute(delete_query, (idno,))
+        db.commit()
+
         cursor.close()
         db.close()
 
-        if cursor.rowcount > 0:
-            message = 'pendingstudent updated successfully'
-        else:
-            message = 'No changes made to the pendingstudent'
+        # if cursor.rowcount > 0:
+        #     message = 'pendingstudent updated successfully'
+        # else:
+        #     message = 'No changes made to the pendingstudent'
 
-        return redirect('/pendeingstudent')
+        return redirect('/pendingstudent ')
 
 @app.route('/delete_pendingstudent/<int:pendingstudent_id>', methods=['DELETE'])
 def delete_pendingstudent(pendingstudent_id):
