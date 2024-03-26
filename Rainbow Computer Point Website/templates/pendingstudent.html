@@ -54,7 +54,6 @@
             width: 100%;
             table-layout: auto;
         }
-
         #pendingstudent_filter {
             float: right;
         }
@@ -67,6 +66,7 @@
             display: inline-flex;
             margin-bottom: .5rem;
             margin-top: .5rem;
+            font-weight: normal;
 
         }
     </style>
@@ -190,8 +190,8 @@
                                                                             .then(pendingstudent => {
                                                                                 console.log("Pending: ", pendingstudent);
                                                                                 // Populate the modal input fields with pendingstudent data
-                                                                                document.getElementById('update_pendingstudentid').value = pendingstudent.studentid;
-                                                                                console.log(pendingstudent.studentid);
+                                                                                document.getElementById('update_pendingstudentid').value  = pendingstudent.studentid;
+                                                                                // console.log(pendingstudent.studentid);
                                                                                 document.getElementById('update_pendingstudentcoursename').value = pendingstudent.coursename;
                                                                                 document.getElementById('update_pendingstudentname').value = pendingstudent.studentname;
                                                                                 
@@ -203,9 +203,6 @@
                                                                                 document.getElementById('update_pendingstudentdob').value = pendingstudent.dob;
                                                                                 document.getElementById('update_pendingstudentaddress').value = pendingstudent.address;
                                                                                 document.getElementById('update_pendingstudentphoto').value = pendingstudent.studentphoto;
-                                                                               
-                                                                                
-
                                                                                 // document.getElementById('test_id').value = pendingstudent.email;
                                                                                 
                                                                
@@ -295,13 +292,14 @@
                                 method="post" enctype="multipart/form-data">
                                 <div class="controls">
                                     <div class="row">
+                                        <input type="hidden" id="update_pendingstudentid" name="update_pendingstudentid">
+                                        <input type="hidden" id="update_pendingstudentphoto" name="update_pendingstudentphoto">
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label for="update_pendingstudentid">রোল নং *</label>
-                                                <input id="update_pendingstudentid" type="text"
-                                                    name="update_pendingstudentid" class="form-control"
-                                                    placeholder="pendingstudent Serial No *" required="required"
-                                                    readonly>
+                                                <label for="update_pendingstudentrollno">রোল নং *</label>
+                                                <input type="text"
+                                                    name="update_pendingstudentrollno" class="form-control"
+                                                    placeholder="Student Roll No" required="required">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12">
@@ -322,10 +320,40 @@
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
+                                                <label for="update_pendingstudentgender">ব্যাচ *</label>
+                                                <select name="update_pendingstudentbatch" class="form-control"
+                                                required="required" data-error="Select the Batch">
+                                                <option value="" selected disabled>--Select Batch--</option>
+                                                <option>10:00 AM</option>
+                                                <option>11:30 AM</option>
+                                                <option>03:00 PM</option>
+                                                <option>04:30 PM</option>
+                                                <option>06:00 PM</option>
+                                                <option>08:00 PM</option>
+                                                <option>Other</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="update_pendingstudentgender">সেকশন *</label>
+                                                <select name="update_pendingstudentsection" class="form-control"
+                                                required="required" data-error="Select the Section">
+                                                <option value="" selected disabled>--Select Section--</option>
+                                                <option>A</option>
+                                                <option>B</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
                                                 <label for="update_pendingstudentname">শিক্ষার্থীর নাম *</label>
                                                 <input id="update_pendingstudentname" type="text"
                                                     name="update_pendingstudentname" class="form-control"
-                                                    placeholder="pendingstudent Name *" required="required">
+                                                    placeholder="Student Name" required="required">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12">
@@ -333,7 +361,7 @@
                                                 <label for="update_pendingstudentfathername">পিতার নাম *</label>
                                                 <input id="update_pendingstudentfathername" type="text"
                                                     name="update_pendingstudentfathername" class="form-control"
-                                                    placeholder="Father Name *" required="required">
+                                                    placeholder="Father Name" required="required">
                                             </div>
                                         </div>
                                     </div>
@@ -343,14 +371,14 @@
                                                 <label for="update_pendingstudentmothername">মাতার নাম *</label>
                                                 <input id="update_pendingstudentmothername" type="text"
                                                     name="update_pendingstudentmothername" class="form-control"
-                                                    placeholder="Mother Name *" required="required">
+                                                    placeholder="Mother Name" required="required">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label for="update_pendingstudentgender">লিঙ্গ *</label>
                                                 <select id="update_pendingstudentgender" name="update_pendingstudentgender" class="form-control"
-                                                required="required" data-error="Select the Gender.">
+                                                required="required" data-error="Select the Gender">
                                                 <option value="" selected disabled>--Select Gender--</option>
                                                 <option>Male</option>
                                                 <option>Female</option>
@@ -363,7 +391,7 @@
                                             <div class="form-group">
                                                 <label for="update_pendingstudentdob">জন্ম তারিখ *</label>
                                                 <input id="update_pendingstudentdob" type="text" name="update_pendingstudentdob"
-                                                    class="form-control" placeholder="Address *" required="required">
+                                                    class="form-control" placeholder="Address" required="required">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-12 col-sm-12">
@@ -378,30 +406,29 @@
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label for="updatependingstudentemail">ইমেল *</label>
-                                                <input id="update_pendingstudentemail" type="text" name="updatependingstudentemail"
-                                                    class="form-control" placeholder="Email Address *" required="required">
+                                                <label for="update_pendingstudentemail">ইমেইল *</label>
+                                                <input id="update_pendingstudentemail" type="text" name="update_pendingstudentemail"
+                                                    class="form-control" placeholder="Email Address" required="required">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label for="update_pendingstudentmobile">মোবইল *</label>
+                                                <label for="update_pendingstudentmobile">মোবাইল *</label>
                                                 <input id="update_pendingstudentmobile" type="text" name="update_pendingstudentmobile"
-                                                    class="form-control" placeholder="Mobile No *" required="required">
+                                                    class="form-control" placeholder="Mobile No" required="required">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <!-- <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <label for="photo" class="form-label">ফটোগ্রাফ/ছবি (সর্বোচ্চ ২ MB, ৫০০ x ৫০০
-                                                    Pixels)
-                                                    *</label>
+                                                <label for="photo" class="form-label">ছবি (সর্বোচ্চ ২ MB, ৫০০ x ৫০০
+                                                    Pixels)</label>
                                                 <input class="form-control" type="file"  id="update_pendingstudentphoto"
-                                                    name="photo" required="required">
+                                                    name="photo">
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-success"
