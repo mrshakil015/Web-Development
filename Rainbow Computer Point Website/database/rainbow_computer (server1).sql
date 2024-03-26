@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 26, 2024 at 07:47 AM
+-- Generation Time: Mar 13, 2024 at 05:42 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -39,14 +39,16 @@ CREATE TABLE `course_info` (
   `image_name` varchar(200) NOT NULL,
   `aboutcourse` text NOT NULL,
   `coursetopic` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 --
 -- Dumping data for table `course_info`
 --
 
 INSERT INTO `course_info` (`id`, `courseid`, `course_name`, `month_duration`, `weekly`, `duration_hour`, `duration_minute`, `amount`, `image_name`, `aboutcourse`, `coursetopic`) VALUES
-(5, '103', 'Office Application Program', '৩', '৩/৫', '১', '৩০', '৩৮০০', 'msoffice.png', 'ব্যক্তিগত কাজ, একাডেমিক কিংবা ক্যারিয়ার -যেকোনো ক্ষেত্রে এগিয়ে থাকতে হলে যে বিষয়টি সম্পর্কে আপনাকে জানতেই হবে সেটি হলো মাইক্রোসফট অফিস। বিশ্বে ১২০ কোটি মাইক্রোসফট অফিস ইউজার রয়েছে। আর এই মাইক্রোসফট অফিসের সবচেয়ে গুরুত্বপূর্ণ ৩টি সফটওয়্যার - MS Word, MS Excel ও MS PowerPoint. বই, চিঠিপত্র, রিজিউমি, অ্যাপ্লিকেশন, বা অন্য ডকুমেন্টেশনের কাজ লেখার জন্য মাইক্রোসফট ওয়ার্ড ব্যবহৃত হয়। অন্যদিকে', 'MS Word-এ অ্যাসাইনমেন্ট, সিভি, রিপোর্ট, এবং যেকোনো ডকুমেন্ট প্রফেশনালি ফরম্যাট ও উপস্থাপন করা। MS Word-এর বিভিন্ন ফিচার ও টুলসের ব্যবহার, যেমন: হেডিং, সাব-হেডিং, টেবিল, স্মার্ট আর্ট, টেবিল অফ কন্টেন্ট, ফাইন্ড এন্ড রিপ্লেস, হেডার ও ফুটার, ইত্যাদি। Microsoft Excel -এর বেসিক থেকে অ্যাডভান্স ফাংশন, ফর্মুলা, টিপস্, ও ট্রিকস শিখে দ্রুত জটিল কাজ। MS Excel -এর সাহায্যে ডাটা ম্যানেজমেন্ট, ভিজ্যুয়ালাইজেশন ও এনালাইজ করা। MS PowerPoint -এ ভিডিও প্রেজেন্টেশন, সাউন্ড যোগ করা ও এনিমেশন তৈরি এবং আকর্ষণীয় স্লাইড তৈরি করা। দ্রুত গতিতে বাংলা ও ইংরেজী টাইপ করার কোৗশল। Internet Browsing, Download, E-mail সম্পর্কে ধারণা। বিভিন্ন স্কুল, কলেজ ও বিশ্ববিদ্যালয় ভর্তি এবং চাকরির আবেদন করার নিয়ম। হার্ডওয়্যার এ্যাসেম্বেলিং, Print, Scan, বিষয়ে ধারণা। Windows Setup, Hard Disk Partition এবং Software Install-Uninstall করা।'),
+(3, '102', 'Digital Marketing', '১', '৩', '১', '৩০', '৫০০০', 'digitalmarketing.jpg', 'ব্যক্তিগত কাজ, একাডেমিক কিংবা ক্যারিয়ার -যেকোনো ক্ষেত্রে এগিয়ে থাকতে হলে যে বিষয়টি সম্পর্কে আপনাকে জানতেই হবে সেটি হলো মাইক্রোসফট অফিস। বিশ্বে ১২০ কোটি মাইক্রোসফট অফিস ইউজার রয়েছে। আর এই মাইক্রোসফট অফিসের সবচেয়ে গুরুত্বপূর্ণ ৩টি সফটওয়্যার - MS Word, MS Excel ও MS PowerPoint. বই, চিঠিপত্র, রিজিউমি, অ্যাপ্লিকেশন, বা অন্য ডকুমেন্টেশনের কাজ লেখার জন্য মাইক্রোসফট ওয়ার্ড ব্যবহৃত হয়। অন্যদিকে', 'মাইক্রোসফট অফিস সফটওয়্যারের ১০টিরও বেশি প্রজেক্ট ও এপ্লিকেশন\r\n\r\nMS Word-এ নিউজ ডকুমেন্টস, বিজনেস কার্ড, লেটার হেড ও 3D মডেল '),
+(5, '103', 'Office Application Program', '৩', '৩/৫', '১', '৩০', '৩৮০০', 'msoffice.png', 'ব্যক্তিগত কাজ, একাডেমিক কিংবা ক্যারিয়ার -যেকোনো ক্ষেত্রে এগিয়ে থাকতে হলে যে বিষয়টি সম্পর্কে আপনাকে জানতেই হবে সেটি হলো মাইক্রোসফট অফিস। বিশ্বে ১২০ কোটি মাইক্রোসফট অফিস ইউজার রয়েছে। আর এই মাইক্রোসফট অফিসের সবচেয়ে গুরুত্বপূর্ণ ৩টি সফটওয়্যার - MS Word, MS Excel ও MS PowerPoint. বই, চিঠিপত্র, রিজিউমি, অ্যাপ্লিকেশন, বা অন্য ডকুমেন্টেশনের কাজ লেখার জন্য মাইক্রোসফট ওয়ার্ড ব্যবহৃত হয়। অন্যদিকে', 'মাইক্রোসফট অফিস সফটওয়্যারের ১০টিরও বেশি প্রজেক্ট ও এপ্লিকেশন\r\n\r\nMS Word-এ নিউজ ডকুমেন্টস, বিজনেস কার্ড, লেটার হেড ও 3D মডেল তৈরি'),
 (9, '107', 'Graphic Designing', '৩', '৩', '১', '৩০', '৮০০০', 'graphic.jpg', 'প্রতিদিনের ব্যক্তিগত কিংবা অফিসিয়াল কাজে সবচেয়ে বেশি ব্যবহৃত সফটওয়্যারগুলোর মধ্যে Adobe Illustrator অন্যতম। আপনি যদি ডিজাইন সেক্টরে ক্যারিয়ার গড়তে চান তাহলে এডোবি ইলাস্ট্রেটরে অবশ্যই দক্ষতা অর্জন করতে হবে। Adobe Illustrator এ ', 'Color & Gradient color apply\r\n\r\nTransforming');
 
 -- --------------------------------------------------------
@@ -59,7 +61,7 @@ CREATE TABLE `galleryimage_info` (
   `id` int NOT NULL,
   `imageid` int NOT NULL,
   `imagename` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `galleryimage_info`
@@ -90,7 +92,7 @@ CREATE TABLE `pending_studentinfo` (
   `mobile` varchar(20) NOT NULL,
   `address` varchar(100) NOT NULL,
   `studentphoto` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `pending_studentinfo`
@@ -115,7 +117,7 @@ CREATE TABLE `service_info` (
   `serviceid` varchar(50) NOT NULL,
   `servicename` varchar(100) NOT NULL,
   `aboutservice` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `service_info`
@@ -144,7 +146,7 @@ CREATE TABLE `successfulstudent_info` (
   `studentdesignation` varchar(50) NOT NULL,
   `studentinstitute` varchar(100) NOT NULL,
   `image_name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `successfulstudent_info`
