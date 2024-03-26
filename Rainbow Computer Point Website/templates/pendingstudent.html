@@ -188,21 +188,27 @@
                                                                         fetch(`/get_pendingstudent/${pendingstudentId}`)
                                                                             .then(response => response.json())
                                                                             .then(pendingstudent => {
+                                                                                console.log("Pending: ", pendingstudent);
                                                                                 // Populate the modal input fields with pendingstudent data
                                                                                 document.getElementById('update_pendingstudentid').value = pendingstudent.studentid;
                                                                                 console.log(pendingstudent.studentid);
                                                                                 document.getElementById('update_pendingstudentcoursename').value = pendingstudent.coursename;
                                                                                 document.getElementById('update_pendingstudentname').value = pendingstudent.studentname;
-                                                                                console.log(pendingstudent.studentname);
+                                                                                
                                                                                 document.getElementById('update_pendingstudentfathername').value = pendingstudent.fathername;
                                                                                 document.getElementById('update_pendingstudentmothername').value = pendingstudent.mothername;
-                                                                                document.getElementById('update_pendingstudentaddress').value = pendingstudent.address;
-                                                                                document.getElementById('update_pendingstudentdob').value = pendingstudent.dob;
-                                                                                document.getElementById('update_pendingstudentphoto').value = pendingstudent.studentphoto;
-                                                                                document.getElementById('update_pendingstudentgender').value = pendingstudent.gender;
                                                                                 document.getElementById('update_pendingstudentemail').value = pendingstudent.email;
                                                                                 document.getElementById('update_pendingstudentmobile').value = pendingstudent.mobile;
+                                                                                document.getElementById('update_pendingstudentgender').value = pendingstudent.gender;
+                                                                                document.getElementById('update_pendingstudentdob').value = pendingstudent.dob;
+                                                                                document.getElementById('update_pendingstudentaddress').value = pendingstudent.address;
+                                                                                document.getElementById('update_pendingstudentphoto').value = pendingstudent.studentphoto;
+                                                                               
+                                                                                
 
+                                                                                // document.getElementById('test_id').value = pendingstudent.email;
+                                                                                
+                                                               
                                                                                 // Show the update modal
                                                                                 $('#updatependingstudentModal').modal('show');
                                                                             })
@@ -273,160 +279,164 @@
 
             </div>
 
-                <!-- Update pendingstudent -->
-    <div class="modal fade" id="updatependingstudentModal" tabindex="-1" aria-labelledby="updatependingstudentModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="updatependingstudentModalLabel">Update Applied Student</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="update-pendingstudent-form" role="form" action="/update_pendingstudent" method="post"
-                    enctype="multipart/form-data">
-                    <div class="controls">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="update_pendingstudentid">রোল নং *</label>
-                                    <input id="update_pendingstudentid" type="text" name="update_pendingstudentid"
-                                        class="form-control" placeholder="pendingstudent Serial No *" required="required"
-                                        readonly>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="coursename">কোর্স সিলেক্ট করুন *</label>
-                                    <select id="update_pendingstudentcoursename" name="update_pendingstudentcoursename" class="form-control"
-                                        required="required" data-error="Select the Course.">
-                                        <option value="" selected disabled>--Select Course--</option>
-                                        <option>Office Application Program</option>
-                                        <option>Graphic Designing</option>
-                                        <option>Digital Marketing</option>
-                                    </select>
-                                </div>
-                            </div>
+            <!-- Update pendingstudent -->
+            <div class="modal fade" id="updatependingstudentModal" tabindex="-1"
+                aria-labelledby="updatependingstudentModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="updatependingstudentModalLabel">Update Applied Student</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
+                        <div class="modal-body">
+                            <form id="update-pendingstudent-form" role="form" action="/update_pendingstudent"
+                                method="post" enctype="multipart/form-data">
+                                <div class="controls">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="update_pendingstudentid">রোল নং *</label>
+                                                <input id="update_pendingstudentid" type="text"
+                                                    name="update_pendingstudentid" class="form-control"
+                                                    placeholder="pendingstudent Serial No *" required="required"
+                                                    readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="coursename">কোর্স সিলেক্ট করুন *</label>
+                                                <select id="update_pendingstudentcoursename"
+                                                    name="update_pendingstudentcoursename" class="form-control"
+                                                    required="required" data-error="Select the Course.">
+                                                    <option value="" selected disabled>--Select Course--</option>
+                                                    <option>Office Application Program</option>
+                                                    <option>Graphic Designing</option>
+                                                    <option>Digital Marketing</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="update_pendingstudentname">শিক্ষার্থীর নাম *</label>
-                                    <input id="update_pendingstudentname" type="text" name="update_pendingstudentname"
-                                        class="form-control" placeholder="pendingstudent Name *" required="required">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="update_pendingstudentname">শিক্ষার্থীর নাম *</label>
+                                                <input id="update_pendingstudentname" type="text"
+                                                    name="update_pendingstudentname" class="form-control"
+                                                    placeholder="pendingstudent Name *" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="update_pendingstudentfathername">পিতার নাম *</label>
+                                                <input id="update_pendingstudentfathername" type="text"
+                                                    name="update_pendingstudentfathername" class="form-control"
+                                                    placeholder="Father Name *" required="required">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="update_pendingstudentmothername">মাতার নাম *</label>
+                                                <input id="update_pendingstudentmothername" type="text"
+                                                    name="update_pendingstudentmothername" class="form-control"
+                                                    placeholder="Mother Name *" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="update_pendingstudentgender">লিঙ্গ *</label>
+                                                <select id="update_pendingstudentgender" name="update_pendingstudentgender" class="form-control"
+                                                required="required" data-error="Select the Gender.">
+                                                <option value="" selected disabled>--Select Gender--</option>
+                                                <option>Male</option>
+                                                <option>Female</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="update_pendingstudentdob">জন্ম তারিখ *</label>
+                                                <input id="update_pendingstudentdob" type="text" name="update_pendingstudentdob"
+                                                    class="form-control" placeholder="Address *" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="update_pendingstudentaddress">ঠিকানা *</label>
+                                                <input id="update_pendingstudentaddress" type="text" name="update_pendingstudentaddress"
+                                                    class="form-control" placeholder="Address *" required="required">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="updatependingstudentemail">ইমেল *</label>
+                                                <input id="update_pendingstudentemail" type="text" name="updatependingstudentemail"
+                                                    class="form-control" placeholder="Email Address *" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="update_pendingstudentmobile">মোবইল *</label>
+                                                <input id="update_pendingstudentmobile" type="text" name="update_pendingstudentmobile"
+                                                    class="form-control" placeholder="Mobile No *" required="required">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="photo" class="form-label">ফটোগ্রাফ/ছবি (সর্বোচ্চ ২ MB, ৫০০ x ৫০০
+                                                    Pixels)
+                                                    *</label>
+                                                <input class="form-control" type="file"  id="update_pendingstudentphoto"
+                                                    name="photo" required="required">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="update_pendingstudentfathername">পিতার নাম *</label>
-                                    <input id="update_pendingstudentfathername" type="text" name="update_pendingstudentfathername"
-                                        class="form-control" placeholder="Father Name *" required="required">
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-success"
+                                        id="update-pendingstudent-button">Update</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="update_pendingstudentmothername">মাতার নাম *</label>
-                                    <input id="update_pendingstudentmothername" type="text" name="update_pendingstudentmothername"
-                                        class="form-control" placeholder="Mother Name *" required="required">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="photo" class="form-label">ফটোগ্রাফ/ছবি (সর্বোচ্চ ২ MB, ৫০০ x ৫০০
-                                        Pixels)
-                                        *</label>
-                                    <input class="form-control" type="file" accept="image/*" id="update_pendingstudentphoto"
-                                        name="photo" required="required">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="update_pendingstudentdob">জন্ম তারিখ *</label>
-                                    <input id="update_pendingstudentdob" type="text" name="update_pendingstudentdob"
-                                        class="form-control" placeholder="Date of Birth *" required="required">
-                                </div>
-                            </div>
-
-
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="update_pendingstudentgender">লিঙ্গ *</label>
-                                    <select id="update_pendingstudentgender" name="update_pendingstudentgender" class="form-control"
-                                    required="required" data-error="Select the Gender.">
-                                    <option value="" selected disabled>--Select Gender--</option>
-                                    <option>Male</option>
-                                    <option>Female</option>
-                                </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="update_pendingstudentemail">ইমেল *</label>
-                                    <input id="update_pendingstudentemail" type="text" name="update_pendingstudentemail"
-                                        class="form-control" placeholder="Email Address *" required="required">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="update_pendingstudentmobile">মোবইল *</label>
-                                    <input id="update_pendingstudentmobile" type="text" name="update_pendingstudentmobile"
-                                        class="form-control" placeholder="Mobile No *" required="required">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-group">
-                                    <label for="update_pendingstudentaddress">ঠিকানা *</label>
-                                    <input id="update_pendingstudentaddress" type="text" name="update_pendingstudentaddress"
-                                        class="form-control" placeholder="Address *" required="required">
-                                </div>
-                            </div>
-                            </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" id="update-pendingstudent-button">Update</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+
+            <!-- Delete Confirmation Modal -->
+            <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog"
+                aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirm Deletion</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete this Student?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-danger"
+                                id="confirmpendingstudentDeleteButton">Delete</button>
+                        </div>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Delete Confirmation Modal -->
-<div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog"
-    aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirm Deletion</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete this Student?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" id="confirmpendingstudentDeleteButton">Delete</button>
-            </div>
-        </div>
-    </div>
-</div>
     </section>
     <script>
         $(document).ready(function () {
