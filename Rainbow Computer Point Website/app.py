@@ -224,6 +224,74 @@ def pendingstudent():
 
     return render_template("pendingstudent.html", data=data)
 
+@app.route('/pendingstudent_infodata')
+def pendingstudent_infodata():
+    db = mysql.connector.connect(**db_config)
+    cursor = db.cursor(dictionary=True)
+
+    query = "SELECT * FROM pending_studentinfo"
+    cursor.execute(query)
+    pendingstudent_data = cursor.fetchall()
+
+    cursor.close()
+    db.close()
+
+    return jsonify(pendingstudent_data)
+
+@app.route('/get_pendingstudent/<int:student_id>')
+def get_pendingstudent(student_id):
+    db = mysql.connector.connect(**db_config)
+    cursor = db.cursor(dictionary=True)
+
+    query = "SELECT * FROM pending_studentinfo WHERE studentid = %s"
+    cursor.execute(query, (student_id,))
+    pendingstudent_data = cursor.fetchone()
+
+    cursor.close()
+    db.close()
+
+    if pendingstudent_data:
+        return jsonify(pendingstudent_data)
+    else:
+        return jsonify({'error': 'pendingstudent not found'}), 404
+
+@app.route('/update_pendingstudent', methods=['POST'])
+def update_pendingstudent():
+    if request.method == 'POST':
+        pendingstudentid = request.form['update_pendingstudentid']
+        pendingstudentname = request.form['update_pendingstudentname']
+        aboutpendingstudent = request.form['update_aboutpendingstudent']
+
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        query = "UPDATE pendingstudent_info SET pendingstudentname = %s, aboutpendingstudent = %s WHERE pendingstudentid = %s"
+        values = (pendingstudentname, aboutpendingstudent, pendingstudentid)
+        cursor.execute(query, values)
+        db.commit()
+        cursor.close()
+        db.close()
+
+        if cursor.rowcount > 0:
+            message = 'pendingstudent updated successfully'
+        else:
+            message = 'No changes made to the pendingstudent'
+
+        return redirect('/pendeingstudent')
+
+@app.route('/delete_pendingstudent/<int:pendingstudent_id>', methods=['DELETE'])
+def delete_pendingstudent(pendingstudent_id):
+    try:
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        query = "DELETE FROM pendingstudent_info WHERE pendingstudentid = %s"
+        cursor.execute(query, (pendingstudent_id,))
+        db.commit()
+        cursor.close()
+        db.close()
+        return jsonify({'message': 'pendingstudent deleted successfully'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 def generateid():
     randomid = random.randint(100,10000)
     return randomid
