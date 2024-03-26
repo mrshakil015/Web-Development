@@ -309,12 +309,12 @@ def delete_pendingstudent(pendingstudent_id):
     try:
         db = mysql.connector.connect(**db_config)
         cursor = db.cursor()
-        query = "DELETE FROM pendingstudent_info WHERE pendingstudentid = %s"
+        query = "DELETE FROM pending_studentinfo WHERE studentid = %s"
         cursor.execute(query, (pendingstudent_id,))
         db.commit()
         cursor.close()
         db.close()
-        return jsonify({'message': 'pendingstudent deleted successfully'}), 200
+        return jsonify({'message': 'Student deleted successfully'}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
