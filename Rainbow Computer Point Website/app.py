@@ -337,6 +337,20 @@ def studentsinfo_data():
 
     return jsonify(students_data)
 
+@app.route('/delete_studentsinfo/<int:studentinfo_roll>', methods=['DELETE'])
+def delete_studentsinfo(studentinfo_roll):
+    try:
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        query = "DELETE FROM studentinfo WHERE RollNo = %s"
+        cursor.execute(query, (studentinfo_roll,))
+        db.commit()
+        cursor.close()
+        db.close()
+        return jsonify({'message': 'Student deleted successfully'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
 def generateid():
     randomid = random.randint(100,10000)
     return randomid
