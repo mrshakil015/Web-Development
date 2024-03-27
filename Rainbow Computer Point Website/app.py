@@ -214,17 +214,17 @@ def applicationform():
 
 @app.route('/pendingstudent')
 def pendingstudent():
-    db = mysql.connector.connect(**db_config)
-    cursor = db.cursor(dictionary=True)
+    # db = mysql.connector.connect(**db_config)
+    # cursor = db.cursor(dictionary=True)
 
-    query = "SELECT * FROM pending_studentinfo"
-    cursor.execute(query)
-    data = cursor.fetchall()
+    # query = "SELECT * FROM pending_studentinfo"
+    # cursor.execute(query)
+    # data = cursor.fetchall()
 
-    cursor.close()
-    db.close()
+    # cursor.close()
+    # db.close()
 
-    return render_template("pendingstudent.html", data=data)
+    return render_template("pendingstudent.html")
 
 @app.route('/pendingstudent_infodata')
 def pendingstudent_infodata():
@@ -317,6 +317,25 @@ def delete_pendingstudent(pendingstudent_id):
         return jsonify({'message': 'Student deleted successfully'}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+@app.route('/studentsinfo')
+def studentsinfo():
+    return render_template('studentsinfo.html')
+
+@app.route('/studentsinfo_data')
+def studentsinfo_data():
+    db = mysql.connector.connect(**db_config)
+    cursor = db.cursor(dictionary=True)
+
+    query = "SELECT * FROM studentinfo"
+    cursor.execute(query)
+    students_data = cursor.fetchall()
+    print(students_data)
+
+    cursor.close()
+    db.close()
+
+    return jsonify(students_data)
 
 def generateid():
     randomid = random.randint(100,10000)
