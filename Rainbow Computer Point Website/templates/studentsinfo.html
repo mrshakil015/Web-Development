@@ -68,6 +68,28 @@
             margin-bottom: .5rem;
             margin-top: .5rem;
             font-weight: normal;
+        }
+        .viewstudentmodal .modal-header .container .logo img{
+            width: 100px;
+            height: auto;
+            margin-top: 20px;
+        }
+        .viewstudentmodal .modal-header .container .content h1{
+            font-weight: bold;
+            padding: 0;
+            margin: 0;
+            color: #4a45cf;
+        }
+        .viewstudentmodal .modal-header .container .content p{
+            font-weight: normal;
+            padding: 0 ;
+            margin: 0;
+        }
+        .viewstudentmodal .modal-header .container .photo img{
+            width: 100%;
+            height: auto;
+            margin-top: 20px;
+            /* border: 1px solid black; */
 
         }
     </style>
@@ -156,7 +178,7 @@
                                                                 const tbody = document.getElementById('studentsinfo-table-body');
                                                                 data.forEach(row => {
                                                                     const tr = document.createElement('tr');
-                                                                    console.log("This is data",row)
+                                                                    console.log("This is data", row)
                                                                     tr.innerHTML = `
                                                                     <td class="text-end">
                                                                             <div class="dropdown">
@@ -164,8 +186,9 @@
                                                                                     Action
                                                                                 </button>
                                                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                                    <a class="dropdown-item update-studentsinfo" data-studentsinfo-id="${row.RollNo}" data-toggle="modal" data-target="#updatestudentsinfoModal">Update studentsinfo</a>
-                                                                                    <a class="dropdown-item delete-studentsinfo" data-studentsinfo-id="${row.RollNo}" data-toggle="modal" data-target="#deleteConfirmationModal">Delete studentsinfo</a>
+                                                                                    <a class="dropdown-item update-studentsinfo" data-studentsinfo-id="${row.RollNo}" data-toggle="modal" data-target="#updatestudentsinfoModal">Update Student</a>
+                                                                                    <a class="dropdown-item delete-studentsinfo" data-studentsinfo-id="${row.RollNo}" data-toggle="modal" data-target="#deleteConfirmationModal">Delete Student</a>
+                                                                                    <a class="dropdown-item view-studentsinfo" data-studentsinfo-id="${row.RollNo}" data-toggle="modal" data-target="#viewstudentModal">View Student</a>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -295,21 +318,20 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="update-studentsinfo-form" role="form" action=""
-                                method="post" enctype="multipart/form-data">
+                            <form id="update-studentsinfo-form" role="form" action="" method="post"
+                                enctype="multipart/form-data">
                                 <div class="controls">
                                     <div class="row">
-                                        <input type="hidden" id="update_studentsinfoid"
-                                            name="update_studentsinfoid">
+                                        <input type="hidden" id="update_studentsinfoid" name="update_studentsinfoid">
                                         <input type="hidden" id="update_studentsinfophoto"
                                             name="update_studentsinfophoto">
-                                        
+
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label for="update_studentsinforollno">রোল নং *</label>
-                                                <input type="text" id="update_studentsinforollno" name="update_studentsinforollno"
-                                                    class="form-control" placeholder="Student Roll No"
-                                                    required="required">
+                                                <input type="text" id="update_studentsinforollno"
+                                                    name="update_studentsinforollno" class="form-control"
+                                                    placeholder="Student Roll No" required="required">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12">
@@ -331,8 +353,9 @@
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label for="update_studentsinfobatch">ব্যাচ *</label>
-                                                <select name="update_studentsinfobatch" id="update_studentsinfobatch" class="form-control"
-                                                    required="required" data-error="Select the Batch">
+                                                <select name="update_studentsinfobatch" id="update_studentsinfobatch"
+                                                    class="form-control" required="required"
+                                                    data-error="Select the Batch">
                                                     <option value="" selected disabled>--Select Batch--</option>
                                                     <option>10:00 AM</option>
                                                     <option>11:30 AM</option>
@@ -347,7 +370,8 @@
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label for="update_studentsinfosection">সেকশন *</label>
-                                                <select name="update_studentsinfosection" id="update_studentsinfosection" class="form-control"
+                                                <select name="update_studentsinfosection"
+                                                    id="update_studentsinfosection" class="form-control"
                                                     required="required" data-error="Select the Section">
                                                     <option value="" selected disabled>--Select Section--</option>
                                                     <option>A</option>
@@ -387,9 +411,9 @@
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label for="update_studentsinfogender">লিঙ্গ *</label>
-                                                <select id="update_studentsinfogender"
-                                                    name="update_studentsinfogender" class="form-control"
-                                                    required="required" data-error="Select the Gender">
+                                                <select id="update_studentsinfogender" name="update_studentsinfogender"
+                                                    class="form-control" required="required"
+                                                    data-error="Select the Gender">
                                                     <option value="" selected disabled>--Select Gender--</option>
                                                     <option>Male</option>
                                                     <option>Female</option>
@@ -451,6 +475,50 @@
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal viewstudentmodal fade" id="viewstudentModal" tabindex="-1" role="dialog"
+                aria-labelledby="viewstudentModalLabel" aria-hidden="true">
+                <div class="modal-dialog  modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+
+                            <div class="container">
+                                <div class="row mb-0">
+                                    <div class="logo col-lg-2 justify-content-center">
+                                        <img src="../static/images/logo.png" alt="rainbowlogo" >
+                                    </div>
+                                    <div class="content col-lg-8 flex-column text-center justify-content-center">
+                                        <p>Youth Development Computer Training Institute</p>
+                                        <h1>Rainbow Computer Point</h1>
+                                        <p>Joynabari, Hemayetpur, Savar, Dhaka-1340</p>
+                                        <h4 class="btn btn-primary mt-2">Student Information</h4>
+                                    </div>
+                                    <div class="photo col-lg-2 justify-content-end">
+                                        <img src="../static/images/aboutus/director.JPG" alt="rainbowlogo">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row">
+                                    <p class="g-3">Name</p>
+                                    <p>Information</p>
+                                </div>
+                                <div class="row">
+                                    <p>Name</p>
+                                    <p>Information</p>
+                                </div>
+                            </div>
+                               
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
                         </div>
                     </div>
                 </div>
