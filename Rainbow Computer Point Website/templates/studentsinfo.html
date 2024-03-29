@@ -156,7 +156,7 @@
                                                                 const tbody = document.getElementById('studentsinfo-table-body');
                                                                 data.forEach(row => {
                                                                     const tr = document.createElement('tr');
-                                                                    console.log(row)
+                                                                    console.log("This is data",row)
                                                                     tr.innerHTML = `
                                                                     <td class="text-end">
                                                                             <div class="dropdown">
@@ -192,21 +192,24 @@
                                                                         fetch(`/get_studentsinfo/${studentsinfoId}`)
                                                                             .then(response => response.json())
                                                                             .then(studentsinfo => {
-                                                                                console.log("Pending: ", studentsinfo);
+                                                                                console.log("Pending data: ", studentsinfo);
                                                                                 // Populate the modal input fields with studentsinfo data
-                                                                                document.getElementById('update_studentsinfoid').value = studentsinfo.studentid;
+                                                                                document.getElementById('update_studentsinfoid').value = studentsinfo.Id;
+                                                                                document.getElementById('update_studentsinforollno').value = studentsinfo.RollNo;
                                                                                 // console.log(studentsinfo.studentid);
-                                                                                document.getElementById('update_studentsinfocoursename').value = studentsinfo.coursename;
-                                                                                document.getElementById('update_studentsinfoname').value = studentsinfo.studentname;
+                                                                                document.getElementById('update_studentsinfocoursename').value = studentsinfo.Coursename;
+                                                                                document.getElementById('update_studentsinfobatch').value = studentsinfo.Batch;
+                                                                                document.getElementById('update_studentsinfosection').value = studentsinfo.Section;
+                                                                                document.getElementById('update_studentsinfoname').value = studentsinfo.StudentName;
 
-                                                                                document.getElementById('update_studentsinfofathername').value = studentsinfo.fathername;
-                                                                                document.getElementById('update_studentsinfomothername').value = studentsinfo.mothername;
-                                                                                document.getElementById('update_studentsinfoemail').value = studentsinfo.email;
-                                                                                document.getElementById('update_studentsinfomobile').value = studentsinfo.mobile;
-                                                                                document.getElementById('update_studentsinfogender').value = studentsinfo.gender;
-                                                                                document.getElementById('update_studentsinfodob').value = studentsinfo.dob;
-                                                                                document.getElementById('update_studentsinfoaddress').value = studentsinfo.address;
-                                                                                document.getElementById('update_studentsinfophoto').value = studentsinfo.studentphoto;
+                                                                                document.getElementById('update_studentsinfofathername').value = studentsinfo.FatherName;
+                                                                                document.getElementById('update_studentsinfomothername').value = studentsinfo.MotherName;
+                                                                                document.getElementById('update_studentsinfoemail').value = studentsinfo.Email;
+                                                                                document.getElementById('update_studentsinfomobile').value = studentsinfo.Mobile;
+                                                                                document.getElementById('update_studentsinfogender').value = studentsinfo.Gender;
+                                                                                document.getElementById('update_studentsinfodob').value = studentsinfo.Dob;
+                                                                                document.getElementById('update_studentsinfoaddress').value = studentsinfo.Address;
+                                                                                document.getElementById('update_studentsinfophoto').value = studentsinfo.StudentPhoto;
                                                                                 // document.getElementById('test_id').value = studentsinfo.email;
 
 
@@ -292,7 +295,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="update-studentsinfo-form" role="form" action="/update_studentsinfo"
+                            <form id="update-studentsinfo-form" role="form" action=""
                                 method="post" enctype="multipart/form-data">
                                 <div class="controls">
                                     <div class="row">
@@ -300,17 +303,18 @@
                                             name="update_studentsinfoid">
                                         <input type="hidden" id="update_studentsinfophoto"
                                             name="update_studentsinfophoto">
+                                        
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label for="update_studentsinforollno">রোল নং *</label>
-                                                <input type="text" name="update_studentsinforollno"
+                                                <input type="text" id="update_studentsinforollno" name="update_studentsinforollno"
                                                     class="form-control" placeholder="Student Roll No"
                                                     required="required">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label for="coursename">কোর্স সিলেক্ট করুন *</label>
+                                                <label for="update_studentsinfocoursename">কোর্স সিলেক্ট করুন *</label>
                                                 <select id="update_studentsinfocoursename"
                                                     name="update_studentsinfocoursename" class="form-control"
                                                     required="required" data-error="Select the Course.">
@@ -326,8 +330,8 @@
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label for="update_studentsinfogender">ব্যাচ *</label>
-                                                <select name="update_studentsinfobatch" class="form-control"
+                                                <label for="update_studentsinfobatch">ব্যাচ *</label>
+                                                <select name="update_studentsinfobatch" id="update_studentsinfobatch" class="form-control"
                                                     required="required" data-error="Select the Batch">
                                                     <option value="" selected disabled>--Select Batch--</option>
                                                     <option>10:00 AM</option>
@@ -342,8 +346,8 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label for="update_studentsinfogender">সেকশন *</label>
-                                                <select name="update_studentsinfosection" class="form-control"
+                                                <label for="update_studentsinfosection">সেকশন *</label>
+                                                <select name="update_studentsinfosection" id="update_studentsinfosection" class="form-control"
                                                     required="required" data-error="Select the Section">
                                                     <option value="" selected disabled>--Select Section--</option>
                                                     <option>A</option>

@@ -350,6 +350,24 @@ def delete_studentsinfo(studentinfo_roll):
         return jsonify({'message': 'Student deleted successfully'}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+@app.route('/get_studentsinfo/<int:student_rollno>')
+def get_studentinfo(student_rollno):
+    db = mysql.connector.connect(**db_config)
+    cursor = db.cursor(dictionary=True)
+
+    query = "SELECT * FROM studentinfo WHERE RollNo = %s"
+    cursor.execute(query, (student_rollno,))
+    studentinfo_data = cursor.fetchone()
+    print("Student my data: ",studentinfo_data)
+
+    # cursor.close()
+    db.close()
+
+    if studentinfo_data:
+        return jsonify(studentinfo_data)
+    else:
+        return jsonify({'error': 'Student not found'}), 404
     
 def generateid():
     randomid = random.randint(100,10000)
