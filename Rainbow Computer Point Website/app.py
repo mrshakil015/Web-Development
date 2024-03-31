@@ -275,6 +275,9 @@ def update_pendingstudent():
         address = request.form['update_pendingstudentaddress']
         email = request.form['update_pendingstudentemail']
         mobile = request.form['update_pendingstudentmobile']
+        coursefee = request.form['update_pendingstudentcoursefee']
+        payment = request.form['update_pendingstudentpayment']
+        due = int(coursefee)-int(payment)
         password = mobile
 
         studentphoto = f"{photoname}"
@@ -286,8 +289,8 @@ def update_pendingstudent():
 
         db = mysql.connector.connect(**db_config)
         cursor = db.cursor()
-        insert_query = "INSERT INTO studentinfo (RollNo, CourseName, Batch, Section, StudentName, FatherName, MotherName, Gender, Dob, Address, Email, Mobile, StudentPhoto, Password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        cursor.execute(insert_query, (rollno, coursename, batch, section, studentname, fathername, mothername, gender, dob, address, email, mobile, photoname, password))
+        insert_query = "INSERT INTO studentinfo (RollNo, CourseName, Batch, Section, StudentName, FatherName, MotherName, Gender, Dob, Address, Email, Mobile, CourseFee, Payment, Due, StudentPhoto, Password) VALUES (%s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        cursor.execute(insert_query, (rollno, coursename, batch, section, studentname, fathername, mothername, gender, dob, address, email, mobile,coursefee, payment, due, photoname, password))
         db.commit()
 
         delete_query = "DELETE FROM pending_studentinfo WHERE studentid = %s"

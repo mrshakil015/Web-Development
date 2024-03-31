@@ -188,7 +188,7 @@
                                                                         fetch(`/get_pendingstudent/${pendingstudentId}`)
                                                                             .then(response => response.json())
                                                                             .then(pendingstudent => {
-                                                                                console.log("Pending: ", pendingstudent);
+                                                                                console.log("Pending dfd: ", pendingstudent);
                                                                                 // Populate the modal input fields with pendingstudent data
                                                                                 document.getElementById('update_pendingstudentid').value  = pendingstudent.studentid;
                                                                                 // console.log(pendingstudent.studentid);
@@ -202,6 +202,18 @@
                                                                                 document.getElementById('update_pendingstudentgender').value = pendingstudent.gender;
                                                                                 document.getElementById('update_pendingstudentdob').value = pendingstudent.dob;
                                                                                 document.getElementById('update_pendingstudentaddress').value = pendingstudent.address;
+                                                                                // Checking the value of Coursename
+                                                                                let CourseFee = 0
+                                                                                
+                                                                                if (pendingstudent.coursename === "Office Application Program") {
+                                                                                    CourseFee = 3800;
+                                                                                } else if (pendingstudent.coursename=== "Graphic Designing") {
+                                                                                    CourseFee = 8000;
+                                                                                }else if (pendingstudent.coursename=== "Digital Marketing") {
+                                                                                    CourseFee = 8000;
+                                                                                }
+                                                                                document.getElementById('update_pendingstudentcoursefee').value = CourseFee;
+                                                                                
                                                                                 document.getElementById('update_pendingstudentphoto').value = pendingstudent.studentphoto;
                                                                                 // document.getElementById('test_id').value = pendingstudent.email;
                                                                                 
@@ -416,6 +428,22 @@
                                                 <label for="update_pendingstudentmobile">মোবাইল *</label>
                                                 <input id="update_pendingstudentmobile" type="text" name="update_pendingstudentmobile"
                                                     class="form-control" placeholder="Mobile No" required="required">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="update_pendingstudentcoursefee">কোর্স ফি *</label>
+                                                <input id="update_pendingstudentcoursefee" type="text" name="update_pendingstudentcoursefee"
+                                                    class="form-control" placeholder="Course Fee" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="update_pendingstudentpayment">জমা *</label>
+                                                <input id="update_pendingstudentpayment" type="text" name="update_pendingstudentpayment"
+                                                    class="form-control" placeholder="Payment" required="required">
                                             </div>
                                         </div>
                                     </div>
