@@ -15,7 +15,7 @@
 <body>
     <div class="input-section col-lg-6 col-md-6 col-sm-12">
         <div class="form-group">
-            <label for="photo" class="form-label">ফটোগ্রাফ/ছবি (সর্বোচ্চ ২ MB, ৫০০ x ৫০০
+            <label for="photo" class="form-label">ছবি (সর্বোচ্চ ২ MB, ৫৩০ x ৬৫০
                 Pixels)
                 *</label>
             <input class="form-control" type="file" accept="image/*" id="photo"
@@ -30,8 +30,8 @@
                 if (input.files && input.files[0]) {
                     let file = input.files[0];
                     let maxSize = 2 * 1024 * 1024;
-                    let requiredWidth = 500;
-                    let requiredHeight = 500;
+                    let requiredWidth = 530;
+                    let requiredHeight = 650;
         
                     // Check file size
                     if (file.size > maxSize) {
@@ -51,7 +51,7 @@
                         if (img.width !== requiredWidth || img.height !== requiredHeight) {
                             Swal.fire({
                                 title: "Error!",
-                                text: "ছবির সাইজ অবশ্যই 500x500 Pixels হতে হবে।",
+                                text: "ছবির সাইজ অবশ্যই 530x650 Pixels হতে হবে।",
                                 icon: "error"
                             });
                             input.value = '';
