@@ -69,28 +69,49 @@
             margin-top: .5rem;
             font-weight: normal;
         }
-        .viewstudentmodal .modal-header .container .logo img{
+
+        .viewstudentmodal .modal-header .container .logo img {
             width: 100px;
             height: auto;
             margin-top: 20px;
         }
-        .viewstudentmodal .modal-header .container .content h1{
+
+        .viewstudentmodal .modal-header .container .content h1 {
             font-weight: bold;
             padding: 0;
             margin: 0;
             color: #4a45cf;
         }
-        .viewstudentmodal .modal-header .container .content p{
+
+        .viewstudentmodal .modal-header .container .content p {
             font-weight: normal;
-            padding: 0 ;
+            padding: 0;
             margin: 0;
         }
-        .viewstudentmodal .modal-header .container .photo img{
+
+        .viewstudentmodal .modal-header .container .photo img {
             width: 100%;
             height: auto;
             margin-top: 20px;
-            /* border: 1px solid black; */
+            border-radius: 10px;
+            border: 1px solid #4a45cf;
 
+        }
+
+        .viewstudentmodal .modal-body .row {
+            margin-bottom: 0;
+        }
+
+        .viewstudentmodal .modal-body .row .info-title {
+            padding: 10px;
+        }
+
+        .viewstudentmodal .modal-body .row .info-detail {
+            border: 1px solid #4a45cf;
+            padding: 10px;
+            font-style: normal;
+            font-weight: normal;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -240,6 +261,41 @@
                                                                                 $('#updatestudentsinfoModal').modal('show');
                                                                             })
                                                                             .catch(error => console.error('Error fetching studentsinfo data:', error));
+                                                                    });
+                                                                });
+
+                                                                document.querySelectorAll('.view-studentsinfo').forEach(item => {
+                                                                    item.addEventListener('click', event => {
+                                                                        const studentsinfoId = event.target.getAttribute('data-studentsinfo-id');
+                                                                        console.log("View id: ", studentsinfoId);
+
+                                                                        // Fetch student information
+                                                                        fetch(`/get_studentsinfo/${studentsinfoId}`)
+                                                                            .then(response => response.json())
+                                                                            .then(data => {
+                                                                                // Update modal content with fetched data
+                                                                                const modal = document.getElementById('viewstudentModal');
+
+
+                                                                                modal.querySelector('.image').src = `../static/images/students/${data.StudentPhoto}`;
+                                                                                console.log("Photo is:",data.StudentPhoto)
+                                                                                modal.querySelector('.rollno').textContent = data.RollNo;
+                                                                                modal.querySelector('.coursename').textContent = data.Coursename;
+                                                                                modal.querySelector('.batch').textContent = data.Batch;
+                                                                                modal.querySelector('.section').textContent = data.Section;
+                                                                                modal.querySelector('.studentname').textContent = data.StudentName;
+                                                                                modal.querySelector('.fathername').textContent = data.FatherName;
+                                                                                modal.querySelector('.mothername').textContent = data.MotherName;
+                                                                                modal.querySelector('.gender').textContent = data.Gender;
+                                                                                modal.querySelector('.dob').textContent = data.Dob;
+                                                                                modal.querySelector('.address').textContent = data.Address;
+                                                                                modal.querySelector('.email').textContent = data.Email;
+                                                                                modal.querySelector('.mobile').textContent = data.Mobile;
+
+                                                                            })
+                                                                            .catch(error => {
+                                                                                console.error('Error fetching student information:', error);
+                                                                            });
                                                                     });
                                                                 });
 
@@ -479,7 +535,7 @@
                     </div>
                 </div>
             </div>
-
+            <!-- View studentsinfo -->
             <div class="modal viewstudentmodal fade" id="viewstudentModal" tabindex="-1" role="dialog"
                 aria-labelledby="viewstudentModalLabel" aria-hidden="true">
                 <div class="modal-dialog  modal-lg" role="document">
@@ -489,7 +545,7 @@
                             <div class="container">
                                 <div class="row mb-0">
                                     <div class="logo col-lg-2 justify-content-center">
-                                        <img src="../static/images/logo.png" alt="rainbowlogo" >
+                                        <img src="../static/images/logo.png" alt="rainbowlogo">
                                     </div>
                                     <div class="content col-lg-8 flex-column text-center justify-content-center">
                                         <p>Youth Development Computer Training Institute</p>
@@ -498,7 +554,7 @@
                                         <h4 class="btn btn-primary mt-2">Student Information</h4>
                                     </div>
                                     <div class="photo col-lg-2 justify-content-end">
-                                        <img src="../static/images/aboutus/director.JPG" alt="rainbowlogo">
+                                        <img class="image" src="../static/images/students/" alt="Student Photo">
                                     </div>
                                 </div>
                             </div>
@@ -506,15 +562,55 @@
                         <div class="modal-body">
                             <div class="container">
                                 <div class="row">
-                                    <p class="g-3">Name</p>
-                                    <p>Information</p>
+                                    <p class="info-title col-lg-3">Roll No:</p>
+                                    <p class="info-detail rollno col-lg-9"></p>
                                 </div>
                                 <div class="row">
-                                    <p>Name</p>
-                                    <p>Information</p>
+                                    <p class="info-title col-lg-3">Course Name:</p>
+                                    <p class="info-detail coursename col-lg-9"></p>
+                                </div>
+                                <div class="row">
+                                    <p class="info-title col-lg-3">Batch:</p>
+                                    <p class="info-detail batch col-lg-9"></p>
+                                </div>
+                                <div class="row">
+                                    <p class="info-title col-lg-3">Section:</p>
+                                    <p class="info-detail section col-lg-9"></p>
+                                </div>
+                                <div class="row">
+                                    <p class="info-title col-lg-3">Student Name:</p>
+                                    <p class="info-detail studentname col-lg-9"></p>
+                                </div>
+                                <div class="row">
+                                    <p class="info-title col-lg-3">Father's Name:</p>
+                                    <p class="info-detail fathername col-lg-9"></p>
+                                </div>
+                                <div class="row">
+                                    <p class="info-title col-lg-3">Mother's Name:</p>
+                                    <p class="info-detail mothername col-lg-9"></p>
+                                </div>
+                                <div class="row">
+                                    <p class="info-title col-lg-3">Gender:</p>
+                                    <p class="info-detail gender col-lg-9"></p>
+                                </div>
+                                <div class="row">
+                                    <p class="info-title col-lg-3">Date of Birth:</p>
+                                    <p class="info-detail dob col-lg-9"></p>
+                                </div>
+                                <div class="row">
+                                    <p class="info-title col-lg-3">Address:</p>
+                                    <p class="info-detail address col-lg-9"></p>
+                                </div>
+                                <div class="row">
+                                    <p class="info-title col-lg-3">Email:</p>
+                                    <p class="info-detail email col-lg-9"></p>
+                                </div>
+                                <div class="row">
+                                    <p class="info-title col-lg-3">Mobile:</p>
+                                    <p class="info-detail mobile col-lg-9"></p>
                                 </div>
                             </div>
-                               
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

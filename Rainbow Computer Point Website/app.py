@@ -277,7 +277,7 @@ def update_pendingstudent():
         mobile = request.form['update_pendingstudentmobile']
         password = mobile
 
-        studentphoto = f"{rollno}_{photoname}"
+        studentphoto = f"{photoname}"
         source_path = 'static/images/pending_student/' + photoname
         destination_path = 'static/images/students/' + studentphoto
 
