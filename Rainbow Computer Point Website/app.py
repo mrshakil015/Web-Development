@@ -3,6 +3,8 @@ import mysql.connector
 import random
 import os
 import shutil
+from datetime import datetime
+import pytz
 
 app = Flask(__name__)
 
@@ -280,6 +282,11 @@ def update_pendingstudent():
         due = int(coursefee)-int(payment)
         password = mobile
 
+
+        bangladesh_timezone = pytz.timezone('Asia/Dhaka')
+        now_in_bangladesh = datetime.now(bangladesh_timezone)
+        admissiondate = now_in_bangladesh.strftime('%d-%m-%Y')
+
         studentphoto = f"{photoname}"
         source_path = 'static/images/pending_student/' + photoname
         destination_path = 'static/images/students/' + studentphoto
@@ -289,8 +296,8 @@ def update_pendingstudent():
 
         db = mysql.connector.connect(**db_config)
         cursor = db.cursor()
-        insert_query = "INSERT INTO studentinfo (RollNo, CourseName, Batch, Section, StudentName, FatherName, MotherName, Gender, Dob, Address, Email, Mobile, CourseFee, Payment, Due, StudentPhoto, Password) VALUES (%s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        cursor.execute(insert_query, (rollno, coursename, batch, section, studentname, fathername, mothername, gender, dob, address, email, mobile,coursefee, payment, due, photoname, password))
+        insert_query = "INSERT INTO studentinfo (RollNo, CourseName, Batch, Section, StudentName, FatherName, MotherName, Gender, Dob, Address, Email, Mobile, CourseFee, Payment, Due,AdmissionDate, StudentPhoto, Password) VALUES (%s,%s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        cursor.execute(insert_query, (rollno, coursename, batch, section, studentname, fathername, mothername, gender, dob, address, email, mobile,coursefee, payment, due,admissiondate, photoname, password))
         db.commit()
 
         delete_query = "DELETE FROM pending_studentinfo WHERE studentid = %s"

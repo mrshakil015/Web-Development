@@ -90,8 +90,8 @@
         }
 
         .viewstudentmodal .modal-header .container .photo img {
-            width: 100%;
-            height: auto;
+            width: 106px;
+            height: 130px;
             margin-top: 20px;
             border-radius: 10px;
             border: 1px solid #4a45cf;
@@ -112,6 +112,9 @@
             font-style: normal;
             font-weight: normal;
             border-radius: 5px;
+        }
+        .form-group{
+            margin-bottom: 0;
         }
     </style>
 </head>
@@ -291,6 +294,10 @@
                                                                                 modal.querySelector('.address').textContent = data.Address;
                                                                                 modal.querySelector('.email').textContent = data.Email;
                                                                                 modal.querySelector('.mobile').textContent = data.Mobile;
+                                                                                modal.querySelector('.coursefee').textContent = data.CourseFee;
+                                                                                modal.querySelector('.payment').textContent = data.Payment;
+                                                                                modal.querySelector('.due').textContent = data.Due;
+                                                                                modal.querySelector('.admissiondate').textContent = data.AdmissionDate;
 
                                                                             })
                                                                             .catch(error => {
@@ -551,7 +558,7 @@
                                         <p>Youth Development Computer Training Institute</p>
                                         <h1>Rainbow Computer Point</h1>
                                         <p>Joynabari, Hemayetpur, Savar, Dhaka-1340</p>
-                                        <h4 class="btn btn-primary mt-2">Student Information</h4>
+                                        <h4 class="btn btn-primary mt-2">Admission Form</h4>
                                     </div>
                                     <div class="photo col-lg-2 justify-content-end">
                                         <img class="image" src="../static/images/students/" alt="Student Photo">
@@ -622,18 +629,22 @@
                                 </div>
                                 <div class="row">
                                     <p class="info-title col-lg-3">Admission Date:</p>
-                                    <p class="info-detail section col-lg-9"></p>
+                                    <p class="info-detail admissiondate col-lg-9"></p>
                                 </div>
                                 <div class="row text-center">
                                     <h4 class="col-lg-12" style="color: #4a45cf;"><strong>Payment Information</strong></h4>
                                 </div>
                                 <div class="row">
                                     <p class="info-title col-lg-2">Course Fee:</p>
-                                    <p class="info-detail section col-lg-2"></p>
+                                    <p class="info-detail coursefee col-lg-10"></p>
+                                </div>
+                                <div class="row">
+
                                     <p class="info-title col-lg-2">Payment:</p>
-                                    <p class="info-detail section col-lg-2"></p>
+                                    <p class="info-detail payment col-lg-4"></p>
                                     <p class="info-title col-lg-2">Due:</p>
-                                    <p class="info-detail section col-lg-2"></p>
+                                    <p class="info-detail due col-lg-4"></p>
+
                                 </div>
                             </div>
 
