@@ -1,10 +1,7 @@
-import random
-import string
+from datetime import datetime
+import pytz
 
-def generateid():
-    # Generate a random ID
-    randomid = ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
-    return randomid
-
-userid = generateid()
-print(userid)
+bangladesh_timezone = pytz.timezone('Asia/Dhaka')
+now_in_bangladesh = datetime.now(bangladesh_timezone)
+admissiondate = now_in_bangladesh.strftime('%d-%m-%Y')
+print("Current date: ",admissiondate)
