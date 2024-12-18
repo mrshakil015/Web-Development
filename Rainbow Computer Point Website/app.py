@@ -626,6 +626,29 @@ def admin_login():
             return render_template('adminlogin.html', error_message=error_message)
     else:
         return render_template('adminlogin.html', error_message=None)
+    
+    
+@app.route('/admingallery', methods=['POST', 'GET'])
+def admingallery():
+    if request.method == 'POST':
+        serviceid = request.form['serviceid']
+        servicename = request.form['servicename']
+        aboutservice = request.form['aboutservice']
+
+        data = {'serviceid': serviceid, 'servicename': servicename, 'aboutservice': aboutservice}
+        print(data['servicename'])
+
+        db = mysql.connector.connect(**db_config)
+        cursor = db.cursor()
+        query = "INSERT INTO service_info (serviceid, servicename, aboutservice) VALUES(%s,%s,%s)"
+        values = (serviceid, servicename, aboutservice)
+        cursor.execute(query, values)
+        db.commit()
+        cursor.close()
+        db.close()
+        message = 'Successfully Added'
+        return render_template('admingallery.html', message=message)
+    return render_template('admingallery.html')
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
